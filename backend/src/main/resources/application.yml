@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: hbp-personal-site
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017/hbp_personal_site}
+
+# Comma-separated list of origins allowed to call the API (the Next.js frontend).
+app:
+  cors:
+    allowed-origins: ${APP_CORS_ORIGINS:http://localhost:3000}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
