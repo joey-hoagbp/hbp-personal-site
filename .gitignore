@@ -4,6 +4,7 @@ frontend/.next/
 frontend/out/
 frontend/.env.local
 frontend/next-env.d.ts
+frontend/*.tsbuildinfo
 npm-debug.log*
 
 # ── Java / Maven ────────────────────────────────
