@@ -1,17 +1,24 @@
-import { HERO_STATS } from "../data";
+"use client";
+
+import { HERO_STAT_NUMS } from "../data";
+import { useLang } from "../i18n/LanguageProvider";
+import { messages } from "../i18n/dictionary";
 
 // Static, hand-tuned syntax highlighting — kept as raw HTML so the exact
 // indentation/line breaks from the design survive inside <pre>. No user input.
 const CODE_HTML = `<span class="c-kw">const</span> <span class="c-fn">developer</span> = {
   <span class="c-prop">name</span>:  <span class="c-str">"Hoàng Bảo Phúc"</span>,
   <span class="c-prop">role</span>:  <span class="c-str">"Software Engineer"</span>,
-  <span class="c-prop">city</span>:  <span class="c-str">"Hồ Chí Minh"</span>,
+  <span class="c-prop">city</span>:  <span class="c-str">"Hà Nội"</span>,
   <span class="c-prop">stack</span>: [<span class="c-str">"Flutter"</span>, <span class="c-str">"React"</span>,
           <span class="c-str">"Node.js"</span>, <span class="c-str">"Python"</span>],
   <span class="c-prop">open</span>:  <span class="c-bool">true</span>,
 };`;
 
 export default function Hero() {
+  const { lang } = useLang();
+  const t = messages[lang].hero;
+
   return (
     <section id="hero">
       <div className="hero-glow-orb" aria-hidden="true" />
@@ -20,7 +27,7 @@ export default function Hero() {
           <div className="hero-left reveal">
             <p className="hero-eyebrow">
               <span className="eyebrow-dash" />
-              Software Engineer · Ho Chi Minh City
+              {t.eyebrow}
             </p>
             <h1 className="hero-name">
               Hoàng
@@ -28,20 +35,17 @@ export default function Hero() {
               <span className="name-dim">Bảo Phúc.</span>
             </h1>
             <p className="hero-tagline">
-              Building apps people
+              {t.taglineLines[0]}
               <br />
-              love to use.
+              {t.taglineLines[1]}
             </p>
-            <p className="hero-bio">
-              Kỹ sư phần mềm với niềm đam mê xây dựng sản phẩm mobile &amp; web.
-              Tập trung vào clean code, trải nghiệm người dùng và hiệu suất.
-            </p>
+            <p className="hero-bio">{t.bio}</p>
             <div className="hero-btns">
               <a href="#portfolio" className="btn-primary">
-                Xem sản phẩm
+                {t.viewWork}
               </a>
               <a href="#contact" className="btn-ghost">
-                Liên hệ ngay
+                {t.getInTouch}
               </a>
             </div>
           </div>
@@ -59,10 +63,10 @@ export default function Hero() {
               />
             </div>
             <div className="hero-stats">
-              {HERO_STATS.map(({ num, lbl }) => (
-                <div key={lbl} className="stat-card">
+              {HERO_STAT_NUMS.map((num, i) => (
+                <div key={num + i} className="stat-card">
                   <div className="stat-num">{num}</div>
-                  <div className="stat-lbl">{lbl}</div>
+                  <div className="stat-lbl">{t.stats[i]}</div>
                 </div>
               ))}
             </div>

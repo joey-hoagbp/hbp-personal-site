@@ -1,5 +1,8 @@
-import { EDUCATION, EXPERIENCE, type TimelineEntry } from "../data";
+"use client";
+
 import { DownloadIcon } from "./icons";
+import { useLang } from "../i18n/LanguageProvider";
+import { messages, type TimelineEntry } from "../i18n/dictionary";
 
 function TLItem({ item, last }: { item: TimelineEntry; last: boolean }) {
   return (
@@ -19,27 +22,30 @@ function TLItem({ item, last }: { item: TimelineEntry; last: boolean }) {
 }
 
 export default function CV() {
+  const { lang } = useLang();
+  const t = messages[lang].cv;
+
   return (
     <section id="cv" className="section-bordered">
       <div className="container">
         <header className="section-hdr reveal">
-          <p className="section-label">Hồ Sơ / Resume</p>
-          <h2 className="section-title">Experience &amp; Education</h2>
+          <p className="section-label">{t.label}</p>
+          <h2 className="section-title">{t.title}</h2>
         </header>
         <div className="cv-cols">
           <div className="reveal">
-            <p className="cv-col-ttl">Kinh Nghiệm</p>
+            <p className="cv-col-ttl">{t.colExperience}</p>
             <div className="timeline">
-              {EXPERIENCE.map((e, i) => (
-                <TLItem key={`${e.title}-${e.date}`} item={e} last={i === EXPERIENCE.length - 1} />
+              {t.experience.map((e, i) => (
+                <TLItem key={`${e.title}-${e.date}`} item={e} last={i === t.experience.length - 1} />
               ))}
             </div>
           </div>
           <div className="reveal reveal-d1">
-            <p className="cv-col-ttl">Học Vấn</p>
+            <p className="cv-col-ttl">{t.colEducation}</p>
             <div className="timeline">
-              {EDUCATION.map((e, i) => (
-                <TLItem key={`${e.title}-${e.date}`} item={e} last={i === EDUCATION.length - 1} />
+              {t.education.map((e, i) => (
+                <TLItem key={`${e.title}-${e.date}`} item={e} last={i === t.education.length - 1} />
               ))}
             </div>
           </div>
@@ -47,7 +53,7 @@ export default function CV() {
         <div className="cv-dl reveal">
           <a href="#" className="btn-ghost">
             <DownloadIcon />
-            Tải CV (PDF)
+            {t.downloadCv}
           </a>
         </div>
       </div>

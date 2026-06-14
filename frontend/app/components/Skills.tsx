@@ -1,20 +1,27 @@
-import { SKILL_GROUPS } from "../data";
+"use client";
+
+import { SKILL_GROUP_ITEMS } from "../data";
+import { useLang } from "../i18n/LanguageProvider";
+import { messages } from "../i18n/dictionary";
 
 export default function Skills() {
+  const { lang } = useLang();
+  const t = messages[lang].skills;
+
   return (
     <section id="skills" className="section-bordered">
       <div className="container">
         <header className="section-hdr reveal">
-          <p className="section-label">Kỹ Năng / Skills</p>
-          <h2 className="section-title">Tech Stack</h2>
-          <p className="section-sub">Những công nghệ tôi sử dụng hàng ngày.</p>
+          <p className="section-label">{t.label}</p>
+          <h2 className="section-title">{t.title}</h2>
+          <p className="section-sub">{t.sub}</p>
         </header>
         <div className="skills-grid">
-          {SKILL_GROUPS.map((g, i) => (
-            <div key={g.label} className={`skill-group reveal reveal-d${(i % 3) + 1}`}>
-              <p className="sg-label">{g.label}</p>
+          {SKILL_GROUP_ITEMS.map((items, i) => (
+            <div key={t.groupLabels[i]} className={`skill-group reveal reveal-d${(i % 3) + 1}`}>
+              <p className="sg-label">{t.groupLabels[i]}</p>
               <div className="sg-tags">
-                {g.items.map((s) => (
+                {items.map((s) => (
                   <span key={s} className="sg-tag">
                     {s}
                   </span>

@@ -1,60 +1,41 @@
 // ============================================================
-//  Site content. Kept in one place so copy is easy to edit.
-//  (Backend stores contact submissions; everything here is static.)
+//  Language-neutral site data. Translatable copy lives in
+//  app/i18n/dictionary.ts. (Backend stores contact submissions.)
 // ============================================================
 
-export const SKILL_GROUPS: { label: string; items: string[] }[] = [
-  { label: "Ngôn ngữ / Languages", items: ["JavaScript", "TypeScript", "Python", "Dart", "Java"] },
-  { label: "Frontend & Mobile", items: ["React", "Next.js", "Flutter", "Tailwind CSS", "HTML/CSS"] },
-  { label: "Backend & API", items: ["Node.js", "Express", "FastAPI", "REST API", "GraphQL"] },
-  { label: "Tools & DevOps", items: ["Git", "Docker", "PostgreSQL", "Firebase", "Figma"] },
+// Hero stat numbers; matching labels are in messages[lang].hero.stats (same order).
+export const HERO_STAT_NUMS: [string, string, string] = ["3+", "10+", "1"];
+
+// Skill tag items per group; matching group labels are in
+// messages[lang].skills.groupLabels (same order).
+export const SKILL_GROUP_ITEMS: string[][] = [
+  ["JavaScript", "TypeScript", "Python", "Dart", "Java"],
+  ["React", "Next.js", "Flutter", "Tailwind CSS", "HTML/CSS"],
+  ["Node.js", "Express", "FastAPI", "REST API", "GraphQL"],
+  ["Git", "Docker", "PostgreSQL", "Firebase", "Figma"],
 ];
 
-export const HERO_STATS: { num: string; lbl: string }[] = [
-  { num: "3+", lbl: "Năm kinh nghiệm" },
-  { num: "10+", lbl: "Dự án hoàn thành" },
-  { num: "1", lbl: "App published" },
+export const SOCIAL_LINKS: { label: string; href: string; icon: "mail" | "github" | "linkedin" | "facebook" | "instagram" }[] = [
+  { label: "phuchb04@gmail.com", href: "mailto:phuchb04@gmail.com", icon: "mail" },
+  { label: "github.com/joey-hoagbp", href: "https://github.com/joey-hoagbp", icon: "github" },
+  { label: "facebook.com/phuchb04", href: "https://www.facebook.com/phuchb04/", icon: "facebook" },
+  { label: "instagram.com/hoaqbp_", href: "https://www.instagram.com/hoaqbp_/", icon: "instagram" },
 ];
 
-export type TimelineEntry = {
-  date: string;
+// Language-neutral project metadata; translatable copy (subtitle, description,
+// features) is in messages[lang].portfolio.project.
+export const PROJECT_META: {
   title: string;
-  org: string;
-  desc: string;
+  chips: { label: string; accent?: boolean }[];
+  apkUrl: string; // empty string → button shows "coming soon". Paste the .apk URL here.
+} = {
+  title: "Hajime",
+  chips: [
+    { label: "Mobile App", accent: true },
+    { label: "React Native" },
+    { label: "Spring Boot" },
+    { label: "MongoDB" },
+    { label: "Education" },
+  ],
+  apkUrl: "", // TODO: paste the .apk download URL here when the build is ready
 };
-
-export const EXPERIENCE: TimelineEntry[] = [
-  {
-    date: "2023 — Nay",
-    title: "Software Engineer",
-    org: "[Tên Công Ty]",
-    desc: "Phát triển ứng dụng mobile với Flutter, xây dựng backend API với Node.js, và triển khai quy trình CI/CD.",
-  },
-  {
-    date: "2022 — 2023",
-    title: "Junior Frontend Developer",
-    org: "[Startup]",
-    desc: "Xây dựng giao diện web với React và TypeScript, tối ưu hiệu suất frontend và trải nghiệm người dùng.",
-  },
-];
-
-export const EDUCATION: TimelineEntry[] = [
-  {
-    date: "2019 — 2023",
-    title: "Kỹ sư Khoa học Máy tính",
-    org: "ĐH Bách Khoa TP.HCM",
-    desc: "Chuyên ngành Kỹ thuật Phần mềm. Tốt nghiệp loại Giỏi.",
-  },
-  {
-    date: "2023",
-    title: "Flutter Development",
-    org: "Online Certificate",
-    desc: "Chứng chỉ phát triển ứng dụng Flutter nâng cao từ Google.",
-  },
-];
-
-export const SOCIAL_LINKS: { label: string; href: string; icon: "mail" | "github" | "linkedin" }[] = [
-  { label: "phuc@example.com", href: "mailto:phuc@example.com", icon: "mail" },
-  { label: "github.com/hbphuc", href: "https://github.com", icon: "github" },
-  { label: "linkedin.com/in/hbphuc", href: "https://linkedin.com", icon: "linkedin" },
-];
