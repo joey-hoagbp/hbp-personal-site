@@ -8,7 +8,7 @@ export const HERO_STAT_NUMS: [string, string, string] = ["3+", "10+", "1"];
 
 // Skill tag items per group; matching group labels are in
 // messages[lang].skills.groupLabels (same order).
-export const SKILL_GROUP_ITEMS: string[][] = [
+export const SKILL_GROUP_ITEMS: [string[], string[], string[], string[]] = [
   ["JavaScript", "TypeScript", "Python", "Dart", "Java"],
   ["React", "Next.js", "Flutter", "Tailwind CSS", "HTML/CSS"],
   ["Node.js", "Express", "FastAPI", "REST API", "GraphQL"],
@@ -37,5 +37,5 @@ export const PROJECT_META: {
     { label: "MongoDB" },
     { label: "Education" },
   ],
-  apkUrl: "", // TODO: paste the .apk download URL here when the build is ready
+  apkUrl: "https://expo.dev/accounts/joey-hoagbp/projects/hajime-japanese/builds/25d76a23-c286-4cf4-a695-049b9937105a",
 };

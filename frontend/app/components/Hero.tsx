@@ -64,7 +64,7 @@ export default function Hero() {
             </div>
             <div className="hero-stats">
               {HERO_STAT_NUMS.map((num, i) => (
-                <div key={num + i} className="stat-card">
+                <div key={num} className="stat-card">
                   <div className="stat-num">{num}</div>
                   <div className="stat-lbl">{t.stats[i]}</div>
                 </div>
