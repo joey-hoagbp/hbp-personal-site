@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { LanguageProvider } from "./i18n/LanguageProvider";
 
 export const metadata: Metadata = {
   title: "Hoàng Bảo Phúc — Software Engineer",
@@ -37,7 +38,9 @@ export default function RootLayout({
           <style>{`.reveal{opacity:1 !important;transform:none !important;}`}</style>
         </noscript>
       </head>
-      <body>{children}</body>
+      <body>
+        <LanguageProvider>{children}</LanguageProvider>
+      </body>
     </html>
   );
 }
