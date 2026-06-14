@@ -37,5 +37,6 @@ export const PROJECT_META: {
     { label: "MongoDB" },
     { label: "Education" },
   ],
-  apkUrl: "https://expo.dev/accounts/joey-hoagbp/projects/hajime-japanese/builds/25d76a23-c286-4cf4-a695-049b9937105a",
+  apkUrl: "/hajime-japanese.apk", // served from frontend/public/ for a direct same-origin download
+
 };

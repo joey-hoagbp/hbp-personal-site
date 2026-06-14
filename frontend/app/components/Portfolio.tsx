@@ -38,7 +38,7 @@ export default function Portfolio() {
             </ul>
             <div className="proj-btns">
               {PROJECT_META.apkUrl ? (
-                <a href={PROJECT_META.apkUrl} className="btn-primary" download>
+                <a href={PROJECT_META.apkUrl} className="btn-primary" download="hajime-japanese.apk">
                   <DownloadIcon />
                   {t.downloadApk}
                 </a>

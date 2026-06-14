@@ -11,7 +11,7 @@ export default function PhoneMockup() {
       <div className="phone-notch" />
       <div className="phone-screen">
         <div className="ps-topbar">
-          <span className="ps-appname">NIHONGO</span>
+          <span className="ps-appname">HAJIME</span>
           <span className="ps-streak">7 ngày</span>
         </div>
         <div className="ps-flashcard">
