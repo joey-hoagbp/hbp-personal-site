@@ -4,10 +4,14 @@ import { useState, type FormEvent } from "react";
 import { SOCIAL_LINKS } from "../data";
 import { SOCIAL_ICONS } from "./icons";
 import { sendContactMessage } from "../../lib/api";
+import { useLang } from "../i18n/LanguageProvider";
+import { messages } from "../i18n/dictionary";
 
 type Status = "idle" | "submitting" | "sent" | "error";
 
 export default function Contact() {
+  const { lang } = useLang();
+  const t = messages[lang].contact;
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
 
@@ -39,16 +43,13 @@ export default function Contact() {
       <div className="container">
         <div className="contact-layout">
           <div className="reveal">
-            <p className="section-label">Liên Hệ / Contact</p>
+            <p className="section-label">{t.label}</p>
             <h2 className="contact-hdg">
-              Cùng xây dựng
+              {t.headingLine1}
               <br />
-              <span className="hdg-accent">điều gì đó.</span>
+              <span className="hdg-accent">{t.headingAccent}</span>
             </h2>
-            <p className="contact-body">
-              Tôi luôn sẵn sàng thảo luận về các dự án mới, ý tưởng sáng tạo hoặc
-              cơ hội hợp tác. Hãy liên hệ với tôi.
-            </p>
+            <p className="contact-body">{t.body}</p>
             <div className="soc-links">
               {SOCIAL_LINKS.map(({ label, href, icon }) => {
                 const Icon = SOCIAL_ICONS[icon];
@@ -74,60 +75,60 @@ export default function Contact() {
             {status === "sent" ? (
               <div className="form-ok">
                 <div className="form-ok-icon">✓</div>
-                <p className="form-ok-msg">Đã gửi! Tôi sẽ phản hồi sớm nhất có thể.</p>
+                <p className="form-ok-msg">{t.sentMsg}</p>
               </div>
             ) : (
               <>
                 <div className="form-row">
                   <div className="fg">
                     <label className="fl" htmlFor="cf-name">
-                      Tên của bạn
+                      {t.nameLabel}
                     </label>
                     <input
                       id="cf-name"
                       name="name"
                       type="text"
                       className="fi"
-                      placeholder="Nguyễn Văn A"
+                      placeholder={t.namePlaceholder}
                       required
                     />
                   </div>
                   <div className="fg">
                     <label className="fl" htmlFor="cf-email">
-                      Email
+                      {t.emailLabel}
                     </label>
                     <input
                       id="cf-email"
                       name="email"
                       type="email"
                       className="fi"
-                      placeholder="email@example.com"
+                      placeholder={t.emailPlaceholder}
                       required
                     />
                   </div>
                 </div>
                 <div className="fg">
                   <label className="fl" htmlFor="cf-subject">
-                    Chủ đề
+                    {t.subjectLabel}
                   </label>
                   <input
                     id="cf-subject"
                     name="subject"
                     type="text"
                     className="fi"
-                    placeholder="Dự án hợp tác..."
+                    placeholder={t.subjectPlaceholder}
                   />
                 </div>
                 <div className="fg">
                   <label className="fl" htmlFor="cf-message">
-                    Tin nhắn
+                    {t.messageLabel}
                   </label>
                   <textarea
                     id="cf-message"
                     name="message"
                     className="fi"
                     rows={5}
-                    placeholder="Xin chào Phúc, tôi muốn thảo luận về..."
+                    placeholder={t.messagePlaceholder}
                     required
                   />
                 </div>
@@ -141,7 +142,7 @@ export default function Contact() {
                   className="btn-primary btn-full"
                   disabled={status === "submitting"}
                 >
-                  {status === "submitting" ? "Đang gửi..." : "Gửi tin nhắn"}
+                  {status === "submitting" ? t.submitting : t.submit}
                 </button>
               </>
             )}
