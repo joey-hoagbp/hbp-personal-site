@@ -6,17 +6,21 @@ import CV from "./components/CV";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import ScrollReveal from "./components/ScrollReveal";
+import { fetchProfile } from "../lib/api";
+import { DEFAULT_PROFILE } from "./data";
 
-export default function Home() {
+export default async function Home() {
+  const profile = await fetchProfile().catch(() => DEFAULT_PROFILE);
+
   return (
     <>
       <ScrollReveal />
       <Nav />
       <main>
         <Hero />
-        <Skills />
-        <Portfolio />
-        <CV />
+        <Skills groups={profile.techStacks} />
+        <Portfolio project={profile.projects.find((p) => p.current) ?? profile.projects[0]} />
+        <CV experience={profile.experiences} education={profile.education} />
         <Contact />
       </main>
       <Footer />

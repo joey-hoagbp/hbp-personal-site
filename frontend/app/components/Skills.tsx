@@ -1,10 +1,10 @@
 "use client";
 
-import { SKILL_GROUP_ITEMS } from "../data";
 import { useLang } from "../i18n/LanguageProvider";
 import { messages } from "../i18n/dictionary";
+import { loc, type TechStackGroup } from "../../lib/api";
 
-export default function Skills() {
+export default function Skills({ groups }: { groups: TechStackGroup[] }) {
   const { lang } = useLang();
   const t = messages[lang].skills;
 
@@ -17,11 +17,11 @@ export default function Skills() {
           <p className="section-sub">{t.sub}</p>
         </header>
         <div className="skills-grid">
-          {SKILL_GROUP_ITEMS.map((items, i) => (
-            <div key={t.groupLabels[i]} className={`skill-group reveal reveal-d${(i % 3) + 1}`}>
-              <p className="sg-label">{t.groupLabels[i]}</p>
+          {groups.map((group, i) => (
+            <div key={loc(group.label, lang)} className={`skill-group reveal reveal-d${(i % 3) + 1}`}>
+              <p className="sg-label">{loc(group.label, lang)}</p>
               <div className="sg-tags">
-                {items.map((s) => (
+                {group.items.map((s) => (
                   <span key={s} className="sg-tag">
                     {s}
                   </span>

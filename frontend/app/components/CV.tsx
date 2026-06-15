@@ -2,9 +2,12 @@
 
 import { DownloadIcon } from "./icons";
 import { useLang } from "../i18n/LanguageProvider";
-import { messages, type TimelineEntry } from "../i18n/dictionary";
+import { messages } from "../i18n/dictionary";
+import { loc, type TimelineItem } from "../../lib/api";
+import type { Lang } from "../../lib/api";
 
-function TLItem({ item, last }: { item: TimelineEntry; last: boolean }) {
+function TLItem({ item, last, lang }: { item: TimelineItem; last: boolean; lang: Lang }) {
+  const desc = loc(item.desc, lang);
   return (
     <div className="tl-item">
       <div className="tl-spine">
@@ -12,16 +15,22 @@ function TLItem({ item, last }: { item: TimelineEntry; last: boolean }) {
         {!last && <div className="tl-line" />}
       </div>
       <div className="tl-body">
-        <p className="tl-date">{item.date}</p>
-        <p className="tl-title">{item.title}</p>
-        <p className="tl-org">{item.org}</p>
-        <p className="tl-desc">{item.desc}</p>
+        <p className="tl-date">{loc(item.date, lang)}</p>
+        <p className="tl-title">{loc(item.title, lang)}</p>
+        <p className="tl-org">{loc(item.org, lang)}</p>
+        {desc && <p className="tl-desc">{desc}</p>}
       </div>
     </div>
   );
 }
 
-export default function CV() {
+export default function CV({
+  experience,
+  education,
+}: {
+  experience: TimelineItem[];
+  education: TimelineItem[];
+}) {
   const { lang } = useLang();
   const t = messages[lang].cv;
 
@@ -36,16 +45,26 @@ export default function CV() {
           <div className="reveal">
             <p className="cv-col-ttl">{t.colExperience}</p>
             <div className="timeline">
-              {t.experience.map((e, i) => (
-                <TLItem key={`${e.title}-${e.date}`} item={e} last={i === t.experience.length - 1} />
+              {experience.map((e, i) => (
+                <TLItem
+                  key={`${loc(e.title, lang)}-${loc(e.date, lang)}`}
+                  item={e}
+                  last={i === experience.length - 1}
+                  lang={lang}
+                />
               ))}
             </div>
           </div>
           <div className="reveal reveal-d1">
             <p className="cv-col-ttl">{t.colEducation}</p>
             <div className="timeline">
-              {t.education.map((e, i) => (
-                <TLItem key={`${e.title}-${e.date}`} item={e} last={i === t.education.length - 1} />
+              {education.map((e, i) => (
+                <TLItem
+                  key={`${loc(e.title, lang)}-${loc(e.date, lang)}`}
+                  item={e}
+                  last={i === education.length - 1}
+                  lang={lang}
+                />
               ))}
             </div>
           </div>

@@ -2,11 +2,11 @@
 
 import PhoneMockup from "./PhoneMockup";
 import { DownloadIcon } from "./icons";
-import { PROJECT_META } from "../data";
 import { useLang } from "../i18n/LanguageProvider";
 import { messages } from "../i18n/dictionary";
+import { loc, type Project } from "../../lib/api";
 
-export default function Portfolio() {
+export default function Portfolio({ project }: { project: Project }) {
   const { lang } = useLang();
   const t = messages[lang].portfolio;
 
@@ -22,23 +22,23 @@ export default function Portfolio() {
         <div className="project-card reveal">
           <div className="project-info">
             <div className="proj-chips">
-              {PROJECT_META.chips.map((chip) => (
+              {project.chips.map((chip) => (
                 <span key={chip.label} className={chip.accent ? "chip chip-ac" : "chip"}>
                   {chip.label}
                 </span>
               ))}
             </div>
-            <h3 className="proj-title">{PROJECT_META.title}</h3>
-            <p className="proj-subtitle">{t.project.subtitle}</p>
-            <p className="proj-desc">{t.project.description}</p>
+            <h3 className="proj-title">{project.title}</h3>
+            <p className="proj-subtitle">{loc(project.subtitle, lang)}</p>
+            <p className="proj-desc">{loc(project.description, lang)}</p>
             <ul className="proj-features">
-              {t.project.features.map((feature) => (
+              {project.features[lang].map((feature) => (
                 <li key={feature}>{feature}</li>
               ))}
             </ul>
             <div className="proj-btns">
-              {PROJECT_META.apkUrl ? (
-                <a href={PROJECT_META.apkUrl} className="btn-primary" download="hajime-japanese.apk">
+              {project.apkUrl ? (
+                <a href={project.apkUrl} className="btn-primary" download="hajime-japanese.apk">
                   <DownloadIcon />
                   {t.downloadApk}
                 </a>
