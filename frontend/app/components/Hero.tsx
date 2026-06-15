@@ -10,8 +10,8 @@ const CODE_HTML = `<span class="c-kw">const</span> <span class="c-fn">developer<
   <span class="c-prop">name</span>:  <span class="c-str">"Hoàng Bảo Phúc"</span>,
   <span class="c-prop">role</span>:  <span class="c-str">"Software Engineer"</span>,
   <span class="c-prop">city</span>:  <span class="c-str">"Hà Nội"</span>,
-  <span class="c-prop">stack</span>: [<span class="c-str">"Flutter"</span>, <span class="c-str">"React"</span>,
-          <span class="c-str">"Node.js"</span>, <span class="c-str">"Python"</span>],
+  <span class="c-prop">stack</span>: [<span class="c-str">"Java"</span>, <span class="c-str">"C#"</span>,
+          <span class="c-str">"React"</span>, <span class="c-str">"MongoDB"</span>],
   <span class="c-prop">open</span>:  <span class="c-bool">true</span>,
 };`;
 
