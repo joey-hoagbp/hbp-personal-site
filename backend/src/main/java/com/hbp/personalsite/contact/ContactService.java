@@ -10,9 +10,11 @@ import java.util.List;
 public class ContactService {
 
     private final ContactRepository repository;
+    private final ContactNotifier notifier;
 
-    public ContactService(ContactRepository repository) {
+    public ContactService(ContactRepository repository, ContactNotifier notifier) {
         this.repository = repository;
+        this.notifier = notifier;
     }
 
     public ContactMessage save(ContactRequest request) {
@@ -27,7 +29,9 @@ public class ContactService {
                 request.message().trim(),
                 Instant.now()
         );
-        return repository.save(message);
+        ContactMessage saved = repository.save(message);
+        notifier.notifyNewMessage(saved);
+        return saved;
     }
 
     public List<ContactMessage> findAll() {
