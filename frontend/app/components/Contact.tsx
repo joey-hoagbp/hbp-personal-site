@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, type CSSProperties, type FormEvent } from "react";
 import { SOCIAL_LINKS } from "../data";
 import { SOCIAL_ICONS } from "./icons";
 import { sendContactMessage } from "../../lib/api";
@@ -8,6 +8,15 @@ import { useLang } from "../i18n/LanguageProvider";
 import { messages } from "../i18n/dictionary";
 
 type Status = "idle" | "submitting" | "sent" | "error";
+
+// Brand colors revealed on social-link hover (via the --brand CSS var).
+const SOCIAL_BRAND: Record<string, string> = {
+  mail: "#EA4335",
+  github: "#181717",
+  linkedin: "#0A66C2",
+  facebook: "#1877F2",
+  instagram: "#E4405F",
+};
 
 export default function Contact() {
   const { lang } = useLang();
@@ -60,6 +69,7 @@ export default function Contact() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="soc-link"
+                    style={{ "--brand": SOCIAL_BRAND[icon] } as CSSProperties}
                   >
                     <span className="soc-icon">
                       <Icon />
@@ -81,56 +91,56 @@ export default function Contact() {
               <>
                 <div className="form-row">
                   <div className="fg">
-                    <label className="fl" htmlFor="cf-name">
-                      {t.nameLabel}
-                    </label>
                     <input
                       id="cf-name"
                       name="name"
                       type="text"
                       className="fi"
-                      placeholder={t.namePlaceholder}
+                      placeholder=" "
                       required
                     />
+                    <label className="fl" htmlFor="cf-name">
+                      {t.nameLabel}
+                    </label>
                   </div>
                   <div className="fg">
-                    <label className="fl" htmlFor="cf-email">
-                      {t.emailLabel}
-                    </label>
                     <input
                       id="cf-email"
                       name="email"
                       type="email"
                       className="fi"
-                      placeholder={t.emailPlaceholder}
+                      placeholder=" "
                       required
                     />
+                    <label className="fl" htmlFor="cf-email">
+                      {t.emailLabel}
+                    </label>
                   </div>
                 </div>
                 <div className="fg">
-                  <label className="fl" htmlFor="cf-subject">
-                    {t.subjectLabel}
-                  </label>
                   <input
                     id="cf-subject"
                     name="subject"
                     type="text"
                     className="fi"
-                    placeholder={t.subjectPlaceholder}
+                    placeholder=" "
                   />
+                  <label className="fl" htmlFor="cf-subject">
+                    {t.subjectLabel}
+                  </label>
                 </div>
                 <div className="fg">
-                  <label className="fl" htmlFor="cf-message">
-                    {t.messageLabel}
-                  </label>
                   <textarea
                     id="cf-message"
                     name="message"
                     className="fi"
                     rows={5}
-                    placeholder={t.messagePlaceholder}
+                    placeholder=" "
                     required
                   />
+                  <label className="fl" htmlFor="cf-message">
+                    {t.messageLabel}
+                  </label>
                 </div>
                 {error && (
                   <p className="form-err" role="alert">
@@ -142,6 +152,7 @@ export default function Contact() {
                   className="btn-primary btn-full"
                   disabled={status === "submitting"}
                 >
+                  {status === "submitting" && <span className="btn-spinner" aria-hidden="true" />}
                   {status === "submitting" ? t.submitting : t.submit}
                 </button>
               </>

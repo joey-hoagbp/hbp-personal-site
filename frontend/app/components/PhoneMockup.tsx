@@ -7,7 +7,7 @@ const GRID_CHARS: [string, string][] = [
 
 export default function PhoneMockup() {
   return (
-    <div className="phone-shell">
+    <div className="phone-shell tilt">
       <div className="phone-notch" />
       <div className="phone-screen">
         <div className="ps-topbar">

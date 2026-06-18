@@ -20,7 +20,17 @@
   --r:      12px;
 }
 [data-theme="glow"]      { --bg: #08080e; --bg2: #0f0f1a; --bg3: #16162a; }
-[data-theme="editorial"] { --bg: #0d0d0f; --bg2: #131316; --bg3: #1a1a1e; --fg2: #979797; --accent: #e85d3d; }
+/* Editorial — light / paper theme (shipped default). */
+[data-theme="editorial"] {
+  --bg:     #faf8f4;
+  --bg2:    #ffffff;
+  --bg3:    #f0ede7;
+  --fg:     #1a1a1d;
+  --fg2:    #5e5e64;
+  --fg3:    #9a978f;
+  --accent: #e85d3d;
+  --border: rgba(0, 0, 0, 0.10);
+}
 
 /* ── RESET & BASE ───────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -165,6 +175,36 @@ nav.nav-scrolled {
   color: var(--fg3);
 }
 
+/* ── EDITORIAL LIGHT-THEME OVERRIDES ────────────────── */
+/* Base styles assume a dark page; on the light/paper theme these
+   surfaces need dark tints (instead of white-on-white) to stay visible.
+   Device/editor surfaces (code card, project visual, phone) stay dark
+   on purpose — they read as intentional contrast on a light page. */
+
+/* Scrolled nav: translucent paper instead of translucent black */
+[data-theme="editorial"] nav.nav-scrolled { background: rgba(250, 248, 244, 0.85); }
+
+/* Pills & ghost button: tint with black, not white */
+[data-theme="editorial"] .sg-tag,
+[data-theme="editorial"] .chip { background: rgba(0, 0, 0, 0.035); }
+[data-theme="editorial"] .sg-tag:hover {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.18);
+}
+[data-theme="editorial"] .btn-ghost:hover { border-color: rgba(0, 0, 0, 0.20); }
+
+/* Keep the code card a dark editor surface on the light page */
+[data-theme="editorial"] .code-card {
+  background: #16161a;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+[data-theme="editorial"] .code-dots { border-bottom-color: rgba(255, 255, 255, 0.08); }
+[data-theme="editorial"] .code-dots span { background: rgba(255, 255, 255, 0.16); }
+[data-theme="editorial"] .code-pre { color: #b6b6bd; }
+
+/* Scrollbar thumb readable on light bg */
+[data-theme="editorial"] ::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.22); }
+
 /* ── SKILLS ─────────────────────────────────────────── */
 .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .skill-group {
@@ -179,9 +219,11 @@ nav.nav-scrolled {
 }
 .sg-tags { display: flex; flex-wrap: wrap; gap: 7px; }
 .sg-tag {
-  padding: 5px 12px; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border);
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 5px 12px 5px 10px; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border);
   border-radius: 100px; font-size: 13px; color: var(--fg2); transition: all 0.15s; cursor: default;
 }
+.sg-tag-icon { width: 15px; height: 15px; flex-shrink: 0; }
 .sg-tag:hover { color: var(--fg); border-color: rgba(255, 255, 255, 0.15); background: rgba(255, 255, 255, 0.07); }
 
 /* ── PORTFOLIO ──────────────────────────────────────── */
@@ -356,6 +398,171 @@ footer { border-top: 1px solid var(--border); padding: 28px 0; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
   html { scroll-behavior: auto; }
+}
+
+/* ── POINTER / SCROLL INTERACTIONS ──────────────────── */
+/* Scroll-progress bar: a thin accent line filled via scaleX from JS. */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 200;
+  background: var(--accent);
+  transform: scaleX(0); transform-origin: 0 50%;
+  will-change: transform;
+}
+
+/* Cursor spotlight: a radial accent glow tracking --mx/--my over a card. */
+.spotlight { position: relative; overflow: hidden; }
+.spotlight > * { position: relative; z-index: 1; }
+.spotlight::after {
+  content: ""; position: absolute; inset: 0; z-index: 0;
+  border-radius: inherit; pointer-events: none;
+  opacity: 0; transition: opacity 0.35s ease;
+  background: radial-gradient(
+    220px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--accent) 14%, transparent),
+    transparent 60%
+  );
+}
+.spotlight:hover::after { opacity: 1; }
+
+/* Magnetic button + 3D tilt: transforms are set inline from JS; these just
+   add the easing for movement and the spring-back on pointer-out. */
+.magnetic { transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1); will-change: transform; }
+.project-visual { perspective: 900px; }
+.tilt { transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1); will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  .spotlight::after { display: none; }
+  .magnetic, .tilt { transition: none; }
+}
+
+/* ── MODULE POLISH PASS ─────────────────────────────── */
+
+/* NAV — animated underline + scroll-spy active link + logo pulse */
+.nav-links a:not(.nav-cta) { position: relative; }
+.nav-links a:not(.nav-cta)::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -5px; height: 1.5px;
+  background: var(--accent); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.nav-links a:not(.nav-cta):hover::after,
+.nav-links a.active::after { transform: scaleX(1); }
+.nav-links a.active { color: var(--fg); }
+.logo-dot { display: inline-block; animation: dotPulse 2.4s ease-in-out infinite; }
+@keyframes dotPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+/* HERO — staggered name reveal, accent gradient, code title + caret, stat hover */
+.hero-name .hero-word {
+  display: inline-block; opacity: 0; transform: translateY(14px);
+  animation: wordIn 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+.hero-name .hero-word:nth-of-type(2) { animation-delay: 0.12s; }
+@keyframes wordIn { to { opacity: 1; transform: none; } }
+.hero-name .name-dim {
+  background: linear-gradient(110deg, var(--accent) 0%, #ff9472 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+.code-title { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--fg3); }
+[data-theme="editorial"] .code-title { color: rgba(255, 255, 255, 0.4); }
+.code-caret {
+  display: inline-block; width: 7px; height: 14px; margin-left: 2px;
+  background: var(--accent); vertical-align: text-bottom;
+  animation: caretBlink 1.1s steps(1) infinite;
+}
+@keyframes caretBlink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+.stat-card { transition: transform 0.2s ease, border-color 0.2s ease; }
+.stat-card:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--accent) 30%, transparent); }
+
+/* TECH STACK — icon brand-color on hover, tag lift, group raise */
+.sg-tag-icon { color: var(--fg2); transition: color 0.18s ease; }
+.sg-tag:hover { transform: translateY(-1px); }
+.sg-tag:hover .sg-tag-icon { color: var(--brand, var(--fg2)); }
+.skill-group { transition: border-color 0.25s, transform 0.25s; }
+.skill-group:hover { transform: translateY(-3px); }
+
+/* FEATURED WORK — accent check marks (staggered) + chip + glow drift */
+.proj-features li::before {
+  content: ""; width: 5px; height: 9px; border-radius: 0; background: none;
+  border: solid var(--accent); border-width: 0 2px 2px 0;
+  transform: rotate(45deg); margin: -3px 2px 0 1px;
+}
+.project-card .proj-features li { opacity: 0; transform: translateX(-8px); }
+.project-card.visible .proj-features li { animation: featIn 0.45s ease forwards; }
+.project-card.visible .proj-features li:nth-child(1) { animation-delay: 0.10s; }
+.project-card.visible .proj-features li:nth-child(2) { animation-delay: 0.20s; }
+.project-card.visible .proj-features li:nth-child(3) { animation-delay: 0.30s; }
+.project-card.visible .proj-features li:nth-child(4) { animation-delay: 0.40s; }
+@keyframes featIn { to { opacity: 1; transform: none; } }
+.chip { transition: color 0.2s, border-color 0.2s, background 0.2s; }
+.chip:hover { border-color: color-mix(in srgb, var(--accent) 30%, transparent); color: var(--fg); }
+.pv-glow { animation: glowDrift 9s ease-in-out infinite alternate; }
+@keyframes glowDrift { from { transform: translate(-28px, -12px); } to { transform: translate(28px, 18px); } }
+
+/* CV TIMELINE — line draws + dots pop on scroll-in, item hover */
+.timeline .tl-line { transform: scaleY(0); transform-origin: top; }
+.timeline .tl-dot { transform: scale(0); }
+.reveal.visible .timeline .tl-line { animation: drawLine 0.5s ease forwards; }
+.reveal.visible .timeline .tl-dot { animation: popDot 0.4s cubic-bezier(0.2, 1.4, 0.4, 1) forwards; }
+.reveal.visible .tl-item:nth-child(1) .tl-dot { animation-delay: 0.05s; }
+.reveal.visible .tl-item:nth-child(2) .tl-dot { animation-delay: 0.20s; }
+.reveal.visible .tl-item:nth-child(3) .tl-dot { animation-delay: 0.35s; }
+.reveal.visible .tl-item:nth-child(1) .tl-line { animation-delay: 0.10s; }
+.reveal.visible .tl-item:nth-child(2) .tl-line { animation-delay: 0.25s; }
+@keyframes drawLine { to { transform: scaleY(1); } }
+@keyframes popDot { to { transform: scale(1); } }
+.tl-title { transition: color 0.2s ease; }
+.tl-item:hover .tl-title { color: var(--accent); }
+
+/* CONTACT — floating labels, focus ring, social brand hover, submit spinner */
+.fg { position: relative; }
+.fl {
+  position: absolute; left: 11px; top: 12px;
+  font-family: var(--font); font-size: 14px; font-weight: 400;
+  letter-spacing: normal; text-transform: none; color: var(--fg3);
+  pointer-events: none; transform-origin: left;
+  background: var(--bg); padding: 0 4px;
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+.fi:focus {
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.fi:focus + .fl,
+.fi:not(:placeholder-shown) + .fl {
+  transform: translateY(-23px) scale(0.82); color: var(--accent);
+}
+.soc-icon { transition: color 0.2s, border-color 0.2s, transform 0.2s; }
+.soc-link:hover .soc-icon {
+  color: var(--brand, var(--accent));
+  border-color: var(--brand, var(--accent));
+  transform: translateY(-2px);
+}
+.btn-spinner {
+  width: 14px; height: 14px; border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4); border-top-color: #fff;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* FOOTER — back-to-top button */
+.footer-top {
+  width: 38px; height: 38px; border-radius: 10px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--bg2); border: 1px solid var(--border); color: var(--fg2);
+  cursor: pointer; transition: color 0.2s, border-color 0.2s, transform 0.2s;
+}
+.footer-top svg { width: 16px; height: 16px; }
+.footer-top:hover {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-name .hero-word { opacity: 1; transform: none; animation: none; }
+  .logo-dot, .code-caret, .pv-glow, .btn-spinner { animation: none; }
+  .project-card .proj-features li { opacity: 1; transform: none; animation: none; }
+  .timeline .tl-line, .timeline .tl-dot { transform: none; animation: none; }
 }
 
 /* ── SCROLLBAR ──────────────────────────────────────── */

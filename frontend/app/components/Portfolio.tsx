@@ -19,7 +19,7 @@ export default function Portfolio({ project }: { project: Project }) {
           <p className="section-sub">{t.sub}</p>
         </header>
 
-        <div className="project-card reveal">
+        <div className="project-card spotlight reveal">
           <div className="project-info">
             <div className="proj-chips">
               {project.chips.map((chip) => (

@@ -3,6 +3,7 @@
 import { HERO_STAT_NUMS } from "../data";
 import { useLang } from "../i18n/LanguageProvider";
 import { messages } from "../i18n/dictionary";
+import CountUp from "./CountUp";
 
 // Static, hand-tuned syntax highlighting — kept as raw HTML so the exact
 // indentation/line breaks from the design survive inside <pre>. No user input.
@@ -13,7 +14,7 @@ const CODE_HTML = `<span class="c-kw">const</span> <span class="c-fn">developer<
   <span class="c-prop">stack</span>: [<span class="c-str">"Java"</span>, <span class="c-str">"C#"</span>,
           <span class="c-str">"React"</span>, <span class="c-str">"MongoDB"</span>],
   <span class="c-prop">open</span>:  <span class="c-bool">true</span>,
-};`;
+};<span class="code-caret"></span>`;
 
 export default function Hero() {
   const { lang } = useLang();
@@ -30,9 +31,9 @@ export default function Hero() {
               {t.eyebrow}
             </p>
             <h1 className="hero-name">
-              Hoàng
+              <span className="hero-word">Hoàng</span>
               <br />
-              <span className="name-dim">Bảo Phúc.</span>
+              <span className="hero-word name-dim">Bảo Phúc.</span>
             </h1>
             <p className="hero-tagline">
               {t.taglineLines[0]}
@@ -41,7 +42,7 @@ export default function Hero() {
             </p>
             <p className="hero-bio">{t.bio}</p>
             <div className="hero-btns">
-              <a href="#portfolio" className="btn-primary">
+              <a href="#portfolio" className="btn-primary magnetic">
                 {t.viewWork}
               </a>
               <a href="#contact" className="btn-ghost">
@@ -56,6 +57,7 @@ export default function Hero() {
                 <span />
                 <span />
                 <span />
+                <span className="code-title">developer.ts</span>
               </div>
               <pre
                 className="code-pre"
@@ -65,7 +67,9 @@ export default function Hero() {
             <div className="hero-stats">
               {HERO_STAT_NUMS.map((num, i) => (
                 <div key={num} className="stat-card">
-                  <div className="stat-num">{num}</div>
+                  <div className="stat-num">
+                    <CountUp value={num} />
+                  </div>
                   <div className="stat-lbl">{t.stats[i]}</div>
                 </div>
               ))}

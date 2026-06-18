@@ -16,9 +16,12 @@ function GlobeIcon() {
   );
 }
 
+const SECTION_IDS = ["skills", "portfolio", "cv", "contact"] as const;
+
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState<string>("");
   const { lang, setLang } = useLang();
   const nav = messages[lang].nav;
   const switchRef = useRef<HTMLDivElement>(null);
@@ -28,6 +31,26 @@ export default function Nav() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Scroll-spy: highlight the nav link for the section currently in view.
+  useEffect(() => {
+    const sections = SECTION_IDS
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]) setActive(visible[0].target.id);
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 },
+    );
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -56,13 +79,19 @@ export default function Nav() {
         <div className="nav-right">
           <ul className="nav-links">
             <li>
-              <a href="#skills">{nav.skills}</a>
+              <a href="#skills" className={active === "skills" ? "active" : ""}>
+                {nav.skills}
+              </a>
             </li>
             <li>
-              <a href="#portfolio">{nav.work}</a>
+              <a href="#portfolio" className={active === "portfolio" ? "active" : ""}>
+                {nav.work}
+              </a>
             </li>
             <li>
-              <a href="#cv">{nav.cv}</a>
+              <a href="#cv" className={active === "cv" ? "active" : ""}>
+                {nav.cv}
+              </a>
             </li>
             <li>
               <a href="#contact" className="nav-cta">
