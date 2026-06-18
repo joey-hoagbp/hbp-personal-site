@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { LanguageProvider } from "./i18n/LanguageProvider";
+import SmoothScroll from "./components/SmoothScroll";
 
 export const metadata: Metadata = {
   title: "Hoàng Bảo Phúc — Software Engineer",
@@ -39,6 +40,7 @@ export default function RootLayout({
         </noscript>
       </head>
       <body>
+        <SmoothScroll />
         <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
