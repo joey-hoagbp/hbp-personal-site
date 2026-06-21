@@ -14,12 +14,12 @@ export type Messages = {
     bio: string;
     viewWork: string;
     getInTouch: string;
-    terminal: {
-      title: string;
+    avatar: {
       name: string;
+      role: string;
+      location: string;
       status: string;
-      avatarAlt: string;
-      lines: { cmd: string; out: string }[];
+      alt: string;
     };
   };
   skills: {
@@ -78,17 +78,12 @@ export const messages: Record<Lang, Messages> = {
         "Tập trung vào clean code, trải nghiệm người dùng và hiệu suất.",
       viewWork: "Xem sản phẩm",
       getInTouch: "Liên hệ ngay",
-      terminal: {
-        title: "phuc@portfolio: ~",
+      avatar: {
         name: "Hoàng Bảo Phúc",
-        status: "sẵn sàng nhận việc",
-        avatarAlt: "Ảnh của Hoàng Bảo Phúc",
-        lines: [
-          { cmd: "whoami", out: "Hoàng Bảo Phúc — Kỹ sư phần mềm" },
-          { cmd: "cat location.txt", out: "Hà Nội, Việt Nam" },
-          { cmd: "ls ~/stack", out: "Java · C# · React · Spring Boot · MongoDB" },
-          { cmd: "./hajime --status", out: "✓ đã phát hành: ứng dụng học tiếng Nhật" },
-        ],
+        role: "Kỹ sư phần mềm",
+        location: "Hà Nội, Việt Nam",
+        status: "Sẵn sàng nhận việc",
+        alt: "Ảnh của Hoàng Bảo Phúc",
       },
     },
     skills: {
@@ -142,17 +137,12 @@ export const messages: Record<Lang, Messages> = {
         "Focused on clean code, user experience, and performance.",
       viewWork: "View work",
       getInTouch: "Get in touch",
-      terminal: {
-        title: "phuc@portfolio: ~",
+      avatar: {
         name: "Hoàng Bảo Phúc",
-        status: "open to work",
-        avatarAlt: "Photo of Hoàng Bảo Phúc",
-        lines: [
-          { cmd: "whoami", out: "Hoàng Bảo Phúc — Software Engineer" },
-          { cmd: "cat location.txt", out: "Hà Nội, Vietnam" },
-          { cmd: "ls ~/stack", out: "Java · C# · React · Spring Boot · MongoDB" },
-          { cmd: "./hajime --status", out: "✓ shipped: a Japanese-learning app" },
-        ],
+        role: "Software Engineer",
+        location: "Hà Nội, Vietnam",
+        status: "Open to work",
+        alt: "Photo of Hoàng Bảo Phúc",
       },
     },
     skills: {

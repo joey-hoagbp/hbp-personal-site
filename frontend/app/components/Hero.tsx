@@ -2,7 +2,7 @@
 
 import { useLang } from "../i18n/LanguageProvider";
 import { messages } from "../i18n/dictionary";
-import IntroTerminal from "./IntroTerminal";
+import AvatarCard from "./AvatarCard";
 
 export default function Hero() {
   const { lang } = useLang();
@@ -40,7 +40,7 @@ export default function Hero() {
           </div>
 
           <div className="hero-right reveal reveal-d2">
-            <IntroTerminal />
+            <AvatarCard />
           </div>
         </div>
       </div>

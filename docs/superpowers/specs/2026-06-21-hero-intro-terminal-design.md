@@ -1,69 +1,61 @@
-# Hero intro terminal — design
+# Hero avatar card — design
 
 **Date:** 2026-06-21
-**Status:** Approved
+**Status:** Implemented
 
 ## Goal
 
 Replace the hero right column (the static `developer.ts` syntax-highlighted code
-card **and** the three stat cards) with a single, livelier panel that is still
-about Phúc: an **avatar + animated terminal** that "introduces" him line by line.
+card and the three stat cards) with an **avatar-first** panel: the photo is the
+focal point, supported by light personal info, and it must sit comfortably in the
+site's light editorial theme.
 
-The three stat cards (`1+` / `3+` / `1`) are removed entirely.
+> **Revision note:** the first build of this used a dark animated "intro
+> terminal." It was rejected — too busy and it clashed with the light theme. The
+> shipped design is the editorial avatar card below.
 
 ## What it looks like
 
-A single terminal card reusing the existing `.code-card` chrome (traffic-light
-dots, dark editor styling under the `editorial` theme):
+An **editorial offset frame** — a classic magazine device that makes the portrait
+the hero:
 
-- **Header**: a round avatar, the name "Hoàng Bảo Phúc", and a green "open to
-  work" status dot.
-- **Body**: terminal lines that type out one at a time — each `$ command`
-  followed by its output, with a blinking caret trailing the active line.
+- A portrait photo (`aspect-ratio: 4/5`, `object-fit: cover`) in a light card.
+- A **solid accent block** (`--accent` `#e85d3d`) sits behind the photo, nudged
+  14px down-and-right, giving depth without a heavy drop shadow. On hover it eases
+  toward the photo (14px → 8px).
+- An **"Open to work"** status pill (mono, pulsing green dot) over the bottom-left
+  of the photo, on a blurred light backdrop.
+- A **mono credit caption** below: `— HOÀNG BẢO PHÚC` (uppercase, tracked) and a
+  muted `role · location` line.
 
-Example (EN):
-
-```
-$ whoami
-Hoàng Bảo Phúc — Software Engineer
-$ cat location.txt
-Hà Nội, Vietnam
-$ ls ~/stack
-Java · C# · React · Spring Boot · MongoDB
-$ ./hajime --status
-✓ shipped: a Japanese-learning app
-```
+Everything derives from the existing editorial tokens (`--bg2`, `--fg`, `--fg2`,
+`--accent`, `--border`, `--r`, `--mono`); no new palette.
 
 ## Behavior
 
-- **Typewriter on mount**: commands type at ~34ms/char, output at ~14ms/char,
-  short pause between segments, blinking caret on the active line and a steady
-  caret once finished.
-- **Bilingual**: all lines come from the i18n dictionary, so the terminal types
-  Vietnamese or English to match the language toggle and re-types when switched.
-- **`prefers-reduced-motion`**: renders every line instantly (no typing), keeping
-  only the blinking caret at the end.
+- **Bilingual** — name, role, location, status and alt text come from
+  `hero.avatar` in the i18n dictionary (vi/en) and switch with the language toggle.
+- **Avatar fallback** — if `avatar.jpg` is missing, an "HBP" monogram shows in its
+  place (via `onError`), so the layout never breaks.
+- **`prefers-reduced-motion`** — the status-dot pulse and the hover transition are
+  disabled.
 
 ## Implementation
 
-- **New client component** `app/components/IntroTerminal.tsx` — owns the typing
-  state and the avatar fallback. Hero's right column renders `<IntroTerminal />`
-  instead of the code card + stats.
-- **Avatar** at `frontend/public/avatar.jpg`, referenced through a new
-  `AVATAR_SRC` constant in `data.ts`. A styled "HBP" monogram sits behind the
-  image as a fallback, so a missing file never breaks the build or layout.
-- **i18n**: add a `hero.terminal` entry to both `vi` and `en` in `dictionary.ts`
-  (`title`, `name`, `status`, `avatarAlt`, `lines: {cmd, out}[]`) and update the
-  `Messages` type. Remove the now-unused `hero.stats`.
-- **Dead code removal**: delete `CODE_HTML` and the stat-card markup from
-  `Hero.tsx`, the `CountUp` import from `Hero.tsx`, `HERO_STAT_NUMS` from
-  `data.ts`, and the hero-stats CSS blocks. `CountUp.tsx` stays (generic reusable
-  component, not feature-specific).
-- **CSS** in `globals.css`: terminal header (avatar, monogram, name, status dot),
-  typed-line styling (prompt/command/output), and a reduced-motion rule. Reuses
-  `.code-card` / `.code-dots`.
+- **Component** `app/components/AvatarCard.tsx` (client; owns the image fallback).
+  Hero's right column renders `<AvatarCard />`.
+- **Avatar** at `frontend/public/avatar.jpg`, referenced via `AVATAR_SRC` in
+  `data.ts`. Rendered with `next/image` (`fill`).
+- **Static export**: `next.config.mjs` sets `images: { unoptimized: true }` —
+  `output: "export"` cannot run the Image Optimization API.
+- **i18n**: `hero.avatar` (`name`, `role`, `location`, `status`, `alt`) in both
+  locales; `Messages` type updated. The old `hero.stats` / `hero.terminal` removed.
+- **Removed**: the `developer.ts` code card, the stat cards, `HERO_STAT_NUMS`, and
+  the `CountUp` usage in Hero. (`CountUp.tsx` kept — generic reusable component.)
+- **CSS** in `globals.css`: the `.avatar-*` block (frame, accent, photo, status
+  pill, caption) plus a reduced-motion rule. Reuses the editorial tokens.
 
 ## Verification
 
-`npm run build` + `npm run lint`, plus a manual browser check of the typing
-animation in both languages and the monogram fallback when no photo is present.
+`npm run build` + `npm run lint` (both clean), plus a browser check of the photo,
+the offset frame, the hover, the monogram fallback, and both languages.

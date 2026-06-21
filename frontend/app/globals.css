@@ -160,50 +160,62 @@ nav.nav-scrolled {
 .c-str  { color: #98c379; }
 .c-bool { color: #d19a66; }
 
-/* ── HERO INTRO TERMINAL ────────────────────────────── */
-.intro-term { margin-bottom: 0; }
-/* The shared .code-dots span rule sizes children as 10px dots; the title needs
-   to render as full text, so opt it back out. */
-.code-dots .code-title {
-  width: auto; height: auto; display: inline-block;
-  background: none; border-radius: 0;
+/* ── HERO AVATAR CARD ───────────────────────────────── */
+/* Editorial offset frame: a solid accent block sits behind the portrait,
+   nudged down-right, giving depth without a heavy shadow. The photo is the
+   focal point; a small status pill and a mono credit caption support it. */
+.avatar-frame {
+  position: relative;
+  margin: 0 14px 28px 0;        /* room for the offset accent block */
 }
-.term-id {
-  display: flex; align-items: center; gap: 12px;
-  padding: 14px 18px; border-bottom: 1px solid var(--border);
+.avatar-accent {
+  position: absolute; inset: 0; z-index: 0;
+  transform: translate(14px, 14px);
+  background: var(--accent);
+  border-radius: var(--r);
+  transition: transform 0.35s ease;
 }
-.term-avatar {
-  position: relative; width: 44px; height: 44px; flex: none;
-  border-radius: 50%; overflow: hidden;
-  background: color-mix(in srgb, var(--accent) 16%, var(--bg2));
-  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+.avatar-photo {
+  position: relative; z-index: 1;
+  aspect-ratio: 4 / 5; overflow: hidden;
+  border-radius: var(--r);
+  border: 1px solid var(--border);
+  background: var(--bg3);
 }
-.term-avatar-mono {
-  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-  font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: 0.04em;
-  color: var(--accent);
+.avatar-photo-img { object-fit: cover; object-position: center top; }
+.avatar-mono {
+  position: absolute; inset: 0; z-index: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 52px; font-weight: 700;
+  letter-spacing: 0.04em; color: var(--accent); background: var(--bg3);
 }
-.term-avatar-img { object-fit: cover; }
-.term-id-meta { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
-.term-id-name { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
-.term-id-status {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-family: var(--mono); font-size: 11px; color: var(--fg3);
+.avatar-status {
+  position: absolute; left: 14px; bottom: 14px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 13px; border-radius: 999px;
+  background: color-mix(in srgb, var(--bg2) 90%, transparent);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  border: 1px solid var(--border);
+  font-family: var(--mono); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.02em; color: var(--fg);
 }
-.term-dot {
-  width: 7px; height: 7px; border-radius: 50%; background: #3fb950; flex: none;
-  box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.5); animation: termPulse 2s ease-out infinite;
+.avatar-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: #2ea043; flex: none;
+  box-shadow: 0 0 0 0 rgba(46, 160, 67, 0.5); animation: dotPulse 2.2s ease-out infinite;
 }
-@keyframes termPulse {
-  0% { box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.5); }
-  70%, 100% { box-shadow: 0 0 0 6px rgba(63, 185, 80, 0); }
+@keyframes dotPulse {
+  0% { box-shadow: 0 0 0 0 rgba(46, 160, 67, 0.5); }
+  70%, 100% { box-shadow: 0 0 0 7px rgba(46, 160, 67, 0); }
 }
-.term-body { min-height: 156px; }
-.term-line { white-space: pre-wrap; word-break: break-word; }
-.term-prompt { color: var(--accent); }
-.term-cmd { color: var(--fg2); }
-.term-out { color: var(--fg3); margin-bottom: 8px; }
-.term-caret { vertical-align: baseline; }
+.avatar-caption { display: flex; flex-direction: column; gap: 5px; }
+.avatar-name {
+  font-family: var(--mono); font-size: 12px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg);
+}
+.avatar-role { font-size: 14px; color: var(--fg2); }
+.avatar-role b { color: var(--accent); font-weight: 600; }
+/* Hover: the portrait eases toward its accent shadow. */
+.avatar-frame:hover .avatar-accent { transform: translate(8px, 8px); }
 
 /* ── SECTION HEADERS ────────────────────────────────── */
 .section-hdr { margin-bottom: 48px; }
@@ -605,7 +617,8 @@ footer { border-top: 1px solid var(--border); padding: 28px 0; }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-name .hero-word { opacity: 1; transform: none; animation: none; }
-  .logo-dot, .code-caret, .pv-glow, .btn-spinner, .term-dot { animation: none; }
+  .logo-dot, .code-caret, .pv-glow, .btn-spinner, .avatar-dot { animation: none; }
+  .avatar-accent, .avatar-frame:hover .avatar-accent { transition: none; }
   .project-card .proj-features li { opacity: 1; transform: none; animation: none; }
   .timeline .tl-line, .timeline .tl-dot { transform: none; animation: none; }
 }
