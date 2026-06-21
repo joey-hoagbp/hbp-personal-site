@@ -18,7 +18,6 @@ export type Messages = {
       name: string;
       role: string;
       location: string;
-      status: string;
       alt: string;
     };
   };
@@ -82,7 +81,6 @@ export const messages: Record<Lang, Messages> = {
         name: "Hoàng Bảo Phúc",
         role: "Kỹ sư phần mềm",
         location: "Hà Nội, Việt Nam",
-        status: "Sẵn sàng nhận việc",
         alt: "Ảnh của Hoàng Bảo Phúc",
       },
     },
@@ -141,7 +139,6 @@ export const messages: Record<Lang, Messages> = {
         name: "Hoàng Bảo Phúc",
         role: "Software Engineer",
         location: "Hà Nội, Vietnam",
-        status: "Open to work",
         alt: "Photo of Hoàng Bảo Phúc",
       },
     },

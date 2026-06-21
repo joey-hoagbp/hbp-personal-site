@@ -14,7 +14,6 @@ export default function AvatarCard() {
   return (
     <figure className="avatar-card">
       <div className="avatar-frame">
-        <span className="avatar-accent" aria-hidden="true" />
         <div className="avatar-photo">
           {imgOk ? (
             <Image
@@ -29,10 +28,6 @@ export default function AvatarCard() {
           ) : (
             <span className="avatar-mono">HBP</span>
           )}
-          <span className="avatar-status">
-            <i className="avatar-dot" aria-hidden="true" />
-            {a.status}
-          </span>
         </div>
       </div>
       <figcaption className="avatar-caption">
