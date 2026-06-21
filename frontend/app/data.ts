@@ -5,8 +5,9 @@
 
 import type { Profile } from "../lib/api";
 
-// Hero stat numbers; matching labels are in messages[lang].hero.stats (same order).
-export const HERO_STAT_NUMS: [string, string, string] = ["1+", "3+", "1"];
+// Hero avatar shown in the intro terminal header. Drop a photo at
+// frontend/public/avatar.jpg (or change this path); a monogram shows if absent.
+export const AVATAR_SRC = "/avatar.jpg";
 
 export const SOCIAL_LINKS: { label: string; href: string; icon: "mail" | "github" | "linkedin" | "facebook" | "instagram" }[] = [
   { label: "phuchb04@gmail.com", href: "mailto:phuchb04@gmail.com", icon: "mail" },
