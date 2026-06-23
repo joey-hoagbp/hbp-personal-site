@@ -68,7 +68,7 @@ public class ProfileSeeder implements CommandLineRunner {
                 new Project(
                         0,
                         "Hajime",
-                        "/hajime-japanese.apk",
+                        "https://github.com/joey-hoagbp/hbp-personal-site/releases/download/hajime-v1.0/hajime-japanese.apk",
                         true,
                         List.of(
                                 new Project.Chip("Mobile App", true),

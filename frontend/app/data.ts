@@ -38,7 +38,7 @@ export const DEFAULT_PROFILE: Profile = {
   projects: [
     {
       title: "Hajime",
-      apkUrl: "https://drive.usercontent.google.com/download?id=1NYWr2puf7vV0H8rhMyHnGcYhlRA8h7kX&export=download&confirm=t",
+      apkUrl: "https://github.com/joey-hoagbp/hbp-personal-site/releases/download/hajime-v1.0/hajime-japanese.apk",
       current: true,
       chips: [
         { label: "Mobile App", accent: true },
