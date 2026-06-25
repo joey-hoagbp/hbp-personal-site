@@ -10,7 +10,10 @@ export default function Hero() {
 
   return (
     <section id="hero">
-      <div className="hero-glow-orb" aria-hidden="true" />
+      <div className="hero-glow-orb-wrap" aria-hidden="true">
+        <div className="hero-glow-orb" />
+      </div>
+      <span className="hero-rule" aria-hidden="true" />
       <div className="container">
         <div className="hero-grid">
           <div className="hero-left reveal">
@@ -40,7 +43,9 @@ export default function Hero() {
           </div>
 
           <div className="hero-right reveal reveal-d2">
-            <AvatarCard />
+            <div className="hero-avatar-parallax" data-parallax="0.06">
+              <AvatarCard />
+            </div>
           </div>
         </div>
       </div>

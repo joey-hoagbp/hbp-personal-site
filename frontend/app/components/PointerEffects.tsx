@@ -42,6 +42,17 @@ export default function PointerEffects() {
         const py = (e.clientY - r.top) / r.height - 0.5;
         tilt.style.transform = `rotateY(${px * TILT_MAX}deg) rotateX(${-py * TILT_MAX}deg)`;
       }
+
+      const heroOrb = document.querySelector<HTMLElement>(".hero-glow-orb-wrap");
+      if (heroOrb) {
+        const hero = heroOrb.parentElement; // #hero
+        if (hero) {
+          const r = hero.getBoundingClientRect();
+          const dx = (e.clientX - (r.left + r.width / 2)) * 0.04;
+          const dy = (e.clientY - (r.top + r.height / 2)) * 0.04;
+          heroOrb.style.transform = `translate(${dx.toFixed(1)}px, ${dy.toFixed(1)}px)`;
+        }
+      }
     };
 
     // Reset transform when leaving a magnetic/tilt element.

@@ -12,7 +12,7 @@ export default function AvatarCard() {
   const [imgOk, setImgOk] = useState(true);
 
   return (
-    <figure className="avatar-card">
+    <figure className="avatar-card tilt">
       <div className="avatar-frame">
         <div className="avatar-photo">
           {imgOk ? (
