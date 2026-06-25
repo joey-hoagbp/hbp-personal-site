@@ -483,6 +483,9 @@ footer { border-top: 1px solid var(--border); padding: 28px 0; }
   .ambient-wash-inner { animation: none; }
 }
 
+/* Parallax targets are transformed from JS; hint the compositor. */
+[data-parallax] { will-change: transform; }
+
 /* ── POINTER / SCROLL INTERACTIONS ──────────────────── */
 /* Scroll-progress bar: a thin accent line filled via scaleX from JS. */
 .scroll-progress {

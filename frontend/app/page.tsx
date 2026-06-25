@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import ScrollReveal from "./components/ScrollReveal";
 import ScrollProgress from "./components/ScrollProgress";
 import PointerEffects from "./components/PointerEffects";
+import Parallax from "./components/Parallax";
 import AmbientBackground from "./components/AmbientBackground";
 import { fetchProfile } from "../lib/api";
 import { DEFAULT_PROFILE } from "./data";
@@ -20,6 +21,7 @@ export default async function Home() {
       <AmbientBackground />
       <ScrollProgress />
       <PointerEffects />
+      <Parallax />
       <ScrollReveal />
       <Nav />
       <main>
