@@ -12,6 +12,7 @@ export default function Skills({ groups }: { groups: TechStackGroup[] }) {
 
   return (
     <section id="skills" className="section-bordered">
+      <span className="section-rule reveal" aria-hidden="true" />
       <div className="container">
         <header className="section-hdr reveal">
           <p className="section-label">{t.label}</p>

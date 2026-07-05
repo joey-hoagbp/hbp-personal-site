@@ -680,6 +680,33 @@ footer { border-top: 1px solid var(--border); padding: 28px 0; }
   .eyebrow-dash { transform: none; }
 }
 
+/* ── SECTION TRANSITIONS ────────────────────────────────── */
+.section-bordered { position: relative; }
+/* The drawn accent line sits exactly on the existing top border. */
+.section-rule {
+  position: absolute; top: -1px; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--accent) 55%, transparent), transparent 75%);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.section-rule.reveal.visible { transform: scaleX(1); }
+
+/* Editorial section numbers build in with the section reveal. */
+[data-theme="editorial"] .section-label::before {
+  display: inline-block;
+  opacity: 0; transform: translateX(-8px);
+  transition: opacity 0.5s ease 0.15s, transform 0.5s ease 0.15s;
+}
+[data-theme="editorial"] .reveal.visible .section-label::before {
+  opacity: 1; transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-rule { transition: none; transform: scaleX(1); }
+  [data-theme="editorial"] .section-label::before { transition: none; opacity: 1; transform: none; }
+}
+
 /* ── SCROLLBAR ──────────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }

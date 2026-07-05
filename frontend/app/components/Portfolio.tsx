@@ -12,6 +12,7 @@ export default function Portfolio({ project }: { project: Project }) {
 
   return (
     <section id="portfolio" className="section-bordered">
+      <span className="section-rule reveal" aria-hidden="true" />
       <div className="container">
         <header className="section-hdr reveal">
           <p className="section-label">{t.label}</p>

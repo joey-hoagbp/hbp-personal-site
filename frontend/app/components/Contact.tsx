@@ -49,6 +49,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="section-bordered">
+      <span className="section-rule reveal" aria-hidden="true" />
       <div className="container">
         <div className="contact-layout">
           <div className="reveal">

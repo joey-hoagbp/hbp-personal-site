@@ -36,6 +36,7 @@ export default function CV({
 
   return (
     <section id="cv" className="section-bordered">
+      <span className="section-rule reveal" aria-hidden="true" />
       <div className="container">
         <header className="section-hdr reveal">
           <p className="section-label">{t.label}</p>
