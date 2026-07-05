@@ -35,6 +35,8 @@ export type Messages = {
     sub: string;
     downloadApk: string;
     comingSoon: string;
+    repo: string;
+    demo: string;
   };
   cv: {
     label: string;
@@ -105,6 +107,8 @@ export const messages: Record<Lang, Messages> = {
       sub: "Sản phẩm nổi bật tôi đã xây dựng.",
       downloadApk: "Tải về APK",
       comingSoon: "Tải về APK · Sắp ra mắt",
+      repo: "Mã nguồn",
+      demo: "Bản demo",
     },
     cv: {
       label: "Hồ Sơ",
@@ -170,6 +174,8 @@ export const messages: Record<Lang, Messages> = {
       sub: "Standout products I've built.",
       downloadApk: "Download APK",
       comingSoon: "Download APK · Coming soon",
+      repo: "Source",
+      demo: "Live demo",
     },
     cv: {
       label: "Resume",

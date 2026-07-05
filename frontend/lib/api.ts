@@ -28,12 +28,16 @@ export type Chip = {
 
 export type Project = {
   title: string;
-  apkUrl: string;
+  apkUrl?: string;
   current: boolean;
   chips: Chip[];
   subtitle: Localized;
   description: Localized;
   features: { vi: string[]; en: string[] };
+  id?: string;
+  repoUrl?: string;
+  demoUrl?: string;
+  accent?: string;
 };
 
 export type TimelineItem = {

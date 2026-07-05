@@ -2,7 +2,7 @@ import Nav from "./components/Nav";
 import Hero from "./components/Hero";
 import Currently from "./components/Currently";
 import Skills from "./components/Skills";
-import Portfolio from "./components/Portfolio";
+import Work from "./components/Work";
 import CV from "./components/CV";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -11,7 +11,7 @@ import ScrollProgress from "./components/ScrollProgress";
 import PointerEffects from "./components/PointerEffects";
 import Parallax from "./components/Parallax";
 import { fetchProfile } from "../lib/api";
-import { DEFAULT_PROFILE } from "./data";
+import { DEFAULT_PROFILE, PROJECTS } from "./data";
 
 export default async function Home() {
   const profile = await fetchProfile().catch(() => DEFAULT_PROFILE);
@@ -27,7 +27,7 @@ export default async function Home() {
         <Hero />
         <Currently />
         <Skills groups={profile.techStacks} />
-        <Portfolio project={profile.projects.find((p) => p.current) ?? profile.projects[0]} />
+        <Work projects={PROJECTS} />
         <CV experience={profile.experiences} education={profile.education} />
         <Contact />
       </main>
