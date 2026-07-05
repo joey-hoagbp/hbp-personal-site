@@ -1,5 +1,6 @@
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
+import Currently from "./components/Currently";
 import Skills from "./components/Skills";
 import Portfolio from "./components/Portfolio";
 import CV from "./components/CV";
@@ -24,6 +25,7 @@ export default async function Home() {
       <Nav />
       <main>
         <Hero />
+        <Currently />
         <Skills groups={profile.techStacks} />
         <Portfolio project={profile.projects.find((p) => p.current) ?? profile.projects[0]} />
         <CV experience={profile.experiences} education={profile.education} />

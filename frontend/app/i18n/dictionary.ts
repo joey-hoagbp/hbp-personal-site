@@ -23,6 +23,7 @@ export type Messages = {
       alt: string;
     };
   };
+  currently: { prefix: string };
   skills: {
     label: string;
     title: string;
@@ -92,6 +93,7 @@ export const messages: Record<Lang, Messages> = {
         alt: "Ảnh của Hoàng Bảo Phúc",
       },
     },
+    currently: { prefix: "hiện tại" },
     skills: {
       label: "Kỹ Năng",
       title: "Tech Stack",
@@ -156,6 +158,7 @@ export const messages: Record<Lang, Messages> = {
         alt: "Photo of Hoàng Bảo Phúc",
       },
     },
+    currently: { prefix: "currently" },
     skills: {
       label: "Skills",
       title: "Tech Stack",

@@ -3,7 +3,7 @@
 //  app/i18n/dictionary.ts. (Backend stores contact submissions.)
 // ============================================================
 
-import type { Profile } from "../lib/api";
+import type { Localized, Profile } from "../lib/api";
 
 // Hero avatar shown in the intro terminal header. Drop a photo at
 // frontend/public/avatar.jpg (or change this path); a monogram shows if absent.
@@ -14,6 +14,13 @@ export const SOCIAL_LINKS: { label: string; href: string; icon: "mail" | "github
   { label: "github.com/joey-hoagbp", href: "https://github.com/joey-hoagbp", icon: "github" },
   { label: "facebook.com/phuchb04", href: "https://www.facebook.com/phuchb04/", icon: "facebook" },
   { label: "instagram.com/hoaqbp_", href: "https://www.instagram.com/hoaqbp_/", icon: "instagram" },
+];
+
+// "Currently" status strip shown under the hero — a small, human touch.
+export const CURRENTLY: { emoji: string; text: Localized }[] = [
+  { emoji: "⚙️", text: { vi: "xây dựng backend tại DrJoy", en: "building backend @ DrJoy" } },
+  { emoji: "📚", text: { vi: "học sâu hơn về hệ thống phân tán", en: "learning distributed systems" } },
+  { emoji: "🎧", text: { vi: "nghe lo-fi khi code", en: "coding to lo-fi" } },
 ];
 
 /**
