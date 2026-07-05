@@ -22,3 +22,4 @@ Thumbs.db
 # ── Design handoff reference (not part of the app) ─
 # Kept locally for reference; remove the next line to commit it.
 _design_reference/
+.superpowers/
