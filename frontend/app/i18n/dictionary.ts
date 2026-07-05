@@ -10,10 +10,12 @@ export type Messages = {
   nav: { skills: string; work: string; cv: string; contact: string };
   hero: {
     eyebrow: string;
+    availability: string;
     taglineLines: [string, string];
     bio: string;
     viewWork: string;
     getInTouch: string;
+    stats: { value: string; label: string }[];
     avatar: {
       name: string;
       role: string;
@@ -71,12 +73,18 @@ export const messages: Record<Lang, Messages> = {
     nav: { skills: "Kỹ năng", work: "Sản phẩm", cv: "CV", contact: "Liên hệ" },
     hero: {
       eyebrow: "Kỹ sư phần mềm · Hà Nội",
+      availability: "Sẵn sàng cho công việc mới",
       taglineLines: ["Xây dựng sản phẩm", "mọi người yêu thích."],
       bio:
         "Kỹ sư phần mềm với niềm đam mê xây dựng sản phẩm mobile & web. " +
         "Tập trung vào clean code, trải nghiệm người dùng và hiệu suất.",
       viewWork: "Xem sản phẩm",
       getInTouch: "Liên hệ ngay",
+      stats: [
+        { value: "2+", label: "năm KN" },
+        { value: "Java·C#", label: "ngôn ngữ chính" },
+        { value: "1", label: "app đã ra mắt" },
+      ],
       avatar: {
         name: "Hoàng Bảo Phúc",
         role: "Kỹ sư phần mềm",
@@ -129,12 +137,18 @@ export const messages: Record<Lang, Messages> = {
     nav: { skills: "Skills", work: "Work", cv: "CV", contact: "Contact" },
     hero: {
       eyebrow: "Software Engineer · Ha Noi",
+      availability: "Available for work",
       taglineLines: ["Building apps people", "love to use."],
       bio:
         "Software engineer with a passion for building mobile & web products. " +
         "Focused on clean code, user experience, and performance.",
       viewWork: "View work",
       getInTouch: "Get in touch",
+      stats: [
+        { value: "2+", label: "yrs exp" },
+        { value: "Java·C#", label: "core langs" },
+        { value: "1", label: "app shipped" },
+      ],
       avatar: {
         name: "Hoàng Bảo Phúc",
         role: "Software Engineer",

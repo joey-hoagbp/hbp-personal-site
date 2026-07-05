@@ -54,7 +54,7 @@ body {
 /* ── NAV ────────────────────────────────────────────── */
 nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
 nav.nav-scrolled {
-  background: rgba(250, 248, 244, 0.85);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
   backdrop-filter: blur(18px) saturate(150%);
   border-bottom: 1px solid var(--border);
 }
@@ -62,17 +62,18 @@ nav.nav-scrolled {
   max-width: var(--max-w); margin: 0 auto; padding: 22px 48px;
   display: flex; align-items: center; justify-content: space-between;
 }
-.nav-logo { font-weight: 700; font-size: 17px; letter-spacing: -0.02em; color: var(--fg); text-decoration: none; }
+.nav-logo { font-weight: 700; font-size: 17px; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
 .logo-dot { color: var(--accent); }
 .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
-.nav-links a { color: var(--fg2); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
-.nav-links a:hover { color: var(--fg); }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--ink); }
 .nav-cta {
-  background: var(--accent) !important; color: #fff !important;
+  background: var(--ink) !important; color: var(--pop-ink) !important;
   padding: 8px 20px; border-radius: 100px;
   font-size: 13px !important; font-weight: 600 !important;
+  transition: transform 0.2s, opacity 0.2s;
 }
-.nav-cta:hover { opacity: 0.85; }
+.nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
 
 /* ── HERO ───────────────────────────────────────────── */
 #hero {
@@ -112,6 +113,19 @@ nav.nav-scrolled {
 .hero-grid {
   display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: center;
 }
+.hero-avail {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--mono); font-size: 12px;
+  color: var(--accent); letter-spacing: 0.04em;
+  margin-bottom: 14px;
+}
+.hero-avail-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  background: var(--accent2);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent2) 25%, transparent);
+  animation: availPulse 2.2s ease-in-out infinite;
+}
+@keyframes availPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 .hero-eyebrow {
   display: flex; align-items: center; gap: 10px;
   font-family: var(--mono); font-size: 12px;
@@ -123,34 +137,41 @@ nav.nav-scrolled {
   font-size: clamp(60px, 7vw, 96px); font-weight: 700;
   letter-spacing: -0.03em; line-height: 1.02; margin-bottom: 18px;
 }
-.name-dim { color: var(--fg2); }
+.name-dim { color: var(--muted); }
 .hero-tagline {
   font-size: clamp(18px, 2vw, 24px); font-weight: 300;
-  color: var(--fg2); line-height: 1.3; margin-bottom: 20px;
+  color: var(--muted); line-height: 1.3; margin-bottom: 20px;
 }
-.hero-bio { font-size: 15px; color: var(--fg3); max-width: 460px; line-height: 1.85; margin-bottom: 40px; }
+.hero-bio { font-size: 15px; color: var(--faint); max-width: 460px; line-height: 1.85; margin-bottom: 40px; }
 .hero-btns { display: flex; gap: 12px; align-items: center; }
+.hero-stats { display: flex; gap: 36px; margin-top: 36px; }
+.hero-stat { display: flex; flex-direction: column; gap: 4px; }
+.hero-stat b { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; color: var(--ink); }
+.hero-stat span { font-family: var(--mono); font-size: 11px; letter-spacing: 0.03em; color: var(--muted); }
 
 /* ── BUTTONS ────────────────────────────────────────── */
 .btn-primary {
   display: inline-flex; align-items: center; gap: 8px;
-  background: var(--accent); color: #fff;
-  padding: 12px 24px; border-radius: 8px;
+  background: var(--ink); color: var(--pop-ink);
+  padding: 12px 24px; border-radius: var(--r);
   font-size: 14px; font-weight: 600; text-decoration: none;
   border: none; cursor: pointer; font-family: var(--font);
-  transition: opacity 0.2s, transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
-.btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
-.btn-primary:disabled { opacity: 0.55; cursor: default; transform: none; }
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--ink) 22%, transparent);
+}
+.btn-primary:disabled { opacity: 0.55; cursor: default; transform: none; box-shadow: none; }
 .btn-ghost {
   display: inline-flex; align-items: center; gap: 8px;
-  color: var(--fg2); padding: 12px 24px; border-radius: 8px;
+  color: var(--muted); padding: 12px 24px; border-radius: var(--r);
   font-size: 14px; font-weight: 500; text-decoration: none;
   border: 1px solid var(--border); background: transparent;
   cursor: pointer; transition: color 0.2s, border-color 0.2s;
   font-family: var(--font);
 }
-.btn-ghost:hover { color: var(--fg); border-color: rgba(0, 0, 0, 0.20); }
+.btn-ghost:hover { color: var(--ink); border-color: color-mix(in srgb, var(--ink) 30%, transparent); }
 .btn-full { width: 100%; justify-content: center; }
 
 /* ── CODE CARD ──────────────────────────────────────── */
@@ -449,7 +470,7 @@ footer { border-top: 1px solid var(--border); padding: 28px 0; }
 @keyframes dashIn { to { transform: scaleX(1); } }
 @keyframes heroRuleIn { to { transform: scaleY(1); } }
 .hero-name .name-dim {
-  background: linear-gradient(110deg, var(--accent) 0%, #ff9472 100%);
+  background: var(--grad);
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
 }
@@ -548,7 +569,7 @@ footer { border-top: 1px solid var(--border); padding: 28px 0; }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-name .hero-word { opacity: 1; transform: none; animation: none; }
-  .logo-dot, .code-caret, .pv-glow, .btn-spinner { animation: none; }
+  .logo-dot, .code-caret, .pv-glow, .btn-spinner, .hero-avail-dot { animation: none; }
   .project-card .proj-features li { opacity: 1; transform: none; animation: none; }
   .timeline .tl-line, .timeline .tl-dot { transform: none; animation: none; }
   .hero-glow-orb, .hero-rule, .eyebrow-dash { animation: none; }

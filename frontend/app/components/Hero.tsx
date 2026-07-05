@@ -17,6 +17,10 @@ export default function Hero() {
       <div className="container">
         <div className="hero-grid">
           <div className="hero-left reveal">
+            <p className="hero-avail">
+              <span className="hero-avail-dot" aria-hidden="true" />
+              {t.availability}
+            </p>
             <p className="hero-eyebrow">
               <span className="eyebrow-dash" />
               {t.eyebrow}
@@ -39,6 +43,14 @@ export default function Hero() {
               <a href="#contact" className="btn-ghost">
                 {t.getInTouch}
               </a>
+            </div>
+            <div className="hero-stats">
+              {t.stats.map((s) => (
+                <div className="hero-stat" key={s.label}>
+                  <b>{s.value}</b>
+                  <span>{s.label}</span>
+                </div>
+              ))}
             </div>
           </div>
 
