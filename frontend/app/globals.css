@@ -226,8 +226,11 @@ nav.nav-scrolled {
   font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
   text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
 }
-.section-title { font-size: clamp(28px, 3.5vw, 40px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; }
-.section-sub { color: var(--fg2); font-size: 15px; margin-top: 8px; }
+.section-title {
+  font-size: clamp(28px, 3.5vw, 40px); font-weight: 700;
+  letter-spacing: -0.025em; line-height: 1.1; color: var(--ink);
+}
+.section-sub { color: var(--muted); font-size: 15px; margin-top: 8px; }
 
 /* ── CURRENTLY ──────────────────────────────────────── */
 /* Signature status strip: one calm mono line, wraps gracefully on mobile. */
@@ -258,7 +261,7 @@ nav.nav-scrolled {
 /* ── SKILLS ─────────────────────────────────────────── */
 .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .skill-group {
-  background: var(--bg2); border: 1px solid var(--border);
+  background: var(--surface); border: 1px solid var(--line);
   border-radius: var(--r); padding: 24px; transition: border-color 0.25s;
 }
 .skill-group:hover { border-color: color-mix(in srgb, var(--accent) 28%, transparent); }
@@ -269,11 +272,15 @@ nav.nav-scrolled {
 .sg-tags { display: flex; flex-wrap: wrap; gap: 7px; }
 .sg-tag {
   display: inline-flex; align-items: center; gap: 7px;
-  padding: 5px 12px 5px 10px; background: rgba(0, 0, 0, 0.035); border: 1px solid var(--border);
-  border-radius: 100px; font-size: 13px; color: var(--fg2); transition: all 0.15s; cursor: default;
+  padding: 5px 12px 5px 10px; background: var(--chipbg); border: 1px solid var(--line);
+  border-radius: 100px; font-size: 13px; color: var(--muted); transition: all 0.15s; cursor: default;
 }
 .sg-tag-icon { width: 15px; height: 15px; flex-shrink: 0; }
-.sg-tag:hover { color: var(--fg); border-color: rgba(0, 0, 0, 0.18); background: rgba(0, 0, 0, 0.06); }
+.sg-tag:hover {
+  color: var(--ink);
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--chipbg));
+}
 
 /* ── PORTFOLIO ──────────────────────────────────────── */
 .project-card {
@@ -509,9 +516,9 @@ footer { border-top: 1px solid var(--border); padding: 28px 0; }
 @keyframes caretBlink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
 
 /* TECH STACK — icon brand-color on hover, tag lift, group raise */
-.sg-tag-icon { color: var(--fg2); transition: color 0.18s ease; }
+.sg-tag-icon { color: var(--muted); transition: color 0.18s ease; }
 .sg-tag:hover { transform: translateY(-1px); }
-.sg-tag:hover .sg-tag-icon { color: var(--brand, var(--fg2)); }
+.sg-tag:hover .sg-tag-icon { color: var(--brand, var(--muted)); }
 .skill-group { transition: border-color 0.25s, transform 0.25s; }
 .skill-group:hover { transform: translateY(-3px); }
 

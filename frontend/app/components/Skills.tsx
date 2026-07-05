@@ -21,7 +21,7 @@ export default function Skills({ groups }: { groups: TechStackGroup[] }) {
         </header>
         <div className="skills-grid">
           {groups.map((group, i) => (
-            <div key={loc(group.label, lang)} className={`skill-group spotlight reveal reveal-d${(i % 3) + 1}`}>
+            <div key={loc(group.label, lang)} className={`skill-group reveal reveal-d${(i % 3) + 1}`}>
               <p className="sg-label">{loc(group.label, lang)}</p>
               <div className="sg-tags">
                 {group.items.map((s) => {
