@@ -394,14 +394,23 @@ nav.nav-scrolled {
 .timeline { display: flex; flex-direction: column; }
 .tl-item  { display: grid; grid-template-columns: 14px 1fr; gap: 16px; }
 .tl-spine { display: flex; flex-direction: column; align-items: center; }
-.tl-dot   { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 5px; }
-.tl-line  { width: 1px; flex: 1; background: var(--border); margin: 5px 0; min-height: 16px; }
+.tl-dot   {
+  width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 5px;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 14%, transparent);
+}
+.tl-line  { width: 1px; flex: 1; background: var(--line); margin: 5px 0; min-height: 16px; }
 .tl-body  { padding-bottom: 26px; }
-.tl-date  { font-family: var(--mono); font-size: 11px; color: var(--fg3); margin-bottom: 4px; }
-.tl-title { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+.tl-date  { font-family: var(--mono); font-size: 11px; color: var(--faint); margin-bottom: 4px; }
+.tl-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
 .tl-org   { font-size: 13px; color: var(--accent); margin-bottom: 6px; }
-.tl-desc  { font-size: 13px; color: var(--fg3); line-height: 1.6; }
+.tl-desc  { font-size: 13px; color: var(--muted); line-height: 1.6; }
 .cv-dl    { margin-top: 32px; }
+.cv-dl .btn-ghost { font-family: var(--mono); font-size: 13px; }
+.cv-dl .btn-ghost:hover {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+}
 
 /* ── CONTACT ────────────────────────────────────────── */
 .contact-layout { display: grid; grid-template-columns: 1fr 480px; gap: 80px; align-items: start; }
@@ -560,8 +569,8 @@ footer { border-top: 1px solid var(--border); padding: 28px 0; }
 /* CV TIMELINE — line draws + dots pop on scroll-in, item hover */
 .timeline .tl-line { transform: scaleY(0); transform-origin: top; }
 .timeline .tl-dot { transform: scale(0); }
-.reveal.visible .timeline .tl-line { animation: drawLine 0.5s ease forwards; }
-.reveal.visible .timeline .tl-dot { animation: popDot 0.4s cubic-bezier(0.2, 1.4, 0.4, 1) forwards; }
+.reveal.visible .timeline .tl-line { animation: drawLine 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.reveal.visible .timeline .tl-dot { animation: popDot 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
 .reveal.visible .tl-item:nth-child(1) .tl-dot { animation-delay: 0.05s; }
 .reveal.visible .tl-item:nth-child(2) .tl-dot { animation-delay: 0.20s; }
 .reveal.visible .tl-item:nth-child(3) .tl-dot { animation-delay: 0.35s; }
