@@ -113,18 +113,6 @@ nav.nav-scrolled {
 .hero-grid {
   display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: center;
 }
-.hero-avail {
-  display: inline-flex; align-items: center; gap: 9px;
-  font-family: var(--mono); font-size: 12px;
-  color: var(--accent); letter-spacing: 0.04em;
-  margin-bottom: 14px;
-}
-.hero-avail-dot {
-  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
-  background: var(--accent2);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent2) 25%, transparent);
-  animation: availPulse 2.2s ease-in-out infinite;
-}
 @keyframes availPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 .hero-eyebrow {
   display: flex; align-items: center; gap: 10px;
@@ -632,7 +620,7 @@ footer { border-top: 1px solid var(--border); padding: 28px 0; }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-name .hero-word { opacity: 1; transform: none; animation: none; }
-  .logo-dot, .code-caret, .work-glow, .btn-spinner, .hero-avail-dot { animation: none; }
+  .logo-dot, .code-caret, .work-glow, .btn-spinner { animation: none; }
   .work-card .work-features li { opacity: 1; transform: none; animation: none; }
   .timeline .tl-line, .timeline .tl-dot { transform: none; animation: none; }
   .hero-glow-orb, .hero-rule, .eyebrow-dash { animation: none; }

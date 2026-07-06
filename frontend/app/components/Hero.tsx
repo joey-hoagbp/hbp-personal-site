@@ -17,10 +17,6 @@ export default function Hero() {
       <div className="container">
         <div className="hero-grid">
           <div className="hero-left reveal">
-            <p className="hero-avail">
-              <span className="hero-avail-dot" aria-hidden="true" />
-              {t.availability}
-            </p>
             <p className="hero-eyebrow">
               <span className="eyebrow-dash" />
               {t.eyebrow}

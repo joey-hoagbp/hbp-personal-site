@@ -10,7 +10,6 @@ export type Messages = {
   nav: { skills: string; work: string; cv: string; contact: string };
   hero: {
     eyebrow: string;
-    availability: string;
     taglineLines: [string, string];
     bio: string;
     viewWork: string;
@@ -76,7 +75,6 @@ export const messages: Record<Lang, Messages> = {
     nav: { skills: "Kỹ năng", work: "Sản phẩm", cv: "CV", contact: "Liên hệ" },
     hero: {
       eyebrow: "Kỹ sư phần mềm · Hà Nội",
-      availability: "Sẵn sàng cho công việc mới",
       taglineLines: ["Xây dựng sản phẩm", "mọi người yêu thích."],
       bio:
         "Kỹ sư phần mềm với niềm đam mê xây dựng sản phẩm mobile & web. " +
@@ -143,7 +141,6 @@ export const messages: Record<Lang, Messages> = {
     nav: { skills: "Skills", work: "Work", cv: "CV", contact: "Contact" },
     hero: {
       eyebrow: "Software Engineer · Ha Noi",
-      availability: "Available for work",
       taglineLines: ["Building apps people", "love to use."],
       bio:
         "Software engineer with a passion for building mobile & web products. " +
