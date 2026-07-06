@@ -3,8 +3,8 @@
 import { useEffect } from "react";
 
 /**
- * Mounted once. Wires three cursor-driven, class-based effects via delegated
- * pointer listeners (no per-component state):
+ * Mounted once. Wires two cursor-driven, class-based effects via delegated
+ * pointer listeners (no per-component state), plus a hero-orb parallax nudge:
  *   .magnetic  — translates the element a fraction toward the cursor
  *   .tilt      — applies a small perspective rotateX/rotateY from cursor position
  * All effects are disabled under prefers-reduced-motion. Renders nothing.
