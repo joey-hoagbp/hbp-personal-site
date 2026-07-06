@@ -5,7 +5,6 @@ import { useEffect } from "react";
 /**
  * Mounted once. Wires three cursor-driven, class-based effects via delegated
  * pointer listeners (no per-component state):
- *   .spotlight — sets --mx/--my on the hovered card for a radial glow overlay
  *   .magnetic  — translates the element a fraction toward the cursor
  *   .tilt      — applies a small perspective rotateX/rotateY from cursor position
  * All effects are disabled under prefers-reduced-motion. Renders nothing.
@@ -19,13 +18,6 @@ export default function PointerEffects() {
 
     const onPointerMove = (e: PointerEvent) => {
       const t = e.target as Element | null;
-
-      const spot = t?.closest<HTMLElement>(".spotlight");
-      if (spot) {
-        const r = spot.getBoundingClientRect();
-        spot.style.setProperty("--mx", `${e.clientX - r.left}px`);
-        spot.style.setProperty("--my", `${e.clientY - r.top}px`);
-      }
 
       const mag = t?.closest<HTMLElement>(".magnetic");
       if (mag) {
