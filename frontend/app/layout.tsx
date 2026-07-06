@@ -6,7 +6,7 @@ import SmoothScroll from "./components/SmoothScroll";
 export const metadata: Metadata = {
   title: "Hoàng Bảo Phúc — Software Engineer",
   description:
-    "Kỹ sư phần mềm tại TP. Hồ Chí Minh — xây dựng sản phẩm mobile & web. " +
+    "Kỹ sư phần mềm tại Hà Nội — xây dựng sản phẩm mobile & web. " +
     "Software engineer building apps people love to use.",
 };
 

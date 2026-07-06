@@ -28,7 +28,7 @@ export default function Work({ projects }: { projects: Project[] }) {
             return (
               <div
                 key={project.id ?? project.title}
-                className={`work-card${featured ? " featured spotlight" : ""} ${revealClass}`}
+                className={`work-card${featured ? " featured" : ""} ${revealClass}`}
               >
                 <div className="work-info">
                   <div className="work-chips">
