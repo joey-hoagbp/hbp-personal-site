@@ -168,40 +168,4 @@ export const PROJECTS: Project[] = [
       ],
     },
   },
-
-  // TODO(owner): replace placeholder projects with real ones
-  {
-    id: "project-2",
-    current: false,
-    apkUrl: "",
-    title: "Project name",
-    chips: [
-      { label: "Web App", accent: true },
-      { label: "Next.js", accent: false },
-    ],
-    subtitle: { vi: "Mô tả ngắn", en: "Short subtitle" },
-    description: { vi: "TODO — mô tả dự án", en: "TODO — describe this project" },
-    features: {
-      vi: ["Tính năng 1", "Tính năng 2"],
-      en: ["Feature 1", "Feature 2"],
-    },
-    repoUrl: "https://github.com/joey-hoagbp/",
-  },
-  {
-    id: "project-3",
-    current: false,
-    apkUrl: "",
-    title: "Project name",
-    chips: [
-      { label: "Web App", accent: true },
-      { label: "Next.js", accent: false },
-    ],
-    subtitle: { vi: "Mô tả ngắn", en: "Short subtitle" },
-    description: { vi: "TODO — mô tả dự án", en: "TODO — describe this project" },
-    features: {
-      vi: ["Tính năng 1", "Tính năng 2"],
-      en: ["Feature 1", "Feature 2"],
-    },
-    repoUrl: "https://github.com/joey-hoagbp/",
-  },
 ];
