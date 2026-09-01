@@ -1,5 +1,7 @@
+# syntax=docker/dockerfile:1
+
 # Render has no native Java runtime, so the API ships as a container.
-# Build context is this directory (backend/).
+# Build context is this directory (backend/). Mirrors HajimeJapanese/backend/Dockerfile.
 
 # ---- build ----------------------------------------------------------------
 # No Maven wrapper in this repo, so the build stage brings its own Maven.
@@ -8,14 +10,14 @@ WORKDIR /build
 
 # Resolve dependencies in their own layer so code-only changes reuse the cache.
 COPY pom.xml .
-RUN mvn -B dependency:go-offline
+RUN mvn -B -ntp dependency:go-offline
 
-COPY src ./src
+COPY src/ src/
 # Tests run in CI and locally (`mvn test`); the deploy image only needs the jar.
-RUN mvn -B -DskipTests package
+RUN mvn -B -ntp -DskipTests package
 
 # ---- run ------------------------------------------------------------------
-FROM eclipse-temurin:21-jre
+FROM eclipse-temurin:21-jre AS runtime
 WORKDIR /app
 
 # Exactly one jar matches: spring-boot-maven-plugin leaves the plain build
