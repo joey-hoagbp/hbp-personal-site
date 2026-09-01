@@ -1,5 +1,7 @@
 server:
-  port: 8080
+  # Render (and most PaaS) inject the port to bind as PORT. SERVER_PORT still
+  # wins when set, since environment variables outrank this file.
+  port: ${PORT:8080}
 
 spring:
   application:

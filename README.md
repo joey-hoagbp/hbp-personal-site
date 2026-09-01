@@ -126,6 +126,44 @@ falls back to `http://localhost:8080` (`frontend/lib/api.ts`).
 `amplify.yml` is kept from the earlier AWS Amplify deployment; it is not used by
 Cloudflare Pages.
 
+## Deploying the backend (Render)
+
+Render has **no native Java runtime**, so the API deploys as a container using
+`backend/Dockerfile` (multi-stage: Maven/Temurin 21 builds the jar, a JRE image
+runs it). The build skips tests — run `mvn test` locally or in CI instead.
+
+Render service settings:
+
+| Setting            | Value                     |
+| ------------------ | ------------------------- |
+| Language / Runtime | `Docker`                  |
+| Root Directory     | `backend`                 |
+| Dockerfile Path    | `./Dockerfile`            |
+| Health Check Path  | `/actuator/health`        |
+
+`application.yml` binds `server.port` to `${PORT:8080}`, so the app listens on
+the port Render injects (default `10000`). `SERVER_PORT` still overrides it
+locally, since environment variables outrank the YAML file.
+
+Required environment variables:
+
+| Env var             | Value                                                        |
+| ------------------- | ------------------------------------------------------------ |
+| `MONGODB_URI`       | MongoDB Atlas SRV string — Render has no managed MongoDB      |
+| `APP_CORS_ORIGINS`  | The exact Cloudflare Pages origin, e.g. `https://…pages.dev`  |
+
+Optional (contact-form email notifications; all four are needed for mail to
+actually send — see `ContactNotifier`): `APP_MAIL_ENABLED=true`, `MAIL_HOST`,
+`MAIL_USERNAME`, `MAIL_PASSWORD`, `APP_MAIL_FROM`, `APP_MAIL_TO`.
+
+In **Atlas → Network Access**, allowlist the CIDR ranges from the Render
+service's **Connect → Outbound** tab. These ranges are shared per region and are
+not static per service; a dedicated static IP is a paid Render add-on.
+
+> **Before pointing a public frontend at this:** `GET /api/contact` returns every
+> stored submission with no authentication (`ContactController`). Gate it, or
+> the mailbox is world-readable.
+
 ## Notes on the design port
 
 - The CSS is a faithful port of the prototype's stylesheet; all three themes
