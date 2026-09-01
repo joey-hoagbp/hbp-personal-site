@@ -98,6 +98,34 @@ the `contact_messages` collection; verify with `GET http://localhost:8080/api/co
 cd backend && mvn test     # ContactController slice test (no DB required)
 ```
 
+## Deploying the frontend (Cloudflare Pages)
+
+`frontend/next.config.mjs` sets `output: "export"`, so the frontend is a **pure
+static site** — no SSR, no route handlers, no middleware. `npm run build` writes
+plain HTML/JS to `frontend/out/`, which any static host serves as-is.
+
+Cloudflare Pages project settings:
+
+| Setting                 | Value           |
+| ----------------------- | --------------- |
+| Root directory          | `frontend`      |
+| Build command           | `npm run build` |
+| Build output directory  | `out`           |
+
+> **Do not use `@cloudflare/next-on-pages`.** It is the adapter for Next.js apps
+> that run server code on the Workers edge runtime; a static export has no server
+> code for it to adapt. Its final release (`1.13.16`) also cannot install here:
+> it pins `@cloudflare/workers-types@^4` while the `wrangler@^4` it pulls in pins
+> `@cloudflare/workers-types@^5` (npm `ERESOLVE`), and it peer-requires
+> `next >=14.3.0` while this app is on `next ~14.2`.
+
+Set `NEXT_PUBLIC_API_BASE_URL` as a **build-time** environment variable in the
+Pages dashboard — it is inlined at build time, and without it the built site
+falls back to `http://localhost:8080` (`frontend/lib/api.ts`).
+
+`amplify.yml` is kept from the earlier AWS Amplify deployment; it is not used by
+Cloudflare Pages.
+
 ## Notes on the design port
 
 - The CSS is a faithful port of the prototype's stylesheet; all three themes

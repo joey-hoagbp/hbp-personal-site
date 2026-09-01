@@ -33,6 +33,10 @@ npm run lint
 
 There is **no test harness** in the frontend; verification is `npm run build` + `npm run lint` + manual browser check. When running the backend on a non-default port, set `NEXT_PUBLIC_API_BASE_URL` in `frontend/.env.local` to match.
 
+### Deployment
+
+The frontend deploys to **Cloudflare Pages** as a static site — root directory `frontend`, build command `npm run build`, build output directory `out`. `next.config.mjs` sets `output: "export"`, so there is **no server-side code**: never introduce `@cloudflare/next-on-pages`, edge runtime routes, route handlers or middleware without first dropping the static export. (`next-on-pages@1.13.16`, its final release, cannot even install: it pins `@cloudflare/workers-types@^4` against `wrangler@^4`'s `^5`, and peer-requires `next >=14.3.0` vs. this app's `~14.2`.) `NEXT_PUBLIC_API_BASE_URL` must be set as a build-time env var in the Pages dashboard; otherwise the build inlines the `http://localhost:8080` fallback from `lib/api.ts`. `amplify.yml` is a leftover from the earlier AWS Amplify deployment.
+
 ## Backend (`backend/`)
 
 Spring Boot 3.4, package `com.hbp.personalsite` (`contact`, `config`, `common`). Maven (no wrapper — use a global `mvn`).
