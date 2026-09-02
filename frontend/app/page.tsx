@@ -1,4 +1,4 @@
-import Nav from "./components/Nav";
+import SiteNav from "./components/SiteNav";
 import Hero from "./components/Hero";
 import Currently from "./components/Currently";
 import Skills from "./components/Skills";
@@ -22,7 +22,7 @@ export default async function Home() {
       <PointerEffects />
       <Parallax />
       <ScrollReveal />
-      <Nav />
+      <SiteNav />
       <main>
         <Hero />
         <Currently />

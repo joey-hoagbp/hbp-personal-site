@@ -7,7 +7,10 @@
 export type Lang = "vi" | "en";
 
 export type Messages = {
-  nav: { skills: string; work: string; cv: string; contact: string };
+  nav: {
+    skills: string; work: string; experience: string; contact: string;
+    menu: string; close: string; toLight: string; toDark: string;
+  };
   hero: {
     eyebrow: string;
     taglineLines: [string, string];
@@ -72,7 +75,11 @@ export const LANG_LABELS: Record<Lang, string> = {
 
 export const messages: Record<Lang, Messages> = {
   vi: {
-    nav: { skills: "Kỹ năng", work: "Sản phẩm", cv: "CV", contact: "Liên hệ" },
+    nav: {
+      skills: "Kỹ năng", work: "Sản phẩm", experience: "Kinh nghiệm", contact: "Liên hệ",
+      menu: "Mở menu", close: "Đóng menu",
+      toLight: "Chuyển sang giao diện sáng", toDark: "Chuyển sang giao diện tối",
+    },
     hero: {
       eyebrow: "Kỹ sư phần mềm · Hà Nội",
       taglineLines: ["Xây dựng sản phẩm", "mọi người yêu thích."],
@@ -138,7 +145,11 @@ export const messages: Record<Lang, Messages> = {
   },
 
   en: {
-    nav: { skills: "Skills", work: "Work", cv: "CV", contact: "Contact" },
+    nav: {
+      skills: "Skills", work: "Work", experience: "Experience", contact: "Contact",
+      menu: "Open menu", close: "Close menu",
+      toLight: "Switch to light theme", toDark: "Switch to dark theme",
+    },
     hero: {
       eyebrow: "Software Engineer · Ha Noi",
       taglineLines: ["Building apps people", "love to use."],

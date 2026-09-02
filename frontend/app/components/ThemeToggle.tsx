@@ -1,16 +1,20 @@
 "use client";
 
 import { useTheme } from "./ThemeProvider";
+import { useLang } from "../i18n/LanguageProvider";
+import { messages } from "../i18n/dictionary";
 
 export default function ThemeToggle() {
   const { theme, toggle } = useTheme();
+  const { lang } = useLang();
+  const t = messages[lang].nav;
   const isDark = theme === "dark";
   return (
     <button
       type="button"
       className="theme-toggle"
       onClick={toggle}
-      aria-label={isDark ? "Chuyển sang giao diện sáng" : "Chuyển sang giao diện tối"}
+      aria-label={isDark ? t.toLight : t.toDark}
     >
       {isDark ? (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true">
