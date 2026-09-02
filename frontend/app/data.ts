@@ -6,8 +6,10 @@
 import type { Localized, Profile, Project } from "../lib/api";
 
 // Hero avatar shown in the intro terminal header. Drop a photo at
-// frontend/public/phuc-reeves.png (or change this path); a monogram shows if absent.
-export const AVATAR_SRC = "/phuc-reeves.png";
+// frontend/public/phuc-reeves.webp (or change this path); a monogram shows if absent.
+// WebP, not PNG: the static export sets images.unoptimized, so whatever is here
+// ships to the browser byte-for-byte — and AvatarCard preloads it as the LCP image.
+export const AVATAR_SRC = "/phuc-reeves.webp";
 
 export const SOCIAL_LINKS: { label: string; href: string; icon: "mail" | "github" | "linkedin" | "facebook" | "instagram" }[] = [
   { label: "phuchb04@gmail.com", href: "mailto:phuchb04@gmail.com", icon: "mail" },
