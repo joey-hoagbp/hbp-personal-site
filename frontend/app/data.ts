@@ -6,19 +6,19 @@
 import type { Localized, Profile, Project } from "../lib/api";
 
 // Hero avatar shown in the intro terminal header. Drop a photo at
-// frontend/public/avatar.jpg (or change this path); a monogram shows if absent.
-export const AVATAR_SRC = "/avatar.jpg";
+// frontend/public/phuc-reeves.png (or change this path); a monogram shows if absent.
+export const AVATAR_SRC = "/phuc-reeves.png";
 
 export const SOCIAL_LINKS: { label: string; href: string; icon: "mail" | "github" | "linkedin" | "facebook" | "instagram" }[] = [
   { label: "phuchb04@gmail.com", href: "mailto:phuchb04@gmail.com", icon: "mail" },
   { label: "github.com/joey-hoagbp", href: "https://github.com/joey-hoagbp", icon: "github" },
-  { label: "facebook.com/phuchb04", href: "https://www.facebook.com/phuchb04/", icon: "facebook" },
-  { label: "instagram.com/hoaqbp_", href: "https://www.instagram.com/hoaqbp_/", icon: "instagram" },
+  { label: "facebook.com/hoaqbp", href: "https://www.facebook.com/hoaqbp", icon: "facebook" },
+  { label: "instagram.com/phuc.hoang1510", href: "https://www.instagram.com/phuc.hoang1510", icon: "instagram" },
 ];
 
 // "Currently" status strip shown under the hero — a small, human touch.
 export const CURRENTLY: { emoji: string; text: Localized }[] = [
-  { emoji: "⚙️", text: { vi: "xây dựng backend tại DrJoy", en: "building backend @ DrJoy" } },
+  { emoji: "⚙️", text: { vi: "xây dựng backend tại Dr.JOY", en: "building backend @ Dr.JOY" } },
   { emoji: "📚", text: { vi: "học sâu hơn về hệ thống phân tán", en: "learning distributed systems" } },
   { emoji: "🎧", text: { vi: "nghe lo-fi khi code", en: "coding to lo-fi" } },
 ];
@@ -87,17 +87,26 @@ export const DEFAULT_PROFILE: Profile = {
   experiences: [
     {
       date: { vi: "3/2026 — Nay", en: "3/2026 — Present" },
-      title: { vi: "Backend Developer (Java)", en: "Backend Developer (Java)" },
-      org: { vi: "DrJoy", en: "DrJoy" },
+      title: { vi: "Kỹ sư phần mềm", en: "Software engineer" },
+      org: { vi: "Dr.JOY Việt Nam", en: "Dr.JOY Vietnam" },
       desc: {
         vi: "Phát triển backend với Java và Spring Boot.",
         en: "Backend development with Java and Spring Boot.",
       },
     },
     {
-      date: { vi: "11/2024 — 7/2025", en: "11/2024 — 7/2025" },
-      title: { vi: "Backend Developer (C#)", en: "Backend Developer (C#)" },
-      org: { vi: "Ominext", en: "Ominext" },
+      date: { vi: "8/2025 — 11/2025", en: "8/2025 — 11/2025" },
+      title: { vi: "Kỹ sư phần mềm", en: "Software engineer" },
+      org: { vi: "Haposoft", en: "Haposoft" },
+      desc: {
+        vi: "Phát triển web với NextJS và PHP Laravel.",
+        en: "Web development with Next.js and PHP Laravel.",
+      },
+    },
+    {
+      date: { vi: "8/2024 — 7/2025", en: "8/2024 — 7/2025" },
+      title: { vi: "Kỹ sư phần mềm", en: "Software engineer" },
+      org: { vi: "OmiGroup", en: "OmiGroup" },
       desc: {
         vi: "Phát triển backend với C# và .NET.",
         en: "Backend development with C# and .NET.",

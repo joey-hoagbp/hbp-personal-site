@@ -115,15 +115,22 @@ public class ProfileSeeder implements CommandLineRunner {
                 new Experience(
                         0,
                         new Localized("3/2026 — Nay", "3/2026 — Present"),
-                        new Localized("Backend Developer (Java)", "Backend Developer (Java)"),
-                        new Localized("DrJoy", "DrJoy"),
+                        new Localized("Kỹ sư phần mềm", "Software engineer"),
+                        new Localized("Dr.JOY Việt Nam", "Dr.JOY Vietnam"),
                         new Localized("Phát triển backend với Java và Spring Boot.", "Backend development with Java and Spring Boot.")
                 ),
                 new Experience(
                         1,
-                        new Localized("11/2024 — 7/2025", "11/2024 — 7/2025"),
-                        new Localized("Backend Developer (C#)", "Backend Developer (C#)"),
-                        new Localized("Ominext", "Ominext"),
+                        new Localized("8/2025 — 11/2025", "8/2025 — 11/2025"),
+                        new Localized("Kỹ sư phần mềm", "Software engineer"),
+                        new Localized("Haposoft", "Haposoft"),
+                        new Localized("Phát triển web với NextJS và PHP Laravel.", "Web development with Next.js and PHP Laravel.")
+                ),
+                new Experience(
+                        2,
+                        new Localized("8/2024 — 7/2025", "8/2024 — 7/2025"),
+                        new Localized("Kỹ sư phần mềm", "Software engineer"),
+                        new Localized("OmiGroup", "OmiGroup"),
                         new Localized("Phát triển backend với C# và .NET.", "Backend development with C# and .NET.")
                 )
         ));
