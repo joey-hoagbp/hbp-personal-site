@@ -906,6 +906,17 @@ footer { border-top: 1px solid var(--legacy-border); padding: 28px 0; }
 .nav-cta { padding: 9px 20px; font-size: 13.5px; }
 .nav-menu { display: none; }
 
+@media (max-width: 959px) {
+  /* Between 600 and 959px the hamburger is still hidden (it only appears
+     below 600px), so .nav-link/.nav-cta are live touch targets here — spec
+     §5's 48px floor applies. display: inline-flex is needed for min-height
+     to take effect on .nav-link (a non-replaced inline anchor ignores it
+     otherwise); .nav-cta already gets inline-flex from .btn. Nav bar height
+     (78px in this band) is unaffected since 48px is well under it. */
+  .nav-link { display: inline-flex; align-items: center; min-height: 48px; }
+  .nav-cta { min-height: 48px; }
+}
+
 @media (max-width: 599px) {
   .nav-inner { height: 60px; }
   /* Ruling F2: scope to .nav-right so the same control inside .sheet-foot stays reachable. */

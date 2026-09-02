@@ -22,6 +22,7 @@ export default function MobileNavSheet({ open, onClose }: { open: boolean; onClo
     if (!open) return;
 
     const previouslyFocused = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     sheetRef.current?.querySelector<HTMLElement>("button, a")?.focus();
 
@@ -38,10 +39,22 @@ export default function MobileNavSheet({ open, onClose }: { open: boolean; onClo
       else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     }
 
+    // The sheet is CSS-hidden at >=600px but stays mounted; without this, a
+    // mouse-only user who resizes past that breakpoint while it's open is
+    // left with body scroll locked and a focus trap armed on an invisible
+    // dialog, with no visible control to escape it.
+    const mql = window.matchMedia("(min-width: 600px)");
+    function onViewportChange(e: MediaQueryListEvent | MediaQueryList) {
+      if (e.matches) onClose();
+    }
+    onViewportChange(mql);
+    mql.addEventListener("change", onViewportChange);
+
     document.addEventListener("keydown", onKeyDown);
     return () => {
       document.removeEventListener("keydown", onKeyDown);
-      document.body.style.overflow = "";
+      mql.removeEventListener("change", onViewportChange);
+      document.body.style.overflow = previousOverflow;
       previouslyFocused?.focus();
     };
   }, [open, onClose]);

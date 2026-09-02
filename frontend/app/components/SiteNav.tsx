@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLang } from "../i18n/LanguageProvider";
 import { messages } from "../i18n/dictionary";
 import Wordmark from "./Wordmark";
@@ -21,6 +21,13 @@ export default function SiteNav() {
   const [sheetOpen, setSheetOpen] = useState(false);
   const { lang } = useLang();
   const t = messages[lang].nav;
+
+  // Stable identity: MobileNavSheet's focus-trap effect depends on this. An
+  // inline arrow here would change identity on every SiteNav re-render (e.g.
+  // pressing a language pill inside the open sheet, since useLang() lives
+  // here), tearing the trap down and rebuilding it while the sheet is still
+  // visibly open.
+  const closeSheet = useCallback(() => setSheetOpen(false), []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -81,7 +88,7 @@ export default function SiteNav() {
           </div>
         </div>
       </nav>
-      <MobileNavSheet open={sheetOpen} onClose={() => setSheetOpen(false)} />
+      <MobileNavSheet open={sheetOpen} onClose={closeSheet} />
     </>
   );
 }
