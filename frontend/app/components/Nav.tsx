@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLang } from "../i18n/LanguageProvider";
 import { messages, LANG_LABELS, type Lang } from "../i18n/dictionary";
+import ThemeToggle from "./ThemeToggle";
 
 const LANGS: Lang[] = ["vi", "en"];
 
@@ -99,6 +100,7 @@ export default function Nav() {
               </a>
             </li>
           </ul>
+          <ThemeToggle />
           <div className="lang-switch" ref={switchRef}>
             <button
               type="button"
