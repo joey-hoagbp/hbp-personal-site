@@ -1,5 +1,10 @@
 # Dark Editorial Redesign — Design Spec
 
+> **SUPERSEDED (2026-09-02).** Approved but never implemented — the shipped
+> `globals.css` remained the mint + lime theme. Replaced by
+> `specs/2026-09-02-an-redesign-spec.md` (direction "Ấn"). Kept for history only;
+> do not implement from this file.
+
 **Date:** 2026-07-30
 **Project:** hbp-personal-site (frontend)
 **Status:** Approved design — ready for implementation planning

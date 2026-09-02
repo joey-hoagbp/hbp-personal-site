@@ -1,5 +1,10 @@
 # Dark Editorial Redesign Implementation Plan
 
+> **SUPERSEDED (2026-09-02).** Approved but never implemented — the shipped
+> `globals.css` remained the mint + lime theme. Replaced by
+> `specs/2026-09-02-an-redesign-spec.md` (direction "Ấn"). Kept for history only;
+> do not implement from this file.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Restyle and restructure the hbp-personal-site frontend onto the dark editorial design imported from the Claude Design project (`Personal Site.html`), preserving bilingual VI/EN, the contact-form backend flow, and all real content.
