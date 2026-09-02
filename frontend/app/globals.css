@@ -217,7 +217,7 @@ html.lenis, html.lenis body { height: auto; }
   .hero-grid-rules { display: none; }
   .hero-copy { grid-column: span 6; order: 2; }
   .hero-portrait { grid-column: span 6; order: 1; width: 240px; }
-  .hero-seal { left: auto; right: -22px; bottom: -20px; }
+  .hero-seal { left: auto; right: -22px; bottom: -8px; }
   .hero-name { font-size: 72px; }
   .hero-tagline { font-size: 22px; }
 }
@@ -521,9 +521,6 @@ footer { border-top: 1px solid var(--legacy-border); padding: 28px 0; }
   .reveal { opacity: 1; transform: none; transition: none; }
   html { scroll-behavior: auto; }
 }
-
-/* Parallax targets are transformed from JS; hint the compositor. */
-[data-parallax] { will-change: transform; }
 
 /* ── POINTER / SCROLL INTERACTIONS ──────────────────── */
 /* Scroll-progress bar: a thin accent line filled via scaleX from JS. */

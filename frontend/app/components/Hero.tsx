@@ -34,7 +34,7 @@ export default function Hero() {
 
         <div className="hero-portrait">
           <img src={AVATAR_SRC} alt={t.avatar.alt} width={420} height={525} />
-          <span className="hero-seal"><SealMark size={96} /></span>
+          <span className="hero-seal"><SealMark size={96} decorative /></span>
         </div>
       </div>
     </section>
