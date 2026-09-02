@@ -2,59 +2,39 @@
 
 import { useLang } from "../i18n/LanguageProvider";
 import { messages } from "../i18n/dictionary";
-import AvatarCard from "./AvatarCard";
+import { AVATAR_SRC } from "../data";
+import SealMark from "./SealMark";
 
 export default function Hero() {
   const { lang } = useLang();
   const t = messages[lang].hero;
 
   return (
-    <section id="hero">
-      <div className="hero-glow-orb-wrap" aria-hidden="true">
-        <div className="hero-glow-orb" />
+    <section id="hero" className="hero shell">
+      <div className="hero-grid-rules" aria-hidden="true">
+        {Array.from({ length: 12 }, (_, i) => <span key={i} />)}
       </div>
-      <span className="hero-rule" aria-hidden="true" />
-      <div className="container">
-        <div className="hero-grid">
-          <div className="hero-left reveal">
-            <p className="hero-eyebrow">
-              <span className="eyebrow-dash" />
-              {t.eyebrow}
-            </p>
-            <h1 className="hero-name">
-              <span className="hero-word">Hoàng</span>
-              <br />
-              <span className="hero-word name-dim">Bảo Phúc.</span>
-            </h1>
-            <p className="hero-tagline">
-              {t.taglineLines[0]}
-              <br />
-              {t.taglineLines[1]}
-            </p>
-            <p className="hero-bio">{t.bio}</p>
-            <div className="hero-btns">
-              <a href="#portfolio" className="btn-primary magnetic">
-                {t.viewWork}
-              </a>
-              <a href="#contact" className="btn-ghost">
-                {t.getInTouch}
-              </a>
-            </div>
-            <div className="hero-stats">
-              {t.stats.map((s) => (
-                <div className="hero-stat" key={s.label}>
-                  <b>{s.value}</b>
-                  <span>{s.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
 
-          <div className="hero-right reveal reveal-d2">
-            <div className="hero-avatar-parallax" data-parallax="0.06">
-              <AvatarCard />
-            </div>
+      <div className="g12 hero-grid">
+        <div className="hero-copy">
+          <p className="eyebrow"><SealMark size={12} decorative /> {t.eyebrow}</p>
+          <h1 className="hero-name">
+            Hoàng<br />Bảo Phúc
+          </h1>
+          <p className="hero-tagline">{t.taglineLines[0]} {t.taglineLines[1]}</p>
+          <p className="prose hero-bio">{t.bio}</p>
+          <div className="hero-actions">
+            <a href="#portfolio" className="btn">
+              {t.viewWork}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" /></svg>
+            </a>
+            <a href="#contact" className="btn-ghost">{t.getInTouch}</a>
           </div>
+        </div>
+
+        <div className="hero-portrait">
+          <img src={AVATAR_SRC} alt={t.avatar.alt} width={420} height={525} />
+          <span className="hero-seal"><SealMark size={96} /></span>
         </div>
       </div>
     </section>

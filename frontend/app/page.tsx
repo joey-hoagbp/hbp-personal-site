@@ -1,15 +1,12 @@
 import SiteNav from "./components/SiteNav";
 import Hero from "./components/Hero";
+import ProofRow from "./components/ProofRow";
 import Currently from "./components/Currently";
 import Skills from "./components/Skills";
 import Work from "./components/Work";
 import CV from "./components/CV";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import ScrollReveal from "./components/ScrollReveal";
-import ScrollProgress from "./components/ScrollProgress";
-import PointerEffects from "./components/PointerEffects";
-import Parallax from "./components/Parallax";
 import { fetchProfile } from "../lib/api";
 import { DEFAULT_PROFILE, PROJECTS } from "./data";
 
@@ -18,13 +15,10 @@ export default async function Home() {
 
   return (
     <>
-      <ScrollProgress />
-      <PointerEffects />
-      <Parallax />
-      <ScrollReveal />
       <SiteNav />
       <main>
         <Hero />
+        <ProofRow />
         <Currently />
         <Skills groups={profile.techStacks} />
         <Work projects={PROJECTS} />

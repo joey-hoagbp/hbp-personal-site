@@ -5,10 +5,10 @@
 
 import type { Localized, Profile, Project } from "../lib/api";
 
-// Hero avatar shown in the intro terminal header. Drop a photo at
-// frontend/public/phuc-reeves.webp (or change this path); a monogram shows if absent.
-// WebP, not PNG: the static export sets images.unoptimized, so whatever is here
-// ships to the browser byte-for-byte — and AvatarCard preloads it as the LCP image.
+// Hero portrait. Drop a photo at frontend/public/phuc-reeves.webp (or change
+// this path). WebP, not PNG: the static export sets images.unoptimized, so
+// whatever is here ships to the browser byte-for-byte. This is the page's LCP
+// image — its <link rel="preload"> lives in app/layout.tsx, not on the <img>.
 export const AVATAR_SRC = "/phuc-reeves.webp";
 
 export const SOCIAL_LINKS: { label: string; href: string; icon: "mail" | "github" | "linkedin" | "facebook" | "instagram" }[] = [
@@ -19,10 +19,10 @@ export const SOCIAL_LINKS: { label: string; href: string; icon: "mail" | "github
 ];
 
 // "Currently" status strip shown under the hero — a small, human touch.
-export const CURRENTLY: { emoji: string; text: Localized }[] = [
-  { emoji: "⚙️", text: { vi: "xây dựng backend tại Dr.JOY", en: "building backend @ Dr.JOY" } },
-  { emoji: "📚", text: { vi: "học sâu hơn về hệ thống phân tán", en: "learning distributed systems" } },
-  { emoji: "🎧", text: { vi: "nghe lo-fi khi code", en: "coding to lo-fi" } },
+export const CURRENTLY: { text: Localized }[] = [
+  { text: { vi: "xây dựng backend tại Dr.JOY", en: "building backend @ Dr.JOY" } },
+  { text: { vi: "học sâu hơn về hệ thống phân tán", en: "learning distributed systems" } },
+  { text: { vi: "nghe lo-fi khi code", en: "coding to lo-fi" } },
 ];
 
 /**

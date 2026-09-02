@@ -17,13 +17,17 @@ export type Messages = {
     bio: string;
     viewWork: string;
     getInTouch: string;
-    stats: { value: string; label: string }[];
     avatar: {
       name: string;
       role: string;
       location: string;
       alt: string;
     };
+  };
+  proof: {
+    shipped: { label: string; value: string; note: string };
+    now:     { label: string; value: string; note: string };
+    source:  { label: string; value: string; note: string };
   };
   currently: { prefix: string };
   skills: {
@@ -84,21 +88,21 @@ export const messages: Record<Lang, Messages> = {
       eyebrow: "Kỹ sư phần mềm · Hà Nội",
       taglineLines: ["Xây dựng sản phẩm", "mọi người yêu thích."],
       bio:
-        "Kỹ sư phần mềm với niềm đam mê xây dựng sản phẩm mobile & web. " +
-        "Tập trung vào clean code, trải nghiệm người dùng và hiệu suất.",
+        "Backend là nghề chính — Java, Spring Boot, .NET. Tôi viết hệ thống chạy được thật, " +
+        "rồi đóng gói nó thành sản phẩm người ta cài về máy.",
       viewWork: "Xem sản phẩm",
       getInTouch: "Liên hệ ngay",
-      stats: [
-        { value: "2+", label: "năm KN" },
-        { value: "Java·C#", label: "ngôn ngữ chính" },
-        { value: "1", label: "app đã ra mắt" },
-      ],
       avatar: {
         name: "Hoàng Bảo Phúc",
         role: "Kỹ sư phần mềm",
         location: "Hà Nội, Việt Nam",
         alt: "Ảnh của Hoàng Bảo Phúc",
       },
+    },
+    proof: {
+      shipped: { label: "Đã phát hành", value: "Hajime", note: "Android · APK cài được ngay · React Native + Spring Boot" },
+      now:     { label: "Hiện tại", value: "Dr.JOY Việt Nam", note: "Kỹ sư backend · Java · Spring Boot · từ 3/2026" },
+      source:  { label: "Mã nguồn", value: "joey-hoagbp", note: "github.com · 3 công ty trong 2 năm" },
     },
     currently: { prefix: "hiện tại" },
     skills: {
@@ -154,21 +158,21 @@ export const messages: Record<Lang, Messages> = {
       eyebrow: "Software Engineer · Ha Noi",
       taglineLines: ["Building apps people", "love to use."],
       bio:
-        "Software engineer with a passion for building mobile & web products. " +
-        "Focused on clean code, user experience, and performance.",
+        "Backend is the day job — Java, Spring Boot, .NET. I write systems that actually run, " +
+        "then package them into something people install.",
       viewWork: "View work",
       getInTouch: "Get in touch",
-      stats: [
-        { value: "2+", label: "yrs exp" },
-        { value: "Java·C#", label: "core langs" },
-        { value: "1", label: "app shipped" },
-      ],
       avatar: {
         name: "Hoàng Bảo Phúc",
         role: "Software Engineer",
         location: "Hà Nội, Vietnam",
         alt: "Photo of Hoàng Bảo Phúc",
       },
+    },
+    proof: {
+      shipped: { label: "Shipped", value: "Hajime", note: "Android · installable APK · React Native + Spring Boot" },
+      now:     { label: "Currently", value: "Dr.JOY Vietnam", note: "Backend engineer · Java · Spring Boot · since 3/2026" },
+      source:  { label: "Source", value: "joey-hoagbp", note: "github.com · 3 companies in 2 years" },
     },
     currently: { prefix: "currently" },
     skills: {
