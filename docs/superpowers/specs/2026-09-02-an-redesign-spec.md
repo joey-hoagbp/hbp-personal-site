@@ -323,7 +323,7 @@ route handlers, no middleware — see the deployment section of `CLAUDE.md`.
 | Feature | Constraint | Implementation |
 |---|---|---|
 | Theme toggle | A React effect runs after paint, so the dark page flashes light on first load | Inline a tiny blocking script in `<head>` that reads `localStorage.theme` (falling back to `matchMedia`) and stamps `data-theme` on `<html>` **before** first paint. The React toggle then only writes |
-| Language toggle | `<html lang="vi">` is hard-coded in `layout.tsx` and never follows the switcher — an a11y and SEO defect today | `LanguageProvider` sets `document.documentElement.lang` on mount and on every change |
+| Language toggle | **Already correct — no work needed.** `LanguageProvider.tsx:36-38` syncs `document.documentElement.lang` on every change; the `lang="vi"` in `layout.tsx` is the SSR default and stays | Leave as-is. Do not "fix" this — an earlier draft of this spec wrongly called it a defect |
 | `/work/hajime` | Needs to exist as a real URL | A static route at `app/work/hajime/page.tsx`. `output: "export"` pre-renders it; no `generateStaticParams` needed for a single fixed path. Cloudflare Pages serves `out/work/hajime/index.html` |
 | Contact form | The only network call on the site | Client `fetch` to `POST ${NEXT_PUBLIC_API_BASE_URL}/api/contact`, exactly as `lib/api.ts` does now. Field errors come back as the 400 `fields` map — render them into the input error state from §3 |
 | Portrait | `images.unoptimized` is set, so the file ships byte-for-byte | Keep the WebP and the preload. Do not introduce `next/image` optimization |
@@ -394,7 +394,7 @@ Then in a browser, at 1440 / 960 / 600 / 390:
 
 1. Dark and light both render, and the toggle wins over the OS setting in both directions.
 2. No flash of the wrong theme on a hard reload.
-3. Switching to EN changes `<html lang>` to `en` (check in devtools, not by eye).
+3. Switching to EN still sets `<html lang="en">` (a regression check — this already works).
 4. The portrait is visible at 390. The nav sheet opens, traps focus, and closes on Esc.
 5. `/work/hajime` loads as a real URL and survives a hard refresh from `out/`.
 6. The contact form posts, and a 400 renders per-field errors.
