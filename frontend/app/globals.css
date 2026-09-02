@@ -852,8 +852,8 @@ footer { border-top: 1px solid var(--legacy-border); padding: 28px 0; }
 }
 .lang-opt:hover { color: var(--ink); }
 .lang-opt-active { color: var(--ink); background: var(--raised); }
-.lang-toggle-sheet .lang-opt { padding: 8px 12px; font-size: 11px; min-height: 44px; }
-@media (max-width: 959px) { .lang-opt { min-height: 44px; padding: 8px 11px; } }
+.lang-toggle-sheet .lang-opt { padding: 8px 12px; font-size: 11px; min-height: 48px; }
+@media (max-width: 959px) { .lang-opt { min-height: 48px; padding: 8px 11px; } }
 
 /* ── MOBILE NAV SHEET ───────────────────────────────── */
 .sheet {
@@ -878,7 +878,7 @@ footer { border-top: 1px solid var(--legacy-border); padding: 28px 0; }
   font-size: 17px; color: var(--ink); text-decoration: none;
   border-bottom: var(--hairline) solid var(--rule-faint);
 }
-.sheet-cta { margin: 16px var(--page-margin); }
+.sheet-cta { margin: 16px var(--page-margin); width: auto; }
 .sheet-foot { padding: 0 var(--page-margin) 18px; }
 @media (min-width: 600px) { .sheet { display: none; } }
 
