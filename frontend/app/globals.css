@@ -217,13 +217,13 @@ html.lenis, html.lenis body { height: auto; }
   .hero-grid-rules { display: none; }
   .hero-copy { grid-column: span 6; order: 2; }
   .hero-portrait { grid-column: span 6; order: 1; width: 240px; }
+  .hero-seal { left: auto; right: -22px; bottom: -20px; }
   .hero-name { font-size: 72px; }
   .hero-tagline { font-size: 22px; }
 }
 @media (max-width: 599px) {
   .hero { padding-top: 34px; }
   .hero-portrait { width: 212px; }
-  .hero-seal { left: auto; right: -22px; bottom: -20px; }
   .hero-seal svg { width: 62px; height: 62px; }
   .hero-name { font-size: 52px; letter-spacing: -0.035em; line-height: 1.02; }
   .hero-tagline { font-size: 19px; max-width: none; }
