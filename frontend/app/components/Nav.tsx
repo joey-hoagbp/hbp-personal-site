@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLang } from "../i18n/LanguageProvider";
 import { messages, LANG_LABELS, type Lang } from "../i18n/dictionary";
 import ThemeToggle from "./ThemeToggle";
+import Wordmark from "./Wordmark";
 
 const LANGS: Lang[] = ["vi", "en"];
 
@@ -75,7 +76,7 @@ export default function Nav() {
     <nav className={scrolled ? "nav-scrolled" : ""}>
       <div className="nav-inner">
         <a href="#hero" className="nav-logo">
-          HBP<span className="logo-dot">.</span>
+          <Wordmark size={24} />
         </a>
         <div className="nav-right">
           <ul className="nav-links">

@@ -845,3 +845,24 @@ footer { border-top: 1px solid var(--legacy-border); padding: 28px 0; }
 .theme-toggle:hover { color: var(--ink); }
 .theme-toggle svg { width: 17px; height: 17px; }
 @media (max-width: 959px) { .theme-toggle { width: 48px; height: 48px; } }
+
+/* ── WORDMARK ───────────────────────────────────── */
+.wordmark {
+  font-family: var(--display);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  color: var(--ink);
+  display: inline-block;
+}
+.wordmark-u { position: relative; display: inline-block; line-height: 1; }
+.wordmark-accent {
+  position: absolute;
+  left: 50%;
+  bottom: 0.80em;
+  transform: translateX(-44%);
+  width: 0.28em;
+  height: auto;
+  display: block;
+}
+.wordmark-accent path { fill: var(--seal); }
