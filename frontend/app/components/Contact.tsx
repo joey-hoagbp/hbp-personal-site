@@ -1,28 +1,20 @@
 "use client";
 
-import { useState, type CSSProperties, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
+import SectionHeader from "./SectionHeader";
 import { SOCIAL_LINKS } from "../data";
-import { SOCIAL_ICONS } from "./icons";
 import { sendContactMessage } from "../../lib/api";
 import { useLang } from "../i18n/LanguageProvider";
 import { messages } from "../i18n/dictionary";
 
 type Status = "idle" | "submitting" | "sent" | "error";
 
-// Brand colors revealed on social-link hover (via the --brand CSS var).
-const SOCIAL_BRAND: Record<string, string> = {
-  mail: "#EA4335",
-  github: "#181717",
-  linkedin: "#0A66C2",
-  facebook: "#1877F2",
-  instagram: "#E4405F",
-};
-
 export default function Contact() {
   const { lang } = useLang();
   const t = messages[lang].contact;
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
+  const [fields, setFields] = useState<Record<string, string>>({});
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -31,6 +23,7 @@ export default function Contact() {
 
     setStatus("submitting");
     setError(null);
+    setFields({});
 
     const result = await sendContactMessage({
       name: String(data.get("name") ?? "").trim(),
@@ -43,123 +36,151 @@ export default function Contact() {
       setStatus("sent");
     } else {
       setError(result.message);
+      setFields(result.fields ?? {});
       setStatus("error");
     }
   }
 
   return (
-    <section id="contact" className="section-bordered">
-      <span className="section-rule reveal" aria-hidden="true" />
-      <div className="container">
-        <div className="contact-layout">
-          <div className="reveal">
-            <p className="section-label">{t.label}</p>
-            <h2 className="contact-hdg">
-              {t.headingLine1}
-              <br />
-              <span className="hdg-accent">{t.headingAccent}</span>
-            </h2>
-            <p className="contact-body">{t.body}</p>
-            <div className="soc-links">
-              {SOCIAL_LINKS.map(({ label, href, icon }) => {
-                const Icon = SOCIAL_ICONS[icon];
-                return (
-                  <a
-                    key={href}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="soc-link"
-                    style={{ "--brand": SOCIAL_BRAND[icon] } as CSSProperties}
-                  >
-                    <span className="soc-icon">
-                      <Icon />
-                    </span>
-                    {label}
-                  </a>
-                );
-              })}
-            </div>
+    <section className="contact shell">
+      <SectionHeader
+        id="contact"
+        label={t.label}
+        title={
+          <>
+            {t.headingLine1}
+            <br />
+            <span className="hdg-accent">{t.headingAccent}</span>
+          </>
+        }
+      />
+      <div className="g12">
+        <div className="contact-copy">
+          <p className="prose">{t.body}</p>
+          <div className="social-list">
+            {SOCIAL_LINKS.map(({ label, href, icon }) => (
+              <a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-row"
+              >
+                <span className="social-key">{icon.toUpperCase()}</span>
+                {label}
+              </a>
+            ))}
           </div>
-
-          <form className="contact-form reveal reveal-d2" onSubmit={handleSubmit} noValidate>
-            {status === "sent" ? (
-              <div className="form-ok">
-                <div className="form-ok-icon">✓</div>
-                <p className="form-ok-msg">{t.sentMsg}</p>
-              </div>
-            ) : (
-              <>
-                <div className="form-row">
-                  <div className="fg">
-                    <input
-                      id="cf-name"
-                      name="name"
-                      type="text"
-                      className="fi"
-                      placeholder=" "
-                      required
-                    />
-                    <label className="fl" htmlFor="cf-name">
-                      {t.nameLabel}
-                    </label>
-                  </div>
-                  <div className="fg">
-                    <input
-                      id="cf-email"
-                      name="email"
-                      type="email"
-                      className="fi"
-                      placeholder=" "
-                      required
-                    />
-                    <label className="fl" htmlFor="cf-email">
-                      {t.emailLabel}
-                    </label>
-                  </div>
-                </div>
-                <div className="fg">
-                  <input
-                    id="cf-subject"
-                    name="subject"
-                    type="text"
-                    className="fi"
-                    placeholder=" "
-                  />
-                  <label className="fl" htmlFor="cf-subject">
-                    {t.subjectLabel}
-                  </label>
-                </div>
-                <div className="fg">
-                  <textarea
-                    id="cf-message"
-                    name="message"
-                    className="fi"
-                    rows={5}
-                    placeholder=" "
-                    required
-                  />
-                  <label className="fl" htmlFor="cf-message">
-                    {t.messageLabel}
-                  </label>
-                </div>
-                {error && (
-                  <p className="form-err" role="alert">
-                    {error}
-                  </p>
-                )}
-                <button
-                  type="submit"
-                  className="btn-primary btn-full"
-                  disabled={status === "submitting"}
-                >
-                  {status === "submitting" && <span className="btn-spinner" aria-hidden="true" />}
-                  {status === "submitting" ? t.submitting : t.submit}
-                </button>
-              </>
-            )}
-          </form>
         </div>
+
+        <form className="contact-form" onSubmit={handleSubmit} noValidate>
+          {status === "sent" ? (
+            <p className="prose" role="status">
+              {t.sentMsg}
+            </p>
+          ) : (
+            <>
+              <div className="form-pair">
+                <div className={fields.name ? "field field-error" : "field"}>
+                  <label className="field-label" htmlFor="cf-name">
+                    {t.nameLabel}
+                  </label>
+                  <input
+                    id="cf-name"
+                    name="name"
+                    type="text"
+                    className="field-input"
+                    placeholder={t.namePlaceholder}
+                    required
+                    aria-invalid={Boolean(fields.name)}
+                    aria-describedby={fields.name ? "cf-name-msg" : undefined}
+                  />
+                  {fields.name && (
+                    <span className="field-msg" id="cf-name-msg">
+                      {fields.name}
+                    </span>
+                  )}
+                </div>
+                <div className={fields.email ? "field field-error" : "field"}>
+                  <label className="field-label" htmlFor="cf-email">
+                    {t.emailLabel}
+                  </label>
+                  <input
+                    id="cf-email"
+                    name="email"
+                    type="email"
+                    className="field-input"
+                    placeholder={t.emailPlaceholder}
+                    required
+                    aria-invalid={Boolean(fields.email)}
+                    aria-describedby={fields.email ? "cf-email-msg" : undefined}
+                  />
+                  {fields.email && (
+                    <span className="field-msg" id="cf-email-msg">
+                      {fields.email}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div className={fields.subject ? "field field-error" : "field"}>
+                <label className="field-label" htmlFor="cf-subject">
+                  {t.subjectLabel}
+                </label>
+                <input
+                  id="cf-subject"
+                  name="subject"
+                  type="text"
+                  className="field-input"
+                  placeholder={t.subjectPlaceholder}
+                  aria-invalid={Boolean(fields.subject)}
+                  aria-describedby={fields.subject ? "cf-subject-msg" : undefined}
+                />
+                {fields.subject && (
+                  <span className="field-msg" id="cf-subject-msg">
+                    {fields.subject}
+                  </span>
+                )}
+              </div>
+
+              <div className={fields.message ? "field field-error" : "field"}>
+                <label className="field-label" htmlFor="cf-message">
+                  {t.messageLabel}
+                </label>
+                <textarea
+                  id="cf-message"
+                  name="message"
+                  className="field-input"
+                  rows={5}
+                  placeholder={t.messagePlaceholder}
+                  required
+                  aria-invalid={Boolean(fields.message)}
+                  aria-describedby={fields.message ? "cf-message-msg" : undefined}
+                />
+                {fields.message && (
+                  <span className="field-msg" id="cf-message-msg">
+                    {fields.message}
+                  </span>
+                )}
+              </div>
+
+              {error && (
+                <p className="form-err" role="alert">
+                  {error}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                className="btn btn-full"
+                disabled={status === "submitting"}
+              >
+                {status === "submitting" && <span className="btn-spinner" aria-hidden="true" />}
+                {status === "submitting" ? t.submitting : t.submit}
+              </button>
+            </>
+          )}
+        </form>
       </div>
     </section>
   );

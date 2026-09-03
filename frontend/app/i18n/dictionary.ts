@@ -77,7 +77,7 @@ export type Messages = {
     submitting: string;
     sentMsg: string;
   };
-  footer: { copy: string };
+  footer: { copy: string; builtWith: string };
 };
 
 // Native-language names shown in the switcher dropdown (never translated).
@@ -168,7 +168,10 @@ export const messages: Record<Lang, Messages> = {
       submitting: "Đang gửi...",
       sentMsg: "Đã gửi! Tôi sẽ phản hồi sớm nhất có thể.",
     },
-    footer: { copy: "© 2026 Hoàng Bảo Phúc. Xây dựng bằng cả tâm huyết." },
+    footer: {
+      copy: "© 2026 Hoàng Bảo Phúc. Xây dựng bằng cả tâm huyết.",
+      builtWith: "Next.js · Spring Boot · dựng bằng tay, không dùng mẫu",
+    },
   },
 
   en: {
@@ -252,6 +255,9 @@ export const messages: Record<Lang, Messages> = {
       submitting: "Sending...",
       sentMsg: "Sent! I'll get back to you as soon as I can.",
     },
-    footer: { copy: "© 2026 Hoàng Bảo Phúc. Built with care." },
+    footer: {
+      copy: "© 2026 Hoàng Bảo Phúc. Built with care.",
+      builtWith: "Next.js · Spring Boot · hand-built, not templated",
+    },
   },
 };
