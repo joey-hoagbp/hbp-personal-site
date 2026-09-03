@@ -4,7 +4,7 @@ import ProofRow from "./components/ProofRow";
 import Currently from "./components/Currently";
 import Skills from "./components/Skills";
 import Work from "./components/Work";
-import CV from "./components/CV";
+import Experience from "./components/Experience";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import ScrollReveal from "./components/ScrollReveal";
@@ -24,7 +24,7 @@ export default async function Home() {
         <Currently />
         <Skills groups={profile.techStacks} />
         <Work projects={PROJECTS} />
-        <CV experience={profile.experiences} education={profile.education} />
+        <Experience experience={profile.experiences} education={profile.education} />
         <Contact />
       </main>
       <Footer />

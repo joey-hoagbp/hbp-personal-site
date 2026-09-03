@@ -50,11 +50,11 @@ export type Messages = {
     streak: string; charNote: string; hard: string; got: string;
     strokeLabel: string; kanjiReading: string; kanjiGloss: string;
   };
-  cv: {
+  experience: {
     label: string;
     title: string;
-    colExperience: string;
-    colEducation: string;
+    sub: string;
+    education: string;
     downloadCv: string;
   };
   contact: {
@@ -136,11 +136,11 @@ export const messages: Record<Lang, Messages> = {
       kanjiReading: "NHẬT",
       kanjiGloss: "mặt trời, ngày — 4 nét\nにち · ひ",
     },
-    cv: {
-      label: "Hồ Sơ",
-      title: "Experience & Education",
-      colExperience: "Kinh Nghiệm",
-      colEducation: "Học Vấn",
+    experience: {
+      label: "Kinh nghiệm · Experience",
+      title: "Ba công ty, trước khi ra trường.",
+      sub: "Bắt đầu đi làm từ năm hai. Backend ở cả ba nơi, hai ngôn ngữ, một lần rẽ qua frontend.",
+      education: "Học vấn",
       downloadCv: "Tải CV (PDF)",
     },
     contact: {
@@ -217,11 +217,11 @@ export const messages: Record<Lang, Messages> = {
       kanjiReading: "NICHI",
       kanjiGloss: "sun, day — 4 strokes\nにち · ひ",
     },
-    cv: {
-      label: "Resume",
-      title: "Experience & Education",
-      colExperience: "Experience",
-      colEducation: "Education",
+    experience: {
+      label: "Experience",
+      title: "Three companies, before graduating.",
+      sub: "Started working in second year. Backend at all three, two languages, one detour through frontend.",
+      education: "Education",
       downloadCv: "Download CV (PDF)",
     },
     contact: {
