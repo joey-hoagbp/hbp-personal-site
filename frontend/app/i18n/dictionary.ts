@@ -76,6 +76,10 @@ export type Messages = {
     submit: string;
     submitting: string;
     sentMsg: string;
+    /** Display label for each social-link row's `.social-key` column — keyed
+     * by the `SOCIAL_LINKS[].icon` discriminator (data.ts), not derived from
+     * it, so renaming the discriminator can't silently change on-screen copy. */
+    socialKeys: Record<"mail" | "github" | "linkedin" | "facebook" | "instagram", string>;
   };
   footer: { copy: string; builtWith: string };
 };
@@ -167,6 +171,13 @@ export const messages: Record<Lang, Messages> = {
       submit: "Gửi tin nhắn",
       submitting: "Đang gửi...",
       sentMsg: "Đã gửi! Tôi sẽ phản hồi sớm nhất có thể.",
+      socialKeys: {
+        mail: "Email",
+        github: "GitHub",
+        linkedin: "LinkedIn",
+        facebook: "Facebook",
+        instagram: "Instagram",
+      },
     },
     footer: {
       copy: "© 2026 Hoàng Bảo Phúc. Xây dựng bằng cả tâm huyết.",
@@ -254,6 +265,13 @@ export const messages: Record<Lang, Messages> = {
       submit: "Send message",
       submitting: "Sending...",
       sentMsg: "Sent! I'll get back to you as soon as I can.",
+      socialKeys: {
+        mail: "Email",
+        github: "GitHub",
+        linkedin: "LinkedIn",
+        facebook: "Facebook",
+        instagram: "Instagram",
+      },
     },
     footer: {
       copy: "© 2026 Hoàng Bảo Phúc. Built with care.",

@@ -66,7 +66,7 @@ export default function Contact() {
                 rel="noopener noreferrer"
                 className="social-row"
               >
-                <span className="social-key">{icon.toUpperCase()}</span>
+                <span className="social-key">{t.socialKeys[icon]}</span>
                 {label}
               </a>
             ))}
