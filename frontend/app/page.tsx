@@ -2,7 +2,7 @@ import SiteNav from "./components/SiteNav";
 import Hero from "./components/Hero";
 import ProofRow from "./components/ProofRow";
 import Currently from "./components/Currently";
-import Skills from "./components/Skills";
+import SkillTiers from "./components/SkillTiers";
 import Work from "./components/Work";
 import Experience from "./components/Experience";
 import Contact from "./components/Contact";
@@ -22,7 +22,7 @@ export default async function Home() {
         <Hero />
         <ProofRow />
         <Currently />
-        <Skills groups={profile.techStacks} />
+        <SkillTiers />
         <Work projects={PROJECTS} />
         <Experience experience={profile.experiences} education={profile.education} />
         <Contact />

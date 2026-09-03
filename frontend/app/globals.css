@@ -295,27 +295,31 @@ a.proof-value:hover { color: var(--seal-lit); }
 @media (max-width: 599px) { .currently { justify-content: flex-start; font-size: 11.5px; } }
 
 /* ── SKILLS ─────────────────────────────────────────── */
-.skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-.skill-group {
-  background: var(--legacy-surface); border: 1px solid var(--legacy-line);
-  border-radius: var(--legacy-r); padding: 24px; transition: border-color 0.25s;
+.skills { padding-block: var(--section-pad); }
+.tier-row { align-items: baseline; }
+.tier-1 { padding: 34px 0; }
+.tier-2 { padding: 30px 0; }
+.tier-3 { padding: 26px 0; }
+.tier-label { grid-column: span 3; }
+.tier-1 .tier-label { color: var(--seal-lit); }
+.tier-items { grid-column: span 9; display: flex; flex-wrap: wrap; }
+.tier-1 .tier-items {
+  gap: 14px 34px;
+  font-family: var(--display); font-weight: 700; font-stretch: 106%;
+  font-size: 38px; letter-spacing: -0.028em; line-height: 1.1; color: var(--ink);
 }
-.skill-group:hover { border-color: color-mix(in srgb, var(--legacy-accent) 28%, transparent); }
-.sg-label {
-  font-family: var(--legacy-mono); font-size: 10px; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--legacy-accent); margin-bottom: 12px;
+.tier-2 .tier-items { gap: 11px 26px; font-size: 21px; font-weight: 500; color: var(--ink-2); }
+.tier-3 .tier-items { gap: 9px 22px; font-size: 15px; color: var(--faint); }
+@media (max-width: 959px) {
+  .tier-label, .tier-items { grid-column: span 6; }
+  .tier-1 .tier-items { font-size: 32px; }
 }
-.sg-tags { display: flex; flex-wrap: wrap; gap: 7px; }
-.sg-tag {
-  display: inline-flex; align-items: center; gap: 7px;
-  padding: 5px 12px 5px 10px; background: var(--legacy-chipbg); border: 1px solid var(--legacy-line);
-  border-radius: 100px; font-size: 13px; color: var(--legacy-muted); transition: all 0.15s; cursor: default;
-}
-.sg-tag-icon { width: 15px; height: 15px; flex-shrink: 0; }
-.sg-tag:hover {
-  color: var(--legacy-ink);
-  border-color: color-mix(in srgb, var(--legacy-accent) 30%, transparent);
-  background: color-mix(in srgb, var(--legacy-accent) 10%, var(--legacy-chipbg));
+@media (max-width: 599px) {
+  .tier-label, .tier-items { grid-column: span 1; }
+  .tier-row { row-gap: 14px; }
+  .tier-1 .tier-items { font-size: 28px; gap: 8px 22px; }
+  .tier-2 .tier-items { font-size: 17px; }
+  .tier-3 .tier-items { font-size: 14px; }
 }
 
 /* ── SECTION HEADER ─────────────────────────────────── */
@@ -537,13 +541,6 @@ footer { border-top: 1px solid var(--legacy-border); padding: 28px 0; }
 
 /* ── MODULE POLISH PASS ─────────────────────────────── */
 
-/* TECH STACK — icon brand-color on hover, tag lift, group raise */
-.sg-tag-icon { color: var(--legacy-muted); transition: color 0.18s ease; }
-.sg-tag:hover { transform: translateY(-1px); }
-.sg-tag:hover .sg-tag-icon { color: var(--brand, var(--legacy-muted)); }
-.skill-group { transition: border-color 0.25s, transform 0.25s; }
-.skill-group:hover { transform: translateY(-3px); }
-
 /* CONTACT — floating labels, focus ring, social brand hover, submit spinner */
 .fg { position: relative; }
 .fl {
@@ -617,7 +614,6 @@ footer { border-top: 1px solid var(--legacy-border); padding: 28px 0; }
 /* ── RESPONSIVE ─────────────────────────────────────── */
 @media (max-width: 960px) {
   .container { padding: 0 24px; }
-  .skills-grid { grid-template-columns: 1fr; }
   .contact-layout { grid-template-columns: 1fr; gap: 36px; }
   .form-row { grid-template-columns: 1fr; }
   .footer-row { flex-direction: column; gap: 12px; }
