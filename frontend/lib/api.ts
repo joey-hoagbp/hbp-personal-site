@@ -28,6 +28,8 @@ export type Chip = {
 
 export type Project = {
   title: string;
+  /** Optional native-script rendering of the title, shown next to it (e.g. Japanese kana for "Hajime"). */
+  titleNative?: string;
   apkUrl?: string;
   current: boolean;
   chips: Chip[];

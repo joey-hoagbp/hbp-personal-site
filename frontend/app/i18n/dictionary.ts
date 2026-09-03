@@ -35,6 +35,7 @@ export type Messages = {
     title: string;
     sub: string;
   };
+  work: { title: string };
   portfolio: {
     label: string;
     title: string;
@@ -43,6 +44,11 @@ export type Messages = {
     comingSoon: string;
     repo: string;
     demo: string;
+    caseStudy: string;
+  };
+  device: {
+    streak: string; charNote: string; hard: string; got: string;
+    strokeLabel: string; kanjiReading: string; kanjiGloss: string;
   };
   cv: {
     label: string;
@@ -110,6 +116,7 @@ export const messages: Record<Lang, Messages> = {
       title: "Tech Stack",
       sub: "Những công nghệ tôi sử dụng hàng ngày.",
     },
+    work: { title: "Một sản phẩm, đã lên kệ." },
     portfolio: {
       label: "Sản Phẩm",
       title: "Featured Work",
@@ -118,6 +125,16 @@ export const messages: Record<Lang, Messages> = {
       comingSoon: "Tải về APK · Sắp ra mắt",
       repo: "Mã nguồn",
       demo: "Bản demo",
+      caseStudy: "Đọc case study",
+    },
+    device: {
+      streak: "7 ngày",
+      charNote: "hàng A · nguyên âm",
+      hard: "Khó",
+      got: "Nhớ rồi",
+      strokeLabel: "THỨ TỰ NÉT · KANJI N5",
+      kanjiReading: "NHẬT",
+      kanjiGloss: "mặt trời, ngày — 4 nét\nにち · ひ",
     },
     cv: {
       label: "Hồ Sơ",
@@ -180,6 +197,7 @@ export const messages: Record<Lang, Messages> = {
       title: "Tech Stack",
       sub: "Technologies I use every day.",
     },
+    work: { title: "One product, actually shipped." },
     portfolio: {
       label: "Portfolio",
       title: "Featured Work",
@@ -188,6 +206,16 @@ export const messages: Record<Lang, Messages> = {
       comingSoon: "Download APK · Coming soon",
       repo: "Source",
       demo: "Live demo",
+      caseStudy: "Read the case study",
+    },
+    device: {
+      streak: "7 days",
+      charNote: "A-row · vowel",
+      hard: "Hard",
+      got: "Got it",
+      strokeLabel: "STROKE ORDER · N5 KANJI",
+      kanjiReading: "NICHI",
+      kanjiGloss: "sun, day — 4 strokes\nにち · ひ",
     },
     cv: {
       label: "Resume",
