@@ -7,7 +7,6 @@ import Work from "./components/Work";
 import Experience from "./components/Experience";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import ScrollReveal from "./components/ScrollReveal";
 import { fetchProfile } from "../lib/api";
 import { DEFAULT_PROFILE, PROJECTS } from "./data";
 
@@ -16,7 +15,6 @@ export default async function Home() {
 
   return (
     <>
-      <ScrollReveal />
       <SiteNav />
       <main>
         <Hero />

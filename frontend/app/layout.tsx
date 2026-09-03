@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { LanguageProvider } from "./i18n/LanguageProvider";
 import { ThemeProvider } from "./components/ThemeProvider";
-import SmoothScroll from "./components/SmoothScroll";
 
 const THEME_INIT = `(function(){try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();`;
 
@@ -45,13 +44,8 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..112,400..800&family=JetBrains+Mono:wght@400;500&family=Literata:opsz,wght@7..72,400&display=swap"
           rel="stylesheet"
         />
-        {/* If JS is unavailable, scroll-reveal can't run — show everything. */}
-        <noscript>
-          <style>{`.reveal{opacity:1 !important;transform:none !important;}`}</style>
-        </noscript>
       </head>
       <body>
-        <SmoothScroll />
         <ThemeProvider>
           <LanguageProvider>{children}</LanguageProvider>
         </ThemeProvider>
