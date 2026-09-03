@@ -37,20 +37,33 @@ export default function SiteNav() {
   }, []);
 
   useEffect(() => {
-    const sections = SECTION_IDS
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => el !== null);
-    if (sections.length === 0) return;
+    // Observe the enclosing <section>, not the id'd element itself: a
+    // converted section's id sits on SectionHeader's inner div (correct for
+    // the #anchor jump landing on the title), which is short next to a
+    // 600px+ device stage — it exits the mid-viewport band while the section
+    // is still on screen, dropping the nav highlight early. closest("section")
+    // returns the element itself when the id is already on a <section>
+    // (Skills, Contact), so unconverted sections are unaffected.
+    const idByElement = new Map<Element, string>();
+    SECTION_IDS.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const section = el.closest("section") ?? el;
+      idByElement.set(section, id);
+    });
+    if (idByElement.size === 0) return;
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible[0]) setActive(visible[0].target.id);
+        const top = visible[0]?.target;
+        const id = top && idByElement.get(top);
+        if (id) setActive(id);
       },
       { rootMargin: "-45% 0px -45% 0px", threshold: 0 },
     );
-    sections.forEach((s) => observer.observe(s));
+    idByElement.forEach((_id, section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
 
