@@ -729,9 +729,33 @@ textarea.field-input { resize: vertical; min-height: 96px; }
   .case-hero-facts { gap: 22px; padding-top: 28px; margin-top: 28px; }
 }
 
-/* Device strip */
+/* Device strip — spec §3: three phones >=1200 (outer two offset +44px),
+   two at 960, one below. The DOM order is [Kana, Review, Kanji]: Kana
+   (first-child) is always visible; Kanji (last-child) keeps the behaviour
+   it already had from DeviceFrame's own `.device-offset` (hidden <=959,
+   offset >=960) unchanged; Review (the middle, added, phone) is the only
+   one gated to the new >=1200 band. At >=1200 the strip overrides both
+   outer phones to its OWN 44px offset — not DeviceFrame's 56px, which
+   stays the homepage WorkFeature figure — so the middle phone sits higher.
+   align-items must be `flex-start`, not the round-1 `flex-end`: with
+   flex-end every item's BOTTOM edge anchors to the same line regardless of
+   its own margin-top, so a margin-top offset is invisible (measured: 0px
+   difference). `center` was tried too, but centering only surfaces HALF of
+   an asymmetric margin as visible offset (44px margin -> 22px measured
+   difference) — not the spec's literal "+44px". `flex-start` anchors every
+   item's own top at margin-top: 0, so a margin-top of 44px on one item
+   reads as a full, exact 44px difference against one with none. */
 .device-strip { padding-block: var(--section-pad); background: var(--surface); overflow-x: auto; }
-.device-strip-row { display: flex; align-items: flex-end; justify-content: center; gap: 40px; padding-inline: var(--page-margin); }
+.device-strip-row { display: flex; align-items: flex-start; justify-content: center; gap: 40px; padding-inline: var(--page-margin); }
+.device-strip-row > .device:nth-child(2) { display: none; }
+@media (min-width: 1200px) {
+  .device-strip-row > .device:nth-child(2) { display: block; margin-top: 0; }
+  .device-strip-row > .device:first-child { margin-top: 44px; }
+  /* Specificity (0,4,0) — beats the plain `.device-offset { margin-top: 56px }`
+     rule (0,1,0) regardless of source order, so Kanji's offset in THIS strip
+     is always 44px, never the homepage's 56px. */
+  .device-strip-row > .device.device-offset:last-child { margin-top: 44px; }
+}
 @media (max-width: 599px) { .device-strip-row { justify-content: flex-start; gap: 24px; } }
 
 /* Shared two-column layout: label+title on the left, prose on the right —

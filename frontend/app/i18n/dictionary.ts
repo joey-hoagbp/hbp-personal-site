@@ -52,6 +52,8 @@ export type Messages = {
   device: {
     streak: string; charNote: string; hard: string; got: string;
     strokeLabel: string; kanjiReading: string; kanjiGloss: string;
+    dueBadge: string; dueUnit: string; dueNote: string;
+    reviewProgressLabel: string; skip: string; startReview: string;
   };
   experience: {
     label: string;
@@ -180,6 +182,12 @@ export const messages: Record<Lang, Messages> = {
       strokeLabel: "THỨ TỰ NÉT · KANJI N5",
       kanjiReading: "NHẬT",
       kanjiGloss: "mặt trời, ngày — 4 nét\nにち · ひ",
+      dueBadge: "12 thẻ đến hạn",
+      dueUnit: "thẻ hôm nay",
+      dueNote: "lịch ôn tính bởi SM-2",
+      reviewProgressLabel: "Đã ôn",
+      skip: "Bỏ qua",
+      startReview: "Ôn ngay",
     },
     experience: {
       label: "Kinh nghiệm · Experience",
@@ -348,6 +356,12 @@ export const messages: Record<Lang, Messages> = {
       strokeLabel: "STROKE ORDER · N5 KANJI",
       kanjiReading: "NICHI",
       kanjiGloss: "sun, day — 4 strokes\nにち · ひ",
+      dueBadge: "12 cards due",
+      dueUnit: "cards today",
+      dueNote: "scheduled by SM-2",
+      reviewProgressLabel: "Reviewed",
+      skip: "Skip",
+      startReview: "Review now",
     },
     experience: {
       label: "Experience",

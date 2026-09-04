@@ -4,12 +4,14 @@ import { useLang } from "../i18n/LanguageProvider";
 import { messages } from "../i18n/dictionary";
 import DeviceFrame from "./DeviceFrame";
 
-// The two real Hajime app screens previewed wherever the product shows up
-// (the homepage Work section and the /work/hajime case study). Kept as one
+// The real Hajime app screens previewed wherever the product shows up (the
+// homepage Work section and the /work/hajime case study). Kept as one
 // source so the mock content — copy, the 68% figure, the kanji stroke paths
 // and its numbered marker — can't drift between call sites. Each screen owns
 // its own DeviceFrame, so a call site renders exactly the subset it wants by
-// importing only the named export(s) it needs — no boolean props.
+// importing only the named export(s) it needs — no boolean props. Which
+// screens get a vertical offset is a layout concern of the call site (see
+// `.device-strip-row` in globals.css), not something threaded back in here.
 
 export function KanaScreen() {
   const { lang } = useLang();
@@ -58,6 +60,36 @@ export function KanjiScreen() {
       <div className="ds-gloss">
         <span className="ds-gloss-title">日 · {d.kanjiReading}</span>
         <span className="ds-gloss-body">{d.kanjiGloss}</span>
+      </div>
+    </DeviceFrame>
+  );
+}
+
+// The SRS review queue — the human-facing side of the dual-run SM-2 system
+// the case study's decision diagram explains. Third phone, shown only in
+// DeviceStrip's widest (>=1200) layout.
+export function ReviewScreen() {
+  const { lang } = useLang();
+  const d = messages[lang].device;
+
+  return (
+    <DeviceFrame>
+      <div className="ds-top">
+        <span className="ds-app">HAJIME</span>
+        <span className="ds-streak">{d.dueBadge}</span>
+      </div>
+      <div className="ds-card">
+        <span className="ds-char">12</span>
+        <span className="ds-roman">{d.dueUnit}</span>
+        <span className="ds-note">{d.dueNote}</span>
+      </div>
+      <div className="ds-progress">
+        <div className="ds-progress-row"><span>{d.reviewProgressLabel}</span><span className="ds-pct">40%</span></div>
+        <div className="ds-progress-bg"><span style={{ width: "40%" }} /></div>
+      </div>
+      <div className="ds-actions">
+        <span className="ds-action">{d.skip}</span>
+        <span className="ds-action ds-action-primary">{d.startReview}</span>
       </div>
     </DeviceFrame>
   );
