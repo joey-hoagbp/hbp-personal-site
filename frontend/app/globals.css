@@ -711,22 +711,54 @@ textarea.field-input { resize: vertical; min-height: 96px; }
    Off-route page: shares tokens, .shell/.g12/.h2/.prose/.meta/.btn/.btn-ghost
    with the rest of the site, adds its own section-scoped classes below. ── */
 
+/* Case-study title: its own display/xl step at 112px (spec §3 line 239),
+   not `.h2` (display/lg, 64px) — `.h2` is shared by every ordinary section
+   heading and must not move. Same family/weight/wdth/letter-spacing as
+   `.hero-name` (display/xl), just a smaller base size for this component.
+   Ramp mirrors `.hero-name`'s own ratios (126/96/72/52 -> ~0.76/0.57/0.41)
+   scaled to a 112px base, landing on clean numbers with an intermediate
+   step at both 1199px and 959px rather than jumping straight to mobile —
+   112 / 84 / 64 / 46. line-height holds at 1.0 (never tighter — the
+   Vietnamese diacritics in `ả ệ ú ỗ` clip into the line above below that)
+   at every step except the smallest, which loosens to 1.02 exactly like
+   `.hero-name` does at its own smallest step, for the same reason. */
+.case-title {
+  font-family: var(--display); font-weight: 800; font-stretch: 108%;
+  font-size: 112px; letter-spacing: -0.038em; line-height: 1.0;
+  color: var(--ink); text-wrap: balance;
+}
+@media (max-width: 1199px) { .case-title { font-size: 84px; } }
+@media (max-width: 959px)  { .case-title { font-size: 64px; } }
+@media (max-width: 599px)  { .case-title { font-size: 46px; letter-spacing: -0.035em; line-height: 1.02; } }
+
+/* Case-study hero layout: title (+ subtitle, which the spec doesn't name
+   separately — it reads as part of the title block) spans 7; the fact
+   table sits beside it at columns 9-12, same row, >=960. The --rule
+   hairline moves with it: a vertical divider between the two columns at
+   >=960 (the same "vertical desktop / horizontal mobile" divider idiom
+   ProofRow already uses for its 3-up items), becoming a horizontal rule
+   above the facts once they stack full-width below 960. */
 .case-hero { padding-top: 158px; padding-bottom: var(--sp-11); }
-.case-hero-main { grid-column: span 8; display: flex; flex-direction: column; gap: 22px; }
-.case-hero-subtitle { grid-column: span 8; font-size: 18px; padding-top: 4px; }
+.case-hero-main { grid-column: span 7; display: flex; flex-direction: column; gap: 22px; }
+.case-hero-subtitle { font-size: 18px; padding-top: 4px; }
 .case-hero-facts {
-  grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 34px;
-  padding-top: 42px; margin-top: 42px; border-top: var(--hairline) solid var(--rule);
+  grid-column: 9 / span 4; display: flex; flex-direction: column; gap: 24px;
+  border-left: var(--hairline) solid var(--rule); padding-left: 28px;
 }
 .case-fact { display: flex; flex-direction: column; gap: 8px; }
 .case-fact-value { font-family: var(--display); font-size: 17px; font-weight: 600; color: var(--ink); }
 @media (max-width: 959px) {
   .case-hero { padding-top: 116px; }
-  .case-hero-main, .case-hero-subtitle { grid-column: span 6; }
+  .case-hero-main { grid-column: span 6; }
+  .case-hero-facts {
+    grid-column: span 6; flex-direction: row; flex-wrap: wrap; gap: 24px 34px;
+    border-left: none; padding-left: 0;
+    padding-top: 32px; margin-top: 32px; border-top: var(--hairline) solid var(--rule);
+  }
 }
 @media (max-width: 599px) {
-  .case-hero-main, .case-hero-subtitle { grid-column: span 1; }
-  .case-hero-facts { gap: 22px; padding-top: 28px; margin-top: 28px; }
+  .case-hero-main { grid-column: span 1; }
+  .case-hero-facts { grid-column: span 1; flex-direction: column; gap: 22px; padding-top: 28px; margin-top: 28px; }
 }
 
 /* Device strip — spec §3: three phones >=1200 (outer two offset +44px),

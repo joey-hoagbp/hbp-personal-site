@@ -13,9 +13,9 @@ export default function CaseHero() {
       <div className="g12">
         <div className="case-hero-main">
           <p className="eyebrow"><SealMark size={12} decorative /> {t.label}</p>
-          <h1 className="h2">{t.title}</h1>
+          <h1 className="case-title">{t.title}</h1>
+          <p className="prose case-hero-subtitle">{t.subtitle}</p>
         </div>
-        <p className="prose case-hero-subtitle">{t.subtitle}</p>
         <div className="case-hero-facts">
           {t.facts.map((fact) => (
             <div className="case-fact" key={fact.label}>
