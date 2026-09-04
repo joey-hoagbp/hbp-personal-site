@@ -64,7 +64,7 @@ two blocks only redefine.
   --ink:               #E8E4DC;   /* headlines, primary text */
   --ink-2:             #C7CDD6;   /* lede, list items, secondary UI */
   --muted:             #9AA2AE;   /* body prose */
-  --faint:             #69727F;   /* metadata */
+  --faint:             #767F8D;   /* metadata — 4.74:1 on --ground */
   --placeholder:       #4E5765;   /* empty form fields */
 
   /* ── controls ────────────────────────────── */
@@ -136,7 +136,7 @@ two blocks only redefine.
     --ink:               #14181E;
     --ink-2:             #39424F;
     --muted:             #5C6675;
-    --faint:             #8D96A3;
+    --faint:             #6B7484;   /* 4.71:1 on --ground */
     --placeholder:       #A8B0BA;
 
     --control-border:        #D5DAE0;

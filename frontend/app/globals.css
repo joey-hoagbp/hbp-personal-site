@@ -12,7 +12,7 @@
   --ink:               #E8E4DC;   /* headlines, primary text */
   --ink-2:             #C7CDD6;   /* lede, list items, secondary UI */
   --muted:             #9AA2AE;   /* body prose */
-  --faint:             #69727F;   /* metadata */
+  --faint:             #767F8D;   /* metadata — 4.74:1 on --ground */
   --placeholder:       #4E5765;   /* empty form fields */
 
   /* ── controls ────────────────────────────── */
@@ -85,7 +85,7 @@
     --ink:               #14181E;
     --ink-2:             #39424F;
     --muted:             #5C6675;
-    --faint:             #8D96A3;
+    --faint:             #6B7484;   /* 4.71:1 on --ground */
     --placeholder:       #A8B0BA;
 
     --control-border:        #D5DAE0;
@@ -116,7 +116,7 @@
   --ink:               #14181E;
   --ink-2:             #39424F;
   --muted:             #5C6675;
-  --faint:             #8D96A3;
+  --faint:             #6B7484;   /* 4.71:1 on --ground */
   --placeholder:       #A8B0BA;
 
   --control-border:        #D5DAE0;
@@ -484,7 +484,11 @@ textarea.field-input { resize: vertical; min-height: 96px; }
 /* Submit spinner (Contact) */
 .btn-spinner {
   width: 14px; height: 14px; border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.4); border-top-color: #fff;
+  /* Inherits .btn's own text colour (--on-seal — near-black on dark,
+     white on light) via currentColor, so the spinner never clashes with
+     the label ink it sits next to in either theme. */
+  border: 2px solid color-mix(in srgb, currentColor 40%, transparent);
+  border-top-color: currentColor;
   animation: spin 0.7s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
