@@ -231,31 +231,13 @@ a.proof-value:hover { color: var(--seal-lit); }
 
 /* ── SKILLS ─────────────────────────────────────────── */
 .skills { padding-block: var(--section-pad); }
-.tier-row { align-items: baseline; }
-.tier-1 { padding: 34px 0; }
-.tier-2 { padding: 30px 0; }
-.tier-3 { padding: 26px 0; }
-.tier-label { grid-column: span 3; }
-.tier-1 .tier-label { color: var(--seal-lit); }
-.tier-items { grid-column: span 9; display: flex; flex-wrap: wrap; }
-.tier-1 .tier-items {
-  gap: 14px 34px;
+.skill-list {
+  display: flex; flex-wrap: wrap; gap: 14px 34px; padding: 34px 0;
   font-family: var(--display); font-weight: 700; font-stretch: 106%;
   font-size: 38px; letter-spacing: -0.028em; line-height: 1.1; color: var(--ink);
 }
-.tier-2 .tier-items { gap: 11px 26px; font-size: 21px; font-weight: 500; color: var(--ink-2); }
-.tier-3 .tier-items { gap: 9px 22px; font-size: 15px; color: var(--faint); }
-@media (max-width: 959px) {
-  .tier-label, .tier-items { grid-column: span 6; }
-  .tier-1 .tier-items { font-size: 32px; }
-}
-@media (max-width: 599px) {
-  .tier-label, .tier-items { grid-column: span 1; }
-  .tier-row { row-gap: 14px; }
-  .tier-1 .tier-items { font-size: 28px; gap: 8px 22px; }
-  .tier-2 .tier-items { font-size: 17px; }
-  .tier-3 .tier-items { font-size: 14px; }
-}
+@media (max-width: 959px) { .skill-list { font-size: 32px; } }
+@media (max-width: 599px) { .skill-list { font-size: 28px; gap: 8px 22px; } }
 
 /* ── SECTION HEADER ─────────────────────────────────── */
 .section-header { align-items: end; margin-bottom: 60px; }

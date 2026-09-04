@@ -25,14 +25,17 @@ export const CURRENTLY: { text: Localized }[] = [
   { text: { vi: "nghe lo-fi khi code", en: "coding to lo-fi" } },
 ];
 
-// Ranked skill tiers for the Skills section. This is an editorial ranking
-// (what I'm paid to work in > fluent in > have touched), not the backend's
-// flat category grouping (Frontend/Backend/Tools) in Profile.techStacks —
-// deliberately separate from that contract.
-export const SKILL_TIERS: { key: "tier1" | "tier2" | "tier3"; items: string[] }[] = [
-  { key: "tier1", items: ["Java", "Spring Boot", "C# .NET", "MongoDB"] },
-  { key: "tier2", items: ["TypeScript", "React", "Next.js", "REST API", "Docker", "Git"] },
-  { key: "tier3", items: ["React Native", "Expo", "Tailwind", "Protobuf gRPC", "PHP Laravel", "Figma"] },
+// The Skills section: one flat, unranked list rendered at a single weight.
+// Separate from the backend's category grouping (Frontend/Backend/Tools) in
+// Profile.techStacks — deliberately not tied to that contract.
+export const SKILLS: string[] = [
+  "Java Spring Boot",
+  "Protobuf gRPC",
+  "Microservices",
+  "MongoDB",
+  "ReactJS",
+  "NextJS",
+  "REST API",
 ];
 
 /**

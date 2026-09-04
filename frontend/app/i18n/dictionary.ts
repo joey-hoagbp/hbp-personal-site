@@ -34,9 +34,6 @@ export type Messages = {
     label: string;
     title: string;
     sub: string;
-    tier1: string;
-    tier2: string;
-    tier3: string;
   };
   work: { title: string };
   portfolio: {
@@ -154,11 +151,8 @@ export const messages: Record<Lang, Messages> = {
     currently: { prefix: "hiện tại" },
     skills: {
       label: "Kỹ năng · Stack",
-      title: "Không phải danh sách bằng nhau.",
-      sub: "Xếp theo thứ tự thật: cái được trả tiền để làm, cái dùng thành thạo, cái đã chạm tới.",
-      tier1: "Được trả tiền để làm",
-      tier2: "Thành thạo",
-      tier3: "Đã dùng qua",
+      title: "Stack tôi làm việc mỗi ngày.",
+      sub: "Backend là nghề chính; phần còn lại là cách sản phẩm đến tay người dùng.",
     },
     work: { title: "Một sản phẩm, đã lên kệ." },
     portfolio: {
@@ -325,11 +319,8 @@ export const messages: Record<Lang, Messages> = {
     currently: { prefix: "currently" },
     skills: {
       label: "Skills · Stack",
-      title: "Not a flat list.",
-      sub: "Ranked honestly: what I'm paid to work in, what I'm fluent in, what I've touched.",
-      tier1: "Paid to work in",
-      tier2: "Fluent",
-      tier3: "Have used",
+      title: "The stack I work in.",
+      sub: "Backend is the day job; the rest is how the product reaches people.",
     },
     work: { title: "One product, actually shipped." },
     portfolio: {
