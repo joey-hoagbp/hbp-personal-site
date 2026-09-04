@@ -15,7 +15,15 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#f4f6f3",
+  // These two literals are the one sanctioned exception to "no hex outside
+  // globals.css" — the viewport export is metadata, not CSS, and can't read
+  // a custom property. They must be kept in sync with --ground in
+  // globals.css: dark's :root (#0D1015) and light's :root[data-theme="light"]
+  // (#FFFFFF).
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#0D1015" },
+    { media: "(prefers-color-scheme: light)", color: "#FFFFFF" },
+  ],
 };
 
 export default function RootLayout({
@@ -36,10 +44,6 @@ export default function RootLayout({
             to emit this, so it's preloaded explicitly here. Ruling F6. */}
         <link rel="preload" as="image" href="/phuc-reeves.webp" fetchPriority="high" />
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
-          rel="stylesheet"
-        />
         <link
           href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..112,400..800&family=JetBrains+Mono:wght@400;500&family=Literata:opsz,wght@7..72,400&display=swap"
           rel="stylesheet"

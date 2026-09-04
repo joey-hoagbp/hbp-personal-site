@@ -13,14 +13,16 @@ Layout: `frontend/` (Next.js) · `backend/` (Spring Boot) · `docker-compose.yml
 - **Execution: go subagent-driven by default.** When an implementation plan is ready, start subagent-driven execution (one fresh subagent per task, review between tasks) — do **not** ask the user to choose between subagent-driven and inline execution.
 - Plans and specs live under `docs/superpowers/plans/` and `docs/superpowers/specs/` (`YYYY-MM-DD-<topic>.md`).
 - **Work directly on `main`** — do not create feature branches. Commit straight onto `main` and `git push origin main` when done (run the lint + build gate first).
-- End commit messages with: `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>`.
+- End commit messages with: `Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>`.
 
 ## Frontend (`frontend/`)
 
 Next.js 14 App Router, TypeScript, React 18. The whole page is assembled in `app/page.tsx` from `app/components/`.
 
-- **Content & i18n:** language-neutral data (links, tech names, project metadata) is in `app/data.ts`; all translatable copy is in `app/i18n/dictionary.ts` keyed by locale (`vi`/`en`). Language state is a client Context in `app/i18n/LanguageProvider.tsx`; components read it via `useLang()`. Default language is **Vietnamese**, persisted to `localStorage` (`"lang"`); the switcher is a globe dropdown in `Nav.tsx`.
-- **Themes:** three CSS themes (`minimal`/`glow`/`editorial`) exist; **`editorial` with accent `#e85d3d`** is the shipped default, set via `data-theme` on `<html>`.
+- **Content & i18n:** language-neutral data (links, tech names, project metadata) is in `app/data.ts`; all translatable copy is in `app/i18n/dictionary.ts` keyed by locale (`vi`/`en`). Language state is a client Context in `app/i18n/LanguageProvider.tsx`; components read it via `useLang()`. Default language is **Vietnamese**, persisted to `localStorage` (`"lang"`); the switcher is `LangToggle.tsx`, a two-pill VI/EN control rendered by `SiteNav.tsx` (`Nav.tsx` no longer exists). It stays visible in the nav bar at every width, and a second copy renders at the foot of `MobileNavSheet.tsx` for reachability while the sheet is open below 600px.
+- **Themes:** two — dark (default) and light — switched by `data-theme` on `<html>`, stamped by a blocking head script before first paint and owned by `ThemeProvider`. Accent is the vermilion seal ink `#C8402C` (`#BC4029` on light). Design system: `docs/superpowers/specs/2026-09-02-an-redesign-spec.md`.
+- Routes: `/` and `/work/hajime`, both pre-rendered by `output: "export"`.
+- There is no motion library. One CSS load sequence in the hero; nothing animates on scroll.
 
 ```bash
 cd frontend

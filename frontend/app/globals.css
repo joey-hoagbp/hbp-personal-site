@@ -145,33 +145,6 @@ body {
 }
 :focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
 
-/* ============================================================
-   Personal site — Fresh mint + lime redesign.
-   Single committed theme: no [data-theme] switching.
-   ============================================================ */
-
-/* ── DESIGN TOKENS ─────────────────────────────────── */
-:root {
-  --legacy-bg:       #f4f6f3;
-  --legacy-surface:  #ffffff;
-  --legacy-ink:      #12140f;
-  --legacy-muted:    #5a6157;
-  --legacy-faint:    #8a9184;
-  --legacy-accent:   #0a8f5b;
-  --legacy-accent2:  #16c47f;
-  --legacy-pop:      #d8f5c0;
-  --legacy-pop-ink:  #eaffb0;
-  --legacy-line:     #dfe4dc;
-  --legacy-chipbg:   #eaf0e8;
-  --legacy-border:   var(--legacy-line);
-  --legacy-font:     'Space Grotesk', system-ui, sans-serif;
-  --legacy-mono:     'Space Mono', monospace;
-  --legacy-max-w:    1200px;
-  --legacy-gap:      120px;
-  --legacy-r:        14px;
-  --legacy-grad:     linear-gradient(100deg, var(--legacy-accent), var(--legacy-accent2));
-}
-
 /* ── HERO ───────────────────────────────────────────── */
 .hero { padding-top: 104px; position: relative; }
 .hero-grid-rules {
@@ -240,19 +213,6 @@ a.proof-value:hover { color: var(--seal-lit); }
 }
 
 /* ── BUTTONS ────────────────────────────────────────── */
-.btn-primary {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--legacy-ink); color: var(--legacy-pop-ink);
-  padding: 12px 24px; border-radius: var(--legacy-r);
-  font-size: 14px; font-weight: 600; text-decoration: none;
-  border: none; cursor: pointer; font-family: var(--legacy-font);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px color-mix(in srgb, var(--legacy-ink) 22%, transparent);
-}
-.btn-primary:disabled { opacity: 0.55; cursor: default; transform: none; box-shadow: none; }
 .btn-full { width: 100%; justify-content: center; }
 
 /* ── CURRENTLY ──────────────────────────────────────── */
@@ -326,6 +286,19 @@ a.proof-value:hover { color: var(--seal-lit); }
 .work-stage {
   grid-column: 7 / span 6; background: var(--surface); height: 600px;
   display: flex; align-items: center; justify-content: center; gap: 26px; overflow: hidden;
+}
+/* >=960 only — device-offset (the second phone) is hidden below 960, so this
+   is the range where both phones show. `align-items: center` surfaces only
+   HALF of device-offset's asymmetric margin-top as visible spacing between
+   the two phones (the same mechanism documented at .device-strip-row
+   further down): a 56px margin-top measures as a 28px delta, not 56.
+   `flex-start` fixes the delta but anchors the pair to the stage's top
+   edge; the 16px padding-top re-centers the resulting 568px-tall two-phone
+   group in the 600px stage — (600 - (512 + 56)) / 2 = 16 — without
+   touching device-offset's own 56px, which DeviceStrip's case-study
+   override depends on staying exactly 56. */
+@media (min-width: 960px) {
+  .work-stage { align-items: flex-start; padding-top: 16px; }
 }
 @media (max-width: 959px) {
   .work-copy { grid-column: span 6; order: 2; }
@@ -517,17 +490,13 @@ textarea.field-input { resize: vertical; min-height: 96px; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 @media (prefers-reduced-motion: reduce) {
-  .logo-dot, .btn-spinner { animation: none; }
+  .btn-spinner { animation: none; }
 }
 
 /* ── SCROLLBAR ──────────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--legacy-faint); border-radius: 2px; }
-
-@media (max-width: 600px) {
-  :root { --legacy-gap: 80px; }
-}
+::-webkit-scrollbar-thumb { background: var(--faint); border-radius: 2px; }
 
 /* ── THEME TOGGLE ───────────────────────────────────── */
 .theme-toggle {

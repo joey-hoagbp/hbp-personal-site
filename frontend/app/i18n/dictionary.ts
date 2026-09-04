@@ -1,7 +1,9 @@
 // ============================================================
 //  All translatable copy, keyed by locale.
-//  Language-neutral data (URLs, tech names, chips) stays in data.ts.
-//  Dynamic portfolio data (skills, projects, cv entries) comes from the API.
+//  Language-neutral data (URLs, tech names, chips, skills, projects) stays in data.ts.
+//  Only Experience's timeline (work history + education) is fetched from the
+//  backend profile API (see lib/api.ts), with data.ts's DEFAULT_PROFILE as
+//  the offline fallback.
 // ============================================================
 
 export type Lang = "vi" | "en";
@@ -18,8 +20,6 @@ export type Messages = {
     viewWork: string;
     getInTouch: string;
     avatar: {
-      name: string;
-      role: string;
       location: string;
       alt: string;
     };
@@ -60,7 +60,6 @@ export type Messages = {
     title: string;
     sub: string;
     education: string;
-    downloadCv: string;
   };
   contact: {
     label: string;
@@ -143,8 +142,6 @@ export const messages: Record<Lang, Messages> = {
       viewWork: "Xem sản phẩm",
       getInTouch: "Liên hệ ngay",
       avatar: {
-        name: "Hoàng Bảo Phúc",
-        role: "Kỹ sư phần mềm",
         location: "Hà Nội, Việt Nam",
         alt: "Ảnh của Hoàng Bảo Phúc",
       },
@@ -194,7 +191,6 @@ export const messages: Record<Lang, Messages> = {
       title: "Ba công ty, trước khi ra trường.",
       sub: "Bắt đầu đi làm từ năm hai. Backend ở cả ba nơi, hai ngôn ngữ, một lần rẽ qua frontend.",
       education: "Học vấn",
-      downloadCv: "Tải CV (PDF)",
     },
     contact: {
       label: "Liên Hệ",
@@ -317,8 +313,6 @@ export const messages: Record<Lang, Messages> = {
       viewWork: "View work",
       getInTouch: "Get in touch",
       avatar: {
-        name: "Hoàng Bảo Phúc",
-        role: "Software Engineer",
         location: "Hà Nội, Vietnam",
         alt: "Photo of Hoàng Bảo Phúc",
       },
@@ -368,7 +362,6 @@ export const messages: Record<Lang, Messages> = {
       title: "Three companies, before graduating.",
       sub: "Started working in second year. Backend at all three, two languages, one detour through frontend.",
       education: "Education",
-      downloadCv: "Download CV (PDF)",
     },
     contact: {
       label: "Contact",
