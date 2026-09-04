@@ -15,12 +15,13 @@ const LINKS = [
   { id: "experience", key: "experience" },
 ] as const;
 
-export default function SiteNav() {
+export default function SiteNav({ home = true }: { home?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
   const [sheetOpen, setSheetOpen] = useState(false);
   const { lang } = useLang();
   const t = messages[lang].nav;
+  const hrefFor = (id: string) => (home ? `#${id}` : `/#${id}`);
 
   // Stable identity: MobileNavSheet's focus-trap effect depends on this. An
   // inline arrow here would change identity on every SiteNav re-render (e.g.
@@ -37,13 +38,15 @@ export default function SiteNav() {
   }, []);
 
   useEffect(() => {
-    // Observe the enclosing <section>, not the id'd element itself: a
-    // converted section's id sits on SectionHeader's inner div (correct for
-    // the #anchor jump landing on the title), which is short next to a
+    // Observe the enclosing <section>, not the id'd element itself: every
+    // observed section's id now sits on SectionHeader's inner div (correct
+    // for the #anchor jump landing on the title), which is short next to a
     // 600px+ device stage — it exits the mid-viewport band while the section
     // is still on screen, dropping the nav highlight early. closest("section")
-    // returns the element itself when the id is already on a <section>
-    // (Skills, Contact), so unconverted sections are unaffected.
+    // walks up to the enclosing <section> in every case (Skills, Portfolio,
+    // Experience and Contact all route their id through SectionHeader now),
+    // and is a harmless no-op if a future section ever puts its id directly
+    // on the <section> element instead.
     const idByElement = new Map<Element, string>();
     SECTION_IDS.forEach((id) => {
       const el = document.getElementById(id);
@@ -71,13 +74,13 @@ export default function SiteNav() {
     <>
       <nav className={scrolled ? "nav nav-scrolled" : "nav"}>
         <div className="nav-inner shell">
-          <a href="#hero" className="nav-logo" aria-label="phúc"><Wordmark size={24} /></a>
+          <a href={home ? "#hero" : "/#hero"} className="nav-logo" aria-label="phúc"><Wordmark size={24} /></a>
 
           <div className="nav-right">
             <ul className="nav-links">
               {LINKS.map((l) => (
                 <li key={l.id}>
-                  <a href={`#${l.id}`} className={active === l.id ? "nav-link nav-link-active" : "nav-link"}>
+                  <a href={hrefFor(l.id)} className={active === l.id ? "nav-link nav-link-active" : "nav-link"}>
                     {t[l.key]}
                   </a>
                 </li>
@@ -86,7 +89,7 @@ export default function SiteNav() {
             <span className="nav-divider" aria-hidden="true" />
             <LangToggle />
             <ThemeToggle />
-            <a href="#contact" className="btn nav-cta">{t.contact}</a>
+            <a href={hrefFor("contact")} className="btn nav-cta">{t.contact}</a>
             <button
               type="button"
               className="nav-menu"
@@ -101,7 +104,7 @@ export default function SiteNav() {
           </div>
         </div>
       </nav>
-      <MobileNavSheet open={sheetOpen} onClose={closeSheet} />
+      <MobileNavSheet open={sheetOpen} onClose={closeSheet} home={home} />
     </>
   );
 }

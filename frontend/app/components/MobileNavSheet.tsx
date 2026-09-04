@@ -13,10 +13,13 @@ const LINKS = [
   { id: "experience", key: "experience" },
 ] as const;
 
-export default function MobileNavSheet({ open, onClose }: { open: boolean; onClose: () => void }) {
+export default function MobileNavSheet({
+  open, onClose, home = true,
+}: { open: boolean; onClose: () => void; home?: boolean }) {
   const sheetRef = useRef<HTMLDivElement>(null);
   const { lang } = useLang();
   const t = messages[lang].nav;
+  const hrefFor = (id: string) => (home ? `#${id}` : `/#${id}`);
 
   useEffect(() => {
     if (!open) return;
@@ -72,11 +75,11 @@ export default function MobileNavSheet({ open, onClose }: { open: boolean; onClo
         </button>
       </div>
       {LINKS.map((l) => (
-        <a key={l.id} href={`#${l.id}`} className="sheet-link" onClick={onClose}>
+        <a key={l.id} href={hrefFor(l.id)} className="sheet-link" onClick={onClose}>
           {t[l.key]}
         </a>
       ))}
-      <a href="#contact" className="btn sheet-cta" onClick={onClose}>{t.contact}</a>
+      <a href={hrefFor("contact")} className="btn sheet-cta" onClick={onClose}>{t.contact}</a>
       <div className="sheet-foot">
         <LangToggle layout="sheet" />
         <ThemeToggle />

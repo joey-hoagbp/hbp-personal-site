@@ -706,3 +706,115 @@ textarea.field-input { resize: vertical; min-height: 96px; }
   }
   .nav-menu svg { width: 19px; height: 19px; }
 }
+
+/* ── CASE STUDY (Hajime, /work/hajime) ──────────────────
+   Off-route page: shares tokens, .shell/.g12/.h2/.prose/.meta/.btn/.btn-ghost
+   with the rest of the site, adds its own section-scoped classes below. ── */
+
+.case-hero { padding-top: 158px; padding-bottom: var(--sp-11); }
+.case-hero-main { grid-column: span 8; display: flex; flex-direction: column; gap: 22px; }
+.case-hero-subtitle { grid-column: span 8; font-size: 18px; padding-top: 4px; }
+.case-hero-facts {
+  grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 34px;
+  padding-top: 42px; margin-top: 42px; border-top: var(--hairline) solid var(--rule);
+}
+.case-fact { display: flex; flex-direction: column; gap: 8px; }
+.case-fact-value { font-family: var(--display); font-size: 17px; font-weight: 600; color: var(--ink); }
+@media (max-width: 959px) {
+  .case-hero { padding-top: 116px; }
+  .case-hero-main, .case-hero-subtitle { grid-column: span 6; }
+}
+@media (max-width: 599px) {
+  .case-hero-main, .case-hero-subtitle { grid-column: span 1; }
+  .case-hero-facts { gap: 22px; padding-top: 28px; margin-top: 28px; }
+}
+
+/* Device strip */
+.device-strip { padding-block: var(--section-pad); background: var(--surface); overflow-x: auto; }
+.device-strip-row { display: flex; align-items: flex-end; justify-content: center; gap: 40px; padding-inline: var(--page-margin); }
+@media (max-width: 599px) { .device-strip-row { justify-content: flex-start; gap: 24px; } }
+
+/* Shared two-column layout: label+title on the left, prose on the right —
+   used by the problem block and the decision block's intro copy. */
+.case-section { padding-block: var(--section-pad); }
+.case-section-main, .decision-main { grid-column: span 7; display: flex; flex-direction: column; gap: 22px; }
+.case-section-body, .decision-body { grid-column: 9 / span 4; display: flex; flex-direction: column; gap: 18px; }
+@media (max-width: 959px) {
+  .case-section-main, .case-section-body,
+  .decision-main, .decision-body { grid-column: span 6; }
+}
+@media (max-width: 599px) {
+  .case-section-main, .case-section-body,
+  .decision-main, .decision-body { grid-column: span 1; }
+}
+
+/* Stack strip */
+.case-stack { padding-block: var(--section-pad); display: flex; flex-direction: column; gap: 26px; }
+.case-stack-list {
+  list-style: none; display: flex; flex-wrap: wrap; gap: 13px 30px;
+  font-family: var(--mono); font-size: 13.5px; letter-spacing: 0.02em; color: var(--ink-2);
+}
+
+/* Decision (diagram section) */
+.decision { padding-block: var(--section-pad); }
+.decision-diagram-wrap { grid-column: 1 / -1; padding-top: 52px; }
+.diagram { border: var(--hairline) solid var(--rule); padding: 52px 48px; }
+.node {
+  border: var(--hairline) solid var(--control-border); padding: 16px 18px;
+  display: flex; flex-direction: column; gap: 6px; background: var(--ground);
+}
+.node-seal { border-color: var(--seal); }
+.node b { font-family: var(--display); font-weight: 600; font-size: 15px; color: var(--ink); letter-spacing: -0.01em; }
+.node span { font-family: var(--mono); font-size: 10.5px; color: var(--faint); line-height: 1.6; }
+.diagram-split { display: grid; grid-template-columns: 190px 46px 1fr; align-items: center; padding-top: 26px; }
+.diagram-lanes { display: flex; flex-direction: column; gap: 30px; }
+.diagram-lane { display: grid; grid-template-columns: 1fr 46px 1fr; align-items: center; }
+.diagram-shared {
+  display: flex; align-items: center; gap: 20px;
+  padding-top: 38px; margin-top: 34px; border-top: 1px dashed var(--control-border);
+}
+/* The arrow's grid track gives it its 46x16 box at desktop (grid items
+   stretch to their track by default); once the mobile rule below drops it
+   out of that 46px column, an <svg> with only a viewBox and no width/height
+   has no intrinsic size left to fall back on and collapses to 0x0. Size it
+   explicitly so it stays visible in both layouts. */
+.diagram-arrow svg { display: block; width: 46px; height: 16px; }
+@media (max-width: 959px) {
+  .diagram { padding: 32px 24px; }
+  .diagram-split, .diagram-lane { grid-template-columns: 1fr; row-gap: 14px; }
+  .diagram-arrow { transform: rotate(90deg); justify-self: center; }
+}
+
+/* Status columns */
+.status { padding-block: var(--section-pad); background: var(--surface); }
+.status-grid { grid-column: 1 / -1; padding-top: 48px; }
+.status-col { grid-column: span 6; display: flex; flex-direction: column; }
+.status-col + .status-col { grid-column: 7 / span 6; }
+.status-item {
+  display: flex; gap: 14px; padding: 15px 0;
+  border-top: var(--hairline) solid var(--rule); font-size: 15.5px;
+}
+.status-item:last-child { border-bottom: var(--hairline) solid var(--rule); }
+.status-shipped .status-item { color: var(--ink-2); }
+.status-notyet .status-item { color: var(--faint); }
+.status-mark { flex: none; margin-top: 6px; width: 11px; }
+.status-notyet .status-mark { height: 1px; background: var(--control-border); margin-top: 12px; }
+@media (max-width: 959px) { .status-col, .status-col + .status-col { grid-column: span 6; } }
+@media (max-width: 599px) {
+  .status-col, .status-col + .status-col { grid-column: span 1; }
+  .status-grid { padding-top: 28px; }
+}
+
+/* Final CTA */
+.case-cta { padding-block: var(--section-pad); background: var(--surface-alt); }
+.case-cta-inner {
+  grid-column: 3 / span 8; display: flex; flex-direction: column; align-items: center;
+  gap: 18px; text-align: center;
+}
+.case-cta .h2, .case-cta .eyebrow { justify-content: center; }
+.case-cta-actions { display: flex; align-items: center; gap: 14px; padding-top: 10px; }
+@media (max-width: 959px) { .case-cta-inner { grid-column: span 6; } }
+@media (max-width: 599px) {
+  .case-cta-inner { grid-column: span 1; }
+  .case-cta-actions { flex-direction: column; align-items: stretch; width: 100%; }
+}

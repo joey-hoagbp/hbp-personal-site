@@ -141,6 +141,21 @@ export const DEFAULT_PROFILE: Profile = {
   ],
 };
 
+// Tech names for the Hajime case study's "stack" strip (/work/hajime).
+// Language-neutral — same list in both locales, so it lives here, not in
+// dictionary.ts.
+export const HAJIME_CASE_STACK: string[] = [
+  "React Native",
+  "Expo",
+  "Java",
+  "Spring Boot",
+  "MongoDB",
+  "Edge TTS",
+  "KanjiVG",
+  "Google Sign-In",
+  "JWT",
+];
+
 /**
  * Content-in-code project list rendered by the Work section — the owner adds
  * projects here (zero backend changes needed). Distinct from
