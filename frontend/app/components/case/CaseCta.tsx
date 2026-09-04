@@ -8,7 +8,7 @@ import SealMark from "../SealMark";
 export default function CaseCta() {
   const { lang } = useLang();
   const t = messages[lang].caseHajime.cta;
-  const apkUrl = PROJECTS[0]?.apkUrl;
+  const apkUrl = PROJECTS.find((p) => p.id === "hajime")?.apkUrl;
 
   return (
     <section className="case-cta shell">
