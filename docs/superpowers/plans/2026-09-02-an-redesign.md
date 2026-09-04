@@ -99,7 +99,7 @@ Defines the whole visual vocabulary and gets dark/light working, without changin
 - Produces: `ThemeProvider({ children }: { children: ReactNode })`; `useTheme(): { theme: "dark" | "light"; toggle: () => void }`; `ThemeToggle()` — no props.
 - Produces: every CSS custom property named in spec §1. All later tasks consume these.
 
-- [ ] **Step 1: Rename every legacy token so the new block cannot collide**
+- [x] **Step 1: Rename every legacy token so the new block cannot collide**
 
 Five of the old names (`--surface`, `--ink`, `--muted`, `--faint`, `--mono`) collide with new ones. Rename all eighteen at once:
 
@@ -111,7 +111,7 @@ grep -c -- '--legacy-' app/globals.css
 
 Expected: a count above 200. The alternation is ordered longest-first so `--accent2` is not eaten by `--accent`, and `\b` stops `--r` from matching `--rule`.
 
-- [ ] **Step 2: Verify the rename left no bare legacy token behind**
+- [x] **Step 2: Verify the rename left no bare legacy token behind**
 
 ```bash
 grep -nE '\-\-(bg|surface|ink|muted|faint|accent|pop|line|chipbg|border|font|mono|max-w|gap|grad)\b' app/globals.css | grep -v -- '--legacy-' | head
@@ -119,7 +119,7 @@ grep -nE '\-\-(bg|surface|ink|muted|faint|accent|pop|line|chipbg|border|font|mon
 
 Expected: **no output.** Any line printed is a token the sed missed — fix it by hand before continuing.
 
-- [ ] **Step 3: Prepend the new token block**
+- [x] **Step 3: Prepend the new token block**
 
 Insert at the very top of `app/globals.css`, above the existing header comment. Copy the full block from spec §1 verbatim — all three theme blocks. The `:root[data-theme="light"]` block repeats the same declarations as the media block; write them out, do not try to share them with a selector list (the media query must stay conditional).
 
@@ -141,7 +141,7 @@ body {
 
 Delete the old `body { ... }` rule and the old reset that used `--legacy-bg` / `--legacy-ink` / `--legacy-font`. **The page will now render dark with mint-styled sections on it. That is the expected intermediate state for Tasks 1–8.**
 
-- [ ] **Step 4: Add the font stylesheet beside the existing one**
+- [x] **Step 4: Add the font stylesheet beside the existing one**
 
 In `app/layout.tsx`, keep the Space Grotesk link (legacy sections still need it) and add below it:
 
@@ -154,7 +154,7 @@ In `app/layout.tsx`, keep the Space Grotesk link (legacy sections still need it)
 
 Task 11 removes the old link.
 
-- [ ] **Step 5: Add the no-FOUC theme script**
+- [x] **Step 5: Add the no-FOUC theme script**
 
 In `app/layout.tsx`, inside `<head>`, **before** both stylesheet links:
 
@@ -168,7 +168,7 @@ const THEME_INIT = `(function(){try{var t=localStorage.getItem("theme");if(t!=="
 
 This is blocking on purpose — it must run before first paint or the dark page flashes light. Because it always stamps `data-theme`, the `prefers-color-scheme` block in the token CSS only governs the JavaScript-disabled case; both are required.
 
-- [ ] **Step 6: Write `ThemeProvider.tsx`**
+- [x] **Step 6: Write `ThemeProvider.tsx`**
 
 ```tsx
 "use client";
@@ -226,7 +226,7 @@ export function useTheme(): ThemeContextValue {
 }
 ```
 
-- [ ] **Step 7: Write `ThemeToggle.tsx`**
+- [x] **Step 7: Write `ThemeToggle.tsx`**
 
 ```tsx
 "use client";
@@ -275,7 +275,7 @@ CSS in `globals.css`:
 
 The label is Vietnamese because VI is the default locale; Task 3 moves it into `dictionary.ts` when the nav is rebuilt.
 
-- [ ] **Step 8: Wrap the tree and mount the toggle**
+- [x] **Step 8: Wrap the tree and mount the toggle**
 
 In `app/layout.tsx`, wrap `LanguageProvider` in `ThemeProvider`:
 
@@ -287,7 +287,7 @@ In `app/layout.tsx`, wrap `LanguageProvider` in `ThemeProvider`:
 
 Temporarily render `<ThemeToggle />` in `app/components/Nav.tsx`, inside `.nav-right`, immediately before the `.lang-switch` div, so the toggle is reachable this task. Task 3 replaces `Nav.tsx` wholesale.
 
-- [ ] **Step 9: Verify the spec correction is present**
+- [x] **Step 9: Verify the spec correction is present**
 
 The spec was amended when this plan was written. Confirm it, so a stale checkout cannot send you off fixing something that already works:
 
@@ -297,7 +297,7 @@ grep -n "Already correct" docs/superpowers/specs/2026-09-02-an-redesign-spec.md
 
 Expected: one hit, on the §7 "Language toggle" row. If there is no hit, you are on an older commit of the spec — do **not** touch `LanguageProvider.tsx`; re-read the "Correction to the spec" section at the top of this plan.
 
-- [ ] **Step 10: Run the gate**
+- [x] **Step 10: Run the gate**
 
 ```bash
 cd frontend && npm run lint && npm run build
@@ -305,7 +305,7 @@ cd frontend && npm run lint && npm run build
 
 Expected: both exit 0.
 
-- [ ] **Step 11: Browser assertions**
+- [x] **Step 11: Browser assertions**
 
 Start `npm run dev`, open `:3000`, and in the console:
 
@@ -328,7 +328,7 @@ Expected: the page paints light immediately — **no dark flash**. Toggle back t
 Set the OS to light, clear `localStorage.theme`, reload.
 Expected: light. Set the OS to dark, reload. Expected: dark.
 
-- [ ] **Step 12: Commit**
+- [x] **Step 12: Commit**
 
 ```bash
 git add frontend/app/globals.css frontend/app/layout.tsx \
@@ -369,7 +369,7 @@ Every later task consumes these. Small, self-contained, and the favicon comes wi
 - Produces: `SealMark({ size?: number; counter?: string; frame?: boolean; decorative?: boolean })` — `size` defaults to 32, `counter` defaults to `"var(--ground)"`, `frame` defaults to `size >= 48`, `decorative` defaults to `false`.
 - Produces: `Wordmark({ size?: number })` — `size` defaults to 24.
 
-- [ ] **Step 1: Write `SealMark.tsx`**
+- [x] **Step 1: Write `SealMark.tsx`**
 
 ```tsx
 export default function SealMark({
@@ -414,7 +414,7 @@ export default function SealMark({
 
 `counter` exists because the counter takes whatever surface the seal is stamped on. On `--ground` the default is right; on the device stage pass `counter="var(--surface)"`.
 
-- [ ] **Step 2: Write `Wordmark.tsx`**
+- [x] **Step 2: Write `Wordmark.tsx`**
 
 ```tsx
 export default function Wordmark({ size = 24 }: { size?: number }) {
@@ -437,7 +437,7 @@ export default function Wordmark({ size = 24 }: { size?: number }) {
 
 The accent is a drawn element, not the `ú` glyph, so the visible text spells `phuc`. `role="img"` plus `aria-label="phúc"` gives assistive tech the real name.
 
-- [ ] **Step 3: Add the wordmark CSS**
+- [x] **Step 3: Add the wordmark CSS**
 
 ```css
 .wordmark {
@@ -463,7 +463,7 @@ The accent is a drawn element, not the `ú` glyph, so the visible text spells `p
 
 `bottom: 0.80em` is measured from the inline-block's own box with `line-height: 1`, which places the accent just clear of the `u`'s x-height. If it reads too high or low at 126px, adjust **only** this value and keep it in one place.
 
-- [ ] **Step 4: Replace the favicon**
+- [x] **Step 4: Replace the favicon**
 
 Overwrite `frontend/app/icon.svg`. It is served standalone, so it cannot use CSS variables — the hexes are literal here and this is the one sanctioned exception to the no-literals rule:
 
@@ -476,11 +476,11 @@ Overwrite `frontend/app/icon.svg`. It is served standalone, so it cannot use CSS
 
 No inner frame — this renders at 16–32px.
 
-- [ ] **Step 5: Mount both temporarily so they can be inspected**
+- [x] **Step 5: Mount both temporarily so they can be inspected**
 
 In `app/components/Nav.tsx`, replace the contents of the `.nav-logo` anchor with `<Wordmark size={24} />`. Task 3 replaces this file.
 
-- [ ] **Step 6: Run the gate**
+- [x] **Step 6: Run the gate**
 
 ```bash
 cd frontend && npm run lint && npm run build
@@ -488,7 +488,7 @@ cd frontend && npm run lint && npm run build
 
 Expected: both exit 0.
 
-- [ ] **Step 7: Browser assertions**
+- [x] **Step 7: Browser assertions**
 
 At `:3000`, in the console:
 
@@ -502,7 +502,7 @@ Expected: `[true, true, true]` — the accent sits inside the `u`'s horizontal s
 
 Check the browser tab: the favicon is a solid vermilion square with a legible `P`. Toggle to light: the wordmark's accent stays vermilion and the letters go dark.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add frontend/app/components/SealMark.tsx frontend/app/components/Wordmark.tsx \
@@ -536,7 +536,7 @@ Favicon becomes the seal without its inner frame, which fills in below 48px.
 - Produces: `SiteNav()`, `MobileNavSheet({ open, onClose }: { open: boolean; onClose: () => void })`, `LangToggle({ layout?: "inline" | "sheet" })`.
 - Produces CSS utilities every later task uses: `.shell`, `.g12`, `.rule`, `.eyebrow`, `.h2`, `.prose`, `.meta`, `.btn`, `.btn-ghost`.
 
-- [ ] **Step 1: Add the layout utilities to `globals.css`**
+- [x] **Step 1: Add the layout utilities to `globals.css`**
 
 ```css
 .shell { padding-inline: var(--page-margin); }
@@ -598,7 +598,7 @@ Add the breakpoint overrides for `--page-margin` and `--section-pad` (spec §5):
 }
 ```
 
-- [ ] **Step 2: Add the nav copy to `dictionary.ts`**
+- [x] **Step 2: Add the nav copy to `dictionary.ts`**
 
 Extend the `Messages` type and both locale objects:
 
@@ -617,7 +617,7 @@ Then change `ThemeToggle.tsx` to read `messages[lang].nav.toLight / .toDark` via
 
 The `cv` key is renamed to `experience` throughout; update `Nav`'s old references as they are deleted.
 
-- [ ] **Step 3: Write `LangToggle.tsx`**
+- [x] **Step 3: Write `LangToggle.tsx`**
 
 ```tsx
 "use client";
@@ -664,7 +664,7 @@ export default function LangToggle({ layout = "inline" }: { layout?: "inline" | 
 
 This replaces the globe dropdown. Two visible pills, no menu — the spec calls for promoting the switch, and a dropdown hides it.
 
-- [ ] **Step 4: Write `MobileNavSheet.tsx`**
+- [x] **Step 4: Write `MobileNavSheet.tsx`**
 
 ```tsx
 "use client";
@@ -766,7 +766,7 @@ export default function MobileNavSheet({ open, onClose }: { open: boolean; onClo
 @media (min-width: 600px) { .sheet { display: none; } }
 ```
 
-- [ ] **Step 5: Write `SiteNav.tsx`**
+- [x] **Step 5: Write `SiteNav.tsx`**
 
 Port the scroll-state and scroll-spy effects from the old `Nav.tsx:29-54` unchanged — they set nav state, not motion, and the spec keeps them. Section ids are `skills`, `portfolio`, `experience`, `contact`.
 
@@ -899,11 +899,11 @@ export default function SiteNav() {
 
 The theme toggle hides below 600px only because it lives in the sheet's foot — add `<ThemeToggle />` beside `<LangToggle layout="sheet" />` in `.sheet-foot` so it stays reachable.
 
-- [ ] **Step 6: Swap the nav in `page.tsx` and delete the old one**
+- [x] **Step 6: Swap the nav in `page.tsx` and delete the old one**
 
 Replace `import Nav from "./components/Nav"` with `import SiteNav from "./components/SiteNav"` and `<Nav />` with `<SiteNav />`, then `git rm frontend/app/components/Nav.tsx`.
 
-- [ ] **Step 7: Run the gate**
+- [x] **Step 7: Run the gate**
 
 ```bash
 cd frontend && npm run lint && npm run build
@@ -911,7 +911,7 @@ cd frontend && npm run lint && npm run build
 
 Expected: both exit 0. If the build fails with a `useLang must be used within a LanguageProvider` error, `SiteNav` is being rendered outside the provider — check `layout.tsx` from Task 1 Step 8.
 
-- [ ] **Step 8: Browser assertions**
+- [x] **Step 8: Browser assertions**
 
 At 1440: nav shows wordmark, three links, VI/EN, theme icon, Liên hệ button. Scroll down 100px — the bar gains a blurred background and a bottom hairline. Scroll to the Skills section; the "Kỹ năng" link gains a vermilion underline.
 
@@ -936,7 +936,7 @@ Expected: `"hidden"`.
 
 Press Tab repeatedly past the last control: focus returns to the first, it does not escape to the page behind. Press Escape: the sheet closes, `document.body.style.overflow` is `""`, and focus is back on `.nav-menu`.
 
-- [ ] **Step 9: Commit**
+- [x] **Step 9: Commit**
 
 ```bash
 git add -A frontend/app
@@ -970,7 +970,7 @@ the point of the complaint.
 - Consumes: `SealMark` (Task 2); `.shell`, `.g12`, `.rule`, `.eyebrow`, `.prose`, `.meta`, `.btn`, `.btn-ghost` (Task 3).
 - Produces: `Hero()`, `ProofRow()`, `Currently()` — none take props; all read i18n.
 
-- [ ] **Step 1: Replace the hero stats with proof in `dictionary.ts`**
+- [x] **Step 1: Replace the hero stats with proof in `dictionary.ts`**
 
 Delete `hero.stats` from the `Messages` type and both locales. Add:
 
@@ -1002,7 +1002,7 @@ proof: {
 
 Also replace `hero.bio` in both locales with the §9 copy, and `hero.taglineLines` stays as-is.
 
-- [ ] **Step 2: Rewrite `Hero.tsx`**
+- [x] **Step 2: Rewrite `Hero.tsx`**
 
 ```tsx
 "use client";
@@ -1051,7 +1051,7 @@ export default function Hero() {
 
 The arrow SVG needs sizing: add `.btn svg, .btn-ghost svg { width: 15px; height: 15px; flex: none; }` to the Task 3 button CSS.
 
-- [ ] **Step 3: Add the hero CSS**
+- [x] **Step 3: Add the hero CSS**
 
 ```css
 .hero { padding-top: 104px; position: relative; }
@@ -1102,7 +1102,7 @@ The arrow SVG needs sizing: add `.btn svg, .btn-ghost svg { width: 15px; height:
 
 **The portrait is never `display: none`.** It reorders above the copy at 960 and shrinks at 600 — deleting it is the bug this task fixes.
 
-- [ ] **Step 4: Write `ProofRow.tsx`**
+- [x] **Step 4: Write `ProofRow.tsx`**
 
 ```tsx
 "use client";
@@ -1171,7 +1171,7 @@ a.proof-value:hover { color: var(--seal-lit); }
 }
 ```
 
-- [ ] **Step 5: Rewrite `Currently.tsx`**
+- [x] **Step 5: Rewrite `Currently.tsx`**
 
 Keep reading `CURRENTLY` from `data.ts`, but drop the emoji (spec: no emoji) and the pulse animation. Replace the emoji field usage — in `data.ts`, change the `CURRENTLY` type to `{ text: Localized }[]` and delete the three `emoji` values.
 
@@ -1214,7 +1214,7 @@ export default function Currently() {
 @media (max-width: 599px) { .currently { justify-content: flex-start; font-size: 11.5px; } }
 ```
 
-- [ ] **Step 6: Update `page.tsx` and delete the three components**
+- [x] **Step 6: Update `page.tsx` and delete the three components**
 
 ```tsx
 <SiteNav />
@@ -1238,7 +1238,7 @@ git rm frontend/app/components/AvatarCard.tsx frontend/app/components/Parallax.t
 
 Delete the now-dead legacy CSS: every rule from `/* ── HERO ── */` through the end of `/* ── HERO AVATAR CARD ── */`, plus `.currently*` legacy rules and `@keyframes orbDrift` / `availPulse`.
 
-- [ ] **Step 7: Run the gate**
+- [x] **Step 7: Run the gate**
 
 ```bash
 cd frontend && npm run lint && npm run build
@@ -1246,7 +1246,7 @@ cd frontend && npm run lint && npm run build
 
 Expected: both exit 0.
 
-- [ ] **Step 8: Browser assertions**
+- [x] **Step 8: Browser assertions**
 
 At 1440, console:
 
@@ -1277,7 +1277,7 @@ Expected: `true` — portrait above the copy.
 
 Visually: no glow orb, no cursor-following light, the portrait does not drift on scroll. The `ả` in "Bảo" is fully visible, not clipped by the line above.
 
-- [ ] **Step 9: Commit**
+- [x] **Step 9: Commit**
 
 ```bash
 git add -A frontend/app
@@ -1312,7 +1312,7 @@ than being deleted. Drops the glow orb, parallax and magnetic cursor.
 - Produces: `DeviceFrame({ children, offset }: { children: ReactNode; offset?: boolean })` — `offset` adds the 56px top nudge on the second phone.
 - Produces: `WorkFeature({ project }: { project: Project })` — `Project` is the existing type from `lib/api.ts`.
 
-- [ ] **Step 1: Write `SectionHeader.tsx`**
+- [x] **Step 1: Write `SectionHeader.tsx`**
 
 ```tsx
 import type { ReactNode } from "react";
@@ -1348,7 +1348,7 @@ export default function SectionHeader({
 }
 ```
 
-- [ ] **Step 2: Write `DeviceFrame.tsx`**
+- [x] **Step 2: Write `DeviceFrame.tsx`**
 
 ```tsx
 import type { ReactNode } from "react";
@@ -1382,7 +1382,7 @@ export default function DeviceFrame({ children, offset = false }: { children: Re
 
 No fake status bar and no fake keyboard — on a real device the OS draws those on top.
 
-- [ ] **Step 3: Add the flashcard screen markup**
+- [x] **Step 3: Add the flashcard screen markup**
 
 Inside `WorkFeature`, the first device's children. All colours here are the app's own screen palette, which is deliberately theme-independent; use `rgba(255,255,255,…)` for the in-screen greys and `var(--seal)` for the accent:
 
@@ -1435,7 +1435,7 @@ Inside `WorkFeature`, the first device's children. All colours here are the app'
 
 Add `--r-pill: 100px;` to the token block if it is not already there.
 
-- [ ] **Step 4: Add the stroke-order screen markup**
+- [x] **Step 4: Add the stroke-order screen markup**
 
 The second device's children:
 
@@ -1467,7 +1467,7 @@ The second device's children:
 .ds-gloss-body { font-size: 9.5px; color: rgba(255,255,255,.36); line-height: 1.6; white-space: pre-line; }
 ```
 
-- [ ] **Step 5: Add the device copy to `dictionary.ts`**
+- [x] **Step 5: Add the device copy to `dictionary.ts`**
 
 ```ts
 device: {
@@ -1482,7 +1482,7 @@ EN: `{ streak: "7 days", charNote: "A-row · vowel", hard: "Hard", got: "Got it"
 
 `kanjiGloss` carries a newline, which is why `.ds-gloss-body` sets `white-space: pre-line`.
 
-- [ ] **Step 6: Write `WorkFeature.tsx` and rewrite `Work.tsx`**
+- [x] **Step 6: Write `WorkFeature.tsx` and rewrite `Work.tsx`**
 
 `Work.tsx` renders `SectionHeader` (label `portfolio.label`, title `work.title` from §9, aside `portfolio.sub`) plus one `WorkFeature` per project. `WorkFeature` lays out copy in `grid-column: span 5` and the device stage in `grid-column: 7 / span 6`:
 
@@ -1518,7 +1518,7 @@ The feature bullets use the accent stroke, same path as the wordmark: `d="M6 19 
 
 The second action is `Đọc case study` / `Read the case study`, an internal `<a href="/work/hajime">` — the route arrives in Task 10 and 404s until then. Add both strings to `portfolio` in `dictionary.ts` as `caseStudy`.
 
-- [ ] **Step 7: Delete `PhoneMockup.tsx` and its legacy CSS**
+- [x] **Step 7: Delete `PhoneMockup.tsx` and its legacy CSS**
 
 ```bash
 git rm frontend/app/components/PhoneMockup.tsx
@@ -1526,7 +1526,7 @@ git rm frontend/app/components/PhoneMockup.tsx
 
 Delete the `/* ── WORK ── */` and `/* ── PHONE MOCKUP ── */` legacy blocks from `globals.css`.
 
-- [ ] **Step 8: Run the gate**
+- [x] **Step 8: Run the gate**
 
 ```bash
 cd frontend && npm run lint && npm run build
@@ -1534,7 +1534,7 @@ cd frontend && npm run lint && npm run build
 
 Expected: both exit 0.
 
-- [ ] **Step 9: Browser assertions**
+- [x] **Step 9: Browser assertions**
 
 At 1440: two phones on the stage, the second nudged down 56px. Console:
 
@@ -1558,7 +1558,7 @@ Expected: `[true, 390]` — stage first and full-bleed past the page margin.
 
 Toggle to light: the phone screens keep their indigo gradient (they are the app's own palette), while the stage behind them becomes `--surface` light.
 
-- [ ] **Step 10: Commit**
+- [x] **Step 10: Commit**
 
 ```bash
 git add -A frontend/app && git commit
@@ -1590,7 +1590,7 @@ are a picture of the product, not a themed surface.
 - Consumes: `SectionHeader` (Task 5); `TimelineEntry` from `lib/api.ts` (existing).
 - Produces: `Experience({ experience, education }: { experience: TimelineEntry[]; education: TimelineEntry[] })` — same props `CV` took, so `page.tsx` changes only the component name.
 
-- [ ] **Step 1: Add the section copy**
+- [x] **Step 1: Add the section copy**
 
 In `dictionary.ts`, rename the `cv` key to `experience` and give it:
 
@@ -1598,7 +1598,7 @@ VI: `{ label: "Kinh nghiệm · Experience", title: "Ba công ty, trước khi r
 
 EN: `{ label: "Experience", title: "Three companies, before graduating.", sub: "Started working in second year. Backend at all three, two languages, one detour through frontend.", education: "Education", downloadCv: "Download CV (PDF)" }`
 
-- [ ] **Step 2: Write `Experience.tsx`**
+- [x] **Step 2: Write `Experience.tsx`**
 
 Rows are a 3 / 5 / 4 column split with a hairline above each. The date is the loud element:
 
@@ -1667,7 +1667,7 @@ Rows are a 3 / 5 / 4 column split with a hairline above each. The date is the lo
 
 The dates come from the backend as pre-formatted strings (`"3/2026 — Nay"`); do not parse or reformat them.
 
-- [ ] **Step 3: Swap in `page.tsx` and delete `CV.tsx`**
+- [x] **Step 3: Swap in `page.tsx` and delete `CV.tsx`**
 
 ```bash
 git rm frontend/app/components/CV.tsx
@@ -1675,7 +1675,7 @@ git rm frontend/app/components/CV.tsx
 
 Delete the `/* ── CV / TIMELINE ── */` legacy block.
 
-- [ ] **Step 4: Gate + assertions**
+- [x] **Step 4: Gate + assertions**
 
 ```bash
 cd frontend && npm run lint && npm run build
@@ -1694,7 +1694,7 @@ Expected: `4` — one above each of the three roles, one below the last.
 
 At 390: each row stacks, date on its own line, and `.exp-desc` still renders.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add -A frontend/app && git commit
@@ -1723,7 +1723,7 @@ now 34px on a hairline-separated row; education drops to metadata below.
 - Consumes: `SectionHeader`.
 - Produces: `SkillTiers()` — no props. **Ranking is editorial, not backend data**, so the tiers live in `data.ts`, not in `profile.techStacks`.
 
-- [ ] **Step 1: Add the tiers to `data.ts`**
+- [x] **Step 1: Add the tiers to `data.ts`**
 
 The backend's `techStacks` groups by category (Frontend / Backend / Tools), which is exactly the flat, equal-weight structure the spec rejects. Add an editorial ranking instead:
 
@@ -1737,13 +1737,13 @@ export const SKILL_TIERS: { key: "tier1" | "tier2" | "tier3"; items: string[] }[
 
 `page.tsx` stops passing `profile.techStacks` to this section. Leave `fetchProfile` and the `techStacks` field alone — the contract is unchanged, this page just no longer renders that field.
 
-- [ ] **Step 2: Add the tier copy**
+- [x] **Step 2: Add the tier copy**
 
 VI: `{ label: "Kỹ năng · Stack", title: "Không phải danh sách bằng nhau.", sub: "Xếp theo thứ tự thật: cái được trả tiền để làm, cái dùng thành thạo, cái đã chạm tới.", tier1: "Được trả tiền để làm", tier2: "Thành thạo", tier3: "Đã dùng qua" }`
 
 EN: `{ label: "Skills · Stack", title: "Not a flat list.", sub: "Ranked honestly: what I'm paid to work in, what I'm fluent in, what I've touched.", tier1: "Paid to work in", tier2: "Fluent", tier3: "Have used" }`
 
-- [ ] **Step 3: Write `SkillTiers.tsx` and its CSS**
+- [x] **Step 3: Write `SkillTiers.tsx` and its CSS**
 
 Each tier is a hairline-separated row: label in `span 3`, items in `span 9`. **The tier is expressed in type size, not in a chip** — there are no pills here.
 
@@ -1776,7 +1776,7 @@ Each tier is a hairline-separated row: label in `span 3`, items in `span 9`. **T
 }
 ```
 
-- [ ] **Step 4: Delete the old skills components and CSS**
+- [x] **Step 4: Delete the old skills components and CSS**
 
 ```bash
 git rm frontend/app/components/Skills.tsx frontend/app/components/techIcons.tsx
@@ -1790,7 +1790,7 @@ grep -rn "react-icons" frontend/app frontend/lib
 
 If there are no hits, remove it from `package.json` dependencies and run `npm install`.
 
-- [ ] **Step 5: Gate + assertions**
+- [x] **Step 5: Gate + assertions**
 
 ```bash
 cd frontend && npm run lint && npm run build
@@ -1808,7 +1808,7 @@ document.querySelectorAll('.tier-items span').length
 ```
 Expected: `16`.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add -A frontend/app frontend/package.json && git commit
@@ -1838,7 +1838,7 @@ category grouping. The profile contract is unchanged.
 - Consumes: `SectionHeader`, `SealMark`, `sendContact` from `lib/api.ts` (existing).
 - Produces: `Contact()`, `Footer()`.
 
-- [ ] **Step 1: Rebuild the form as underlines**
+- [x] **Step 1: Rebuild the form as underlines**
 
 Keep the existing submit logic in `Contact.tsx` exactly as it is — the `fetch`, the 400 `fields` map handling, the submitting and sent states. **Only the markup and CSS change.** Fields become underlines, and each gets a rendered error slot:
 
@@ -1890,13 +1890,13 @@ textarea.field-input { resize: vertical; min-height: 96px; }
 
 The focus and error rules reduce `padding-bottom` by 1px to compensate for the 1px→2px border, so the field does not jump.
 
-- [ ] **Step 2: Render field errors**
+- [x] **Step 2: Render field errors**
 
 The backend returns 400 with a `fields` map. Wherever the component already stores that, wrap each field in `<div className={errors.name ? "field field-error" : "field"}>` and render `{errors.name && <span className="field-msg">{errors.name}</span>}`. The message text comes from the backend verbatim — it is already Vietnamese.
 
 Add `aria-invalid={Boolean(errors.name)}` and `aria-describedby` pointing at the message's `id` on each input.
 
-- [ ] **Step 3: Rebuild the footer**
+- [x] **Step 3: Rebuild the footer**
 
 ```css
 .footer {
@@ -1910,11 +1910,11 @@ Add `aria-invalid={Boolean(errors.name)}` and `aria-describedby` pointing at the
 
 Left: `<SealMark size={28} />` plus copyright and location in `.meta`. Right: a `.meta` line. Add `footer.builtWith` to `dictionary.ts` — VI `"Next.js · Spring Boot · dựng bằng tay, không dùng mẫu"`, EN `"Next.js · Spring Boot · hand-built, not templated"`.
 
-- [ ] **Step 4: Delete the legacy CSS**
+- [x] **Step 4: Delete the legacy CSS**
 
 Remove the `/* ── CONTACT ── */`, `/* ── FORM ── */` and `/* ── FOOTER ── */` legacy blocks.
 
-- [ ] **Step 5: Gate + assertions**
+- [x] **Step 5: Gate + assertions**
 
 ```bash
 cd frontend && npm run lint && npm run build
@@ -1937,7 +1937,7 @@ getComputedStyle(document.querySelector('.field-input')).borderTopWidth
 ```
 Expected: `"0px"` — underlines, not boxes.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add -A frontend/app && git commit
@@ -1963,7 +1963,7 @@ Submit logic is unchanged.
 - Delete: `SmoothScroll.tsx`, `ScrollReveal.tsx`, `CountUp.tsx`, `ScrollProgress.tsx`
 - Modify: `globals.css`, `layout.tsx`, `page.tsx`, `package.json`
 
-- [ ] **Step 1: Delete the components and the dependency**
+- [x] **Step 1: Delete the components and the dependency**
 
 ```bash
 cd frontend
@@ -1974,7 +1974,7 @@ npm uninstall lenis
 
 Remove their imports and usages from `layout.tsx` and `page.tsx`.
 
-- [ ] **Step 2: Remove the noscript block**
+- [x] **Step 2: Remove the noscript block**
 
 In `layout.tsx`, delete:
 
@@ -1986,7 +1986,7 @@ In `layout.tsx`, delete:
 
 It exists because scroll-reveal parked elements at `opacity: 0`. Nothing does that any more — the page is complete with JavaScript off, which is the point.
 
-- [ ] **Step 3: Delete every remaining reveal and Lenis rule**
+- [x] **Step 3: Delete every remaining reveal and Lenis rule**
 
 ```bash
 grep -n 'reveal\|lenis\|magnetic\|scroll-progress' app/globals.css
@@ -2000,7 +2000,7 @@ grep -rn 'className="[^"]*reveal' app/
 
 Expected after both: no output.
 
-- [ ] **Step 4: Add the load sequence**
+- [x] **Step 4: Add the load sequence**
 
 ```css
 @keyframes an-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
@@ -2030,7 +2030,7 @@ The headline is one element, so lines 1 and 2 share the 140ms start rather than 
 
 **The portrait fades and never translates** — it is the LCP element.
 
-- [ ] **Step 5: Gate + assertions**
+- [x] **Step 5: Gate + assertions**
 
 ```bash
 cd frontend && npm run lint && npm run build
@@ -2047,7 +2047,7 @@ Enable "Emulate prefers-reduced-motion: reduce" in devtools Rendering, reload. E
 
 Disable JavaScript entirely and reload. Expected: the page renders complete — copy, portrait, all sections. Only the theme toggle, language toggle and mobile sheet are inert.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add -A frontend && git commit
@@ -2079,13 +2079,13 @@ JavaScript disabled.
 - Consumes: `SiteNav`, `Footer`, `DeviceFrame`, `SealMark`, `.g12`, `.h2`, `.prose`, `.meta`, `.btn`, `.btn-ghost`.
 - Produces: a static route at `/work/hajime`.
 
-- [ ] **Step 1: Add `caseHajime` to `dictionary.ts`**
+- [x] **Step 1: Add `caseHajime` to `dictionary.ts`**
 
 One nested object per block: `hero` (label, title, subtitle, facts), `problem` (label, title, body1, body2), `decision` (label, title, body1, body2, nodes, sharedTitle, sharedNote), `stack` (label), `status` (label, title, note, shippedLabel, notLabel, shipped[], notYet[]), `cta` (label, title, note, install, back).
 
 The `status` arrays must stay honest and match the repo: shipped is kana with real Edge TTS audio, dual-run SM-2 kept in sync by shared test vectors, KanjiVG stroke order for N5, Google Sign-In with rotating refresh tokens and offline support. Not yet is 100 of 700 vocabulary items, audio for vocabulary and kanji, FCM credentials, and session minutes still a proxy.
 
-- [ ] **Step 2: Write the route**
+- [x] **Step 2: Write the route**
 
 ```tsx
 import SiteNav from "../../components/SiteNav";
@@ -2121,7 +2121,7 @@ export default function HajimePage() {
 
 `SiteNav`'s links are `#hash` anchors, which do not work from a sub-route. In `SiteNav`, take an optional `home?: boolean` prop defaulting to `true`; when false, render the links as `/#skills` etc. Pass `home={false}` here.
 
-- [ ] **Step 3: Write `DecisionDiagram.tsx`**
+- [x] **Step 3: Write `DecisionDiagram.tsx`**
 
 Hairline nodes and mono labels — no stock flowchart look, no fills:
 
@@ -2152,7 +2152,7 @@ The arrow is one inline SVG reused: `viewBox="0 0 46 16"`, `<path d="M0 8 H36" s
 
 The shared node carries `<SealMark size={26} />` plus the "both implementations run the same test vectors" line — that is the point of the diagram.
 
-- [ ] **Step 4: Write `StatusColumns.tsx`**
+- [x] **Step 4: Write `StatusColumns.tsx`**
 
 Two columns, shipped left. Shipped items lead with the accent stroke; not-yet items lead with a flat 11px hairline dash — a visual distinction that does not rely on colour alone.
 
@@ -2172,11 +2172,11 @@ Two columns, shipped left. Shipped items lead with the accent stroke; not-yet it
 @media (max-width: 599px) { .status-col, .status-col + .status-col { grid-column: span 1; } }
 ```
 
-- [ ] **Step 5: Point the home page at the route**
+- [x] **Step 5: Point the home page at the route**
 
 In `WorkFeature.tsx`, the secondary action becomes `<a href="/work/hajime" className="btn-ghost">`.
 
-- [ ] **Step 6: Gate + assertions**
+- [x] **Step 6: Gate + assertions**
 
 ```bash
 cd frontend && npm run lint && npm run build
@@ -2199,7 +2199,7 @@ Expected: a matrix, not `"none"` — the rotation applied.
 
 Click the nav's "Sản phẩm" from this page. Expected: it navigates to `/#portfolio`, not a dead `#portfolio` on the case page.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add -A frontend/app && git commit
@@ -2225,7 +2225,7 @@ Pre-rendered by output: export; the nav switches to /# anchors off-route.
 **Files:**
 - Modify: `globals.css`, `layout.tsx`, `CLAUDE.md`
 
-- [ ] **Step 1: Delete every remaining legacy token and rule**
+- [x] **Step 1: Delete every remaining legacy token and rule**
 
 ```bash
 cd frontend
@@ -2239,7 +2239,7 @@ grep -n -- '--legacy-' app/globals.css
 ```
 Expected: no output.
 
-- [ ] **Step 2: Drop the old font stylesheet**
+- [x] **Step 2: Drop the old font stylesheet**
 
 Remove the Space Grotesk / Space Mono `<link>` from `layout.tsx`. Confirm nothing still asks for it:
 
@@ -2248,7 +2248,7 @@ grep -rn "Space Grotesk\|Space Mono" frontend/app
 ```
 Expected: no output.
 
-- [ ] **Step 3: Drive `themeColor` from the tokens**
+- [x] **Step 3: Drive `themeColor` from the tokens**
 
 In `layout.tsx`:
 
@@ -2265,7 +2265,7 @@ export const viewport: Viewport = {
 
 These two literals are unavoidable — the viewport export is not CSS. Add a comment tying them to `--ground` in both themes so they are updated together.
 
-- [ ] **Step 4: Update `CLAUDE.md`**
+- [x] **Step 4: Update `CLAUDE.md`**
 
 Replace the Themes bullet, which still describes three themes and an accent that has not existed since the mint redesign:
 
@@ -2276,7 +2276,7 @@ Add to the frontend section:
 > - Routes: `/` and `/work/hajime`, both pre-rendered by `output: "export"`.
 > - There is no motion library. One CSS load sequence in the hero; nothing animates on scroll.
 
-- [ ] **Step 5: Full gate**
+- [x] **Step 5: Full gate**
 
 ```bash
 cd frontend && npm run lint && npm run build
@@ -2293,7 +2293,7 @@ Both exit 0. Then walk spec §10 end to end at 1440 / 960 / 600 / 390, both them
 7. `prefers-reduced-motion` leaves the page complete and still.
 8. Spot-check contrast with devtools on `.prose`, `.meta` and `.exp-org` in both themes. Expected: ≥ 4.5:1 for all three. `.exp-org` uses `--seal-lit`, not `--seal` — if it reads 3.8:1, the wrong token is in use.
 
-- [ ] **Step 6: Commit and push**
+- [x] **Step 6: Commit and push**
 
 ```bash
 git add -A && git commit
