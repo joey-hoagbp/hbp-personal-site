@@ -34,6 +34,8 @@ export type Messages = {
     label: string;
     title: string;
     sub: string;
+    groupCore: string;
+    groupApi: string;
   };
   work: { title: string };
   portfolio: {
@@ -153,6 +155,8 @@ export const messages: Record<Lang, Messages> = {
       label: "Kỹ năng · Stack",
       title: "Stack tôi làm việc mỗi ngày.",
       sub: "Backend là nghề chính; phần còn lại là cách sản phẩm đến tay người dùng.",
+      groupCore: "Backend · hằng ngày",
+      groupApi: "Giao diện · API",
     },
     work: { title: "Một sản phẩm, đã lên kệ." },
     portfolio: {
@@ -321,6 +325,8 @@ export const messages: Record<Lang, Messages> = {
       label: "Skills · Stack",
       title: "The stack I work in.",
       sub: "Backend is the day job; the rest is how the product reaches people.",
+      groupCore: "Backend · daily",
+      groupApi: "Interface · API",
     },
     work: { title: "One product, actually shipped." },
     portfolio: {

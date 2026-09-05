@@ -25,17 +25,14 @@ export const CURRENTLY: { text: Localized }[] = [
   { text: { vi: "nghe lo-fi khi code", en: "coding to lo-fi" } },
 ];
 
-// The Skills section: one flat, unranked list rendered at a single weight.
+// The Stack section: two domain groups, rendered at one weight. The grouping is
+// by domain (what the service is built from vs. how it reaches a user), NOT a
+// skill ranking — the ranked tiers were deliberately removed in 4d26919.
 // Separate from the backend's category grouping (Frontend/Backend/Tools) in
 // Profile.techStacks — deliberately not tied to that contract.
-export const SKILLS: string[] = [
-  "Java Spring Boot",
-  "Protobuf gRPC",
-  "Microservices",
-  "MongoDB",
-  "ReactJS",
-  "NextJS",
-  "REST API",
+export const STACK_GROUPS: { key: "groupCore" | "groupApi"; items: string[] }[] = [
+  { key: "groupCore", items: ["Java Spring Boot", "Microservices", "Protobuf gRPC", "MongoDB"] },
+  { key: "groupApi", items: ["ReactJS", "NextJS", "REST API"] },
 ];
 
 /**
