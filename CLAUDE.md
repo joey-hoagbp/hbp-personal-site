@@ -39,7 +39,7 @@ npm run build                             # canonical gate — catches server/cl
 npm run lint
 ```
 
-There is **no test harness** in the frontend; verification is `npm run build` + `npm run lint` + manual browser check. `next.config.mjs` is a phase function so the build gets its own `distDir` (`.next-build`) while `next dev` keeps `.next` — without that split a build run while a dev server is up replaces the running server's chunks and the page reloads with no CSS. Never point them at the same directory. When running the backend on a non-default port, set `NEXT_PUBLIC_API_BASE_URL` in `frontend/.env.local` to match.
+There is **no test harness** in the frontend; verification is `npm run build` + `npm run lint` + manual browser check. **Stop every running `next dev` before running the build.** `next dev` and `next build` share `.next/`, so a build run while a dev server is up replaces the running server's chunks: it then throws `MODULE_NOT_FOUND`, every asset 404s and the page reloads with no CSS. Recovery is stop the dev servers, `rm -rf frontend/.next`, restart. Splitting the two with a phase-dependent `distDir` was tried and reverted — with `output: "export"` it scatters the build across two directories and leaves `out/` stale, which would ship a stale site to Pages. When running the backend on a non-default port, set `NEXT_PUBLIC_API_BASE_URL` in `frontend/.env.local` to match.
 
 ### Deployment
 

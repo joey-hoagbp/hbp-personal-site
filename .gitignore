@@ -1,7 +1,6 @@
 # ── Node / Next.js ──────────────────────────────
 frontend/node_modules/
 frontend/.next/
-frontend/.next-build/
 frontend/out/
 frontend/.env.local
 frontend/next-env.d.ts
