@@ -18,7 +18,7 @@ export default function Experience({
 
   return (
     <section className="experience shell">
-      <SectionHeader id="experience" label={t.label} title={t.title} aside={t.sub} />
+      <SectionHeader id="experience" label={t.label} />
       <div className="rule" />
       {experience.map((e) => (
         <Fragment key={`${e.date[lang]}-${e.org[lang]}`}>

@@ -12,8 +12,8 @@ export default function Work({ projects }: { projects: Project[] }) {
 
   return (
     <section className="work shell">
+      <SectionHeader id="portfolio" label={t.portfolio.label} />
       <div className="rule" />
-      <SectionHeader id="portfolio" label={t.portfolio.label} title={t.work.title} aside={t.portfolio.sub} />
       {projects.map((project) => (
         <WorkFeature key={project.id ?? project.title} project={project} />
       ))}

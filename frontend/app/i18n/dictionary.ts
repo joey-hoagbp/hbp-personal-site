@@ -32,16 +32,12 @@ export type Messages = {
   currently: { prefix: string };
   skills: {
     label: string;
-    title: string;
-    sub: string;
     groupCore: string;
     groupApi: string;
   };
-  work: { title: string };
   portfolio: {
     label: string;
     title: string;
-    sub: string;
     downloadApk: string;
     comingSoon: string;
     repo: string;
@@ -56,8 +52,6 @@ export type Messages = {
   };
   experience: {
     label: string;
-    title: string;
-    sub: string;
     education: string;
   };
   contact: {
@@ -153,16 +147,12 @@ export const messages: Record<Lang, Messages> = {
     currently: { prefix: "hiện tại" },
     skills: {
       label: "Kỹ năng · Stack",
-      title: "Stack tôi làm việc mỗi ngày.",
-      sub: "Backend là nghề chính; phần còn lại là cách sản phẩm đến tay người dùng.",
       groupCore: "Backend · hằng ngày",
       groupApi: "Giao diện · API",
     },
-    work: { title: "Một sản phẩm, đã lên kệ." },
     portfolio: {
       label: "Sản Phẩm",
       title: "Featured Work",
-      sub: "Sản phẩm nổi bật tôi đã xây dựng.",
       downloadApk: "Tải về APK",
       comingSoon: "Tải về APK · Sắp ra mắt",
       repo: "Mã nguồn",
@@ -186,8 +176,6 @@ export const messages: Record<Lang, Messages> = {
     },
     experience: {
       label: "Kinh nghiệm · Experience",
-      title: "Ba công ty, trước khi ra trường.",
-      sub: "Bắt đầu đi làm từ năm hai. Backend ở cả ba nơi, hai ngôn ngữ, một lần rẽ qua frontend.",
       education: "Học vấn",
     },
     contact: {
@@ -323,16 +311,12 @@ export const messages: Record<Lang, Messages> = {
     currently: { prefix: "currently" },
     skills: {
       label: "Skills · Stack",
-      title: "The stack I work in.",
-      sub: "Backend is the day job; the rest is how the product reaches people.",
       groupCore: "Backend · daily",
       groupApi: "Interface · API",
     },
-    work: { title: "One product, actually shipped." },
     portfolio: {
       label: "Portfolio",
       title: "Featured Work",
-      sub: "Standout products I've built.",
       downloadApk: "Download APK",
       comingSoon: "Download APK · Coming soon",
       repo: "Source",
@@ -356,8 +340,6 @@ export const messages: Record<Lang, Messages> = {
     },
     experience: {
       label: "Experience",
-      title: "Three companies, before graduating.",
-      sub: "Started working in second year. Backend at all three, two languages, one detour through frontend.",
       education: "Education",
     },
     contact: {
