@@ -11,6 +11,9 @@ import type { Localized, Profile, Project } from "../lib/api";
 // image — its <link rel="preload"> lives in app/layout.tsx, not on the <img>.
 export const AVATAR_SRC = "/phuc-reeves.webp";
 
+// Current employer, linked from the proof row's "Hiện tại / Currently" item.
+export const EMPLOYER_URL = "https://www.facebook.com/DrJOYvietnam/";
+
 export const SOCIAL_LINKS: { label: string; href: string; icon: "mail" | "github" | "linkedin" | "facebook" | "instagram" }[] = [
   { label: "phuchb04@gmail.com", href: "mailto:phuchb04@gmail.com", icon: "mail" },
   { label: "github.com/joey-hoagbp", href: "https://github.com/joey-hoagbp", icon: "github" },

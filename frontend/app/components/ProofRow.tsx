@@ -2,8 +2,7 @@
 
 import { useLang } from "../i18n/LanguageProvider";
 import { messages } from "../i18n/dictionary";
-import { SOCIAL_LINKS } from "../data";
-import { PROJECTS } from "../data";
+import { EMPLOYER_URL, PROJECTS, SOCIAL_LINKS } from "../data";
 
 export default function ProofRow() {
   const { lang } = useLang();
@@ -13,7 +12,7 @@ export default function ProofRow() {
 
   const items = [
     { ...p.shipped, href: apk },
-    { ...p.now, href: undefined },
+    { ...p.now, href: EMPLOYER_URL },
     { ...p.source, href: github },
   ];
 
