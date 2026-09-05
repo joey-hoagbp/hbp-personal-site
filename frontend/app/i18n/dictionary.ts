@@ -128,10 +128,10 @@ export const messages: Record<Lang, Messages> = {
     },
     hero: {
       eyebrow: "Kỹ sư phần mềm · Hà Nội",
-      taglineLines: ["Xây dựng sản phẩm", "mọi người yêu thích."],
+      taglineLines: ["Làm sản phẩm bằng sự tận tâm", "và niềm tin rằng chi tiết nhỏ tạo nên khác biệt lớn."],
       bio:
-        "Backend là nghề chính — Java, Spring Boot, .NET. Tôi viết hệ thống chạy được thật, " +
-        "rồi đóng gói nó thành sản phẩm người ta cài về máy.",
+        "Tôi không viết code chỉ để nó chạy — mỗi dòng đều nhắm đến một mục tiêu: " +
+        "sản phẩm ổn định, đáng tin, và người dùng thực sự muốn quay lại.",
       viewWork: "Xem sản phẩm",
       getInTouch: "Liên hệ ngay",
       avatar: {
@@ -292,10 +292,10 @@ export const messages: Record<Lang, Messages> = {
     },
     hero: {
       eyebrow: "Software Engineer · Ha Noi",
-      taglineLines: ["Building apps people", "love to use."],
+      taglineLines: ["Built with care, believing", "small details make a big difference."],
       bio:
-        "Backend is the day job — Java, Spring Boot, .NET. I write systems that actually run, " +
-        "then package them into something people install.",
+        "I don't write code just to make it run — every line serves one goal: " +
+        "a product that's stable, trustworthy, and worth coming back to.",
       viewWork: "View work",
       getInTouch: "Get in touch",
       avatar: {
