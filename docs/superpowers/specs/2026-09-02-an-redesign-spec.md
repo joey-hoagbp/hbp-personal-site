@@ -40,6 +40,15 @@ from facts already in the repo.
 | Fonts | Archivo (display + UI), Literata (prose), JetBrains Mono (all metadata). Space Grotesk and Space Mono are dropped. |
 | CSS organization | Single rewritten `globals.css`, token-driven. No CSS modules, no CSS-in-JS, no Tailwind. |
 
+> **Scoped exception (2026-09-05) — the Stack section.** Two rows of this table no longer
+> hold everywhere. On the owner's instruction the Stack section was rebuilt as a *pigment
+> index*: seven `--pig-*` tokens (vermilion, indigo, celadon, leaf, sky, amethyst, ochre),
+> one identity hue per technology, carried at rest by each row's chip and hairline, with the
+> name flooding into its hue on hover. Every value is retuned per theme and clears 4.5:1 on
+> its own `--ground`. **The exception is confined to that one section** — the accent rule
+> below and the single-accent decision still govern everywhere else. See §6 for the motion
+> half of the exception.
+
 ---
 
 ## 1. Token block
@@ -290,6 +299,15 @@ Touch targets are **48px minimum** below 960px, buttons and form fields included
 ## 6. Motion
 
 One sequence, on load, once. Nothing animates on scroll. Easing is `--ease` throughout.
+
+> **Scoped exception (2026-09-05) — the Stack section.** The Stack index adds the site's only
+> scroll-triggered motion: an `IntersectionObserver` in `Stack.tsx` fires once, and the seven
+> rows draw in 60 ms apart — hairline `scaleX(0)→1` in its pigment, chip fading, name rising
+> 10px. It disconnects after the first hit, so it never replays. The hidden pre-reveal state
+> hangs off a `stack-armed` class that React only sets after mount, so the pre-rendered export
+> still ships the section complete and the JavaScript-disabled guarantee below is preserved.
+> Under `prefers-reduced-motion: reduce` the rows are never hidden at all. No other section
+> gained scroll motion, and no reusable page-wide reveal component was introduced.
 
 | Start | Element | Movement | Duration |
 |---|---|---|---|

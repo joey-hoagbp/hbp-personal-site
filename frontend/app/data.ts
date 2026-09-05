@@ -28,11 +28,34 @@ export const CURRENTLY: { text: Localized }[] = [
 // The Stack section: two domain groups, rendered at one weight. The grouping is
 // by domain (what the service is built from vs. how it reaches a user), NOT a
 // skill ranking — the ranked tiers were deliberately removed in 4d26919.
+// `pigment` is likewise an identity hue, not a rank: it names one of the
+// --pig-* tokens in globals.css so the row can colour its own chip and hairline.
 // Separate from the backend's category grouping (Frontend/Backend/Tools) in
 // Profile.techStacks — deliberately not tied to that contract.
-export const STACK_GROUPS: { key: "groupCore" | "groupApi"; items: string[] }[] = [
-  { key: "groupCore", items: ["Java Spring Boot", "Microservices", "Protobuf gRPC", "MongoDB"] },
-  { key: "groupApi", items: ["ReactJS", "NextJS", "REST API"] },
+export type Pigment =
+  | "vermilion" | "indigo" | "celadon" | "leaf" | "sky" | "amethyst" | "ochre";
+
+export const STACK_GROUPS: {
+  key: "groupCore" | "groupApi";
+  items: { name: string; pigment: Pigment }[];
+}[] = [
+  {
+    key: "groupCore",
+    items: [
+      { name: "Java Spring Boot", pigment: "vermilion" },
+      { name: "Microservices", pigment: "indigo" },
+      { name: "Protobuf gRPC", pigment: "celadon" },
+      { name: "MongoDB", pigment: "leaf" },
+    ],
+  },
+  {
+    key: "groupApi",
+    items: [
+      { name: "ReactJS", pigment: "sky" },
+      { name: "NextJS", pigment: "amethyst" },
+      { name: "REST API", pigment: "ochre" },
+    ],
+  },
 ];
 
 /**

@@ -28,6 +28,18 @@
   --seal-disabled-ink: #7A6259;
   --on-seal:           #0D1015;   /* text on a seal fill */
 
+  /* ── stack pigments ───────────────────────── */
+  /* One identity hue per technology in the Stack section — the single
+     place on the site that carries colour beyond the seal. Retuned per
+     theme; every value clears 4.5:1 on its own --ground (5.6-8.5 on #0D1015). */
+  --pig-vermilion:     #E0674E;
+  --pig-indigo:        #6D8DE8;
+  --pig-celadon:       #3FB0A0;
+  --pig-leaf:          #5FB35C;
+  --pig-sky:           #4FB6D8;
+  --pig-amethyst:      #A07CE8;
+  --pig-ochre:         #D9A441;
+
   /* ── app mockup (theme-independent) ──────── */
   --app-shell:         #15131F;
   --app-screen-from:   #1E1B4B;
@@ -99,6 +111,18 @@
     --seal-disabled-ink: #C09A90;
     --on-seal:           #FFFFFF;
 
+    /* ── stack pigments ───────────────────────── */
+    /* One identity hue per technology in the Stack section — the single
+       place on the site that carries colour beyond the seal. Retuned per
+       theme; every value clears 4.5:1 on its own --ground (5.1-6.5 on #FFFFFF). */
+    --pig-vermilion:     #BC4029;
+    --pig-indigo:        #3B5BC0;
+    --pig-celadon:       #12796C;
+    --pig-leaf:          #2F7D33;
+    --pig-sky:           #0C7192;
+    --pig-amethyst:      #6B45C0;
+    --pig-ochre:         #8C5F16;
+
     --shadow-device: 0 24px 52px rgba(20, 24, 30, 0.22);
   }
 }
@@ -129,6 +153,18 @@
   --seal-disabled-bg:  #F0DDD8;
   --seal-disabled-ink: #C09A90;
   --on-seal:           #FFFFFF;
+
+  /* ── stack pigments ───────────────────────── */
+  /* One identity hue per technology in the Stack section — the single
+     place on the site that carries colour beyond the seal. Retuned per
+     theme; every value clears 4.5:1 on its own --ground (5.1-6.5 on #FFFFFF). */
+  --pig-vermilion:     #BC4029;
+  --pig-indigo:        #3B5BC0;
+  --pig-celadon:       #12796C;
+  --pig-leaf:          #2F7D33;
+  --pig-sky:           #0C7192;
+  --pig-amethyst:      #6B45C0;
+  --pig-ochre:         #8C5F16;
 
   --shadow-device: 0 24px 52px rgba(20, 24, 30, 0.22);
 }
@@ -230,6 +266,16 @@ a.proof-value:hover { color: var(--seal-lit); }
 @media (max-width: 599px) { .currently { justify-content: flex-start; font-size: 11.5px; } }
 
 /* ── SKILLS ─────────────────────────────────────────── */
+/* The one section that carries colour beyond the seal: each technology
+   owns a pigment (§ stack pigments in the token block), shown at rest as
+   a chip and as the row's own hairline. The name stays --ink until the
+   row is hovered, when it floods into its pigment.
+
+   Transform budget — nothing writes the same property twice:
+     li::before   reveal scaleX   · hover height
+     li::after    hover  scaleX   (untouched by the reveal)
+     .stack-chip  reveal opacity  · hover scale
+     .stack-name  reveal translateY + opacity · hover color            */
 .skills { padding-block: var(--section-pad); }
 .stack-group { align-items: start; padding: 30px 0; }
 .stack-label {
@@ -240,23 +286,93 @@ a.proof-value:hover { color: var(--seal-lit); }
 }
 .stack-core .stack-label { color: var(--seal-lit); }
 .stack-items { grid-column: span 9; list-style: none; }
+
+/* Pigment binding: the only place a row learns its hue. */
+.pig-vermilion { --pig: var(--pig-vermilion); }
+.pig-indigo    { --pig: var(--pig-indigo); }
+.pig-celadon   { --pig: var(--pig-celadon); }
+.pig-leaf      { --pig: var(--pig-leaf); }
+.pig-sky       { --pig: var(--pig-sky); }
+.pig-amethyst  { --pig: var(--pig-amethyst); }
+.pig-ochre     { --pig: var(--pig-ochre); }
+
 .stack-items li {
+  /* isolation keeps the z-index:-1 wash inside this row's stacking
+     context — without it the wash paints behind the page ground. */
+  position: relative; isolation: isolate;
+  display: flex; align-items: center; gap: 16px;
   padding: 15px 0;
-  border-top: var(--hairline) solid var(--rule-faint);
+}
+.stack-items li:last-child { padding-bottom: 0; }
+
+/* The row's hairline, drawn left→right on reveal. */
+.stack-items li::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0;
+  height: var(--hairline); background: var(--pig); transform-origin: left;
+  transition: transform 420ms var(--ease), height var(--dur-hover) var(--ease);
+}
+/* The hover wash, behind the name. */
+.stack-items li::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--pig) 13%, transparent), transparent 68%);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 220ms var(--ease);
+}
+.stack-chip {
+  flex: none; width: 10px; height: 10px;
+  border-radius: var(--r-chip); background: var(--pig);
+  transition: transform var(--dur-hover) var(--ease), opacity 300ms var(--ease);
+}
+.stack-name {
   font-family: var(--display); font-weight: 700; font-stretch: 106%;
   font-size: 31px; letter-spacing: -0.025em; line-height: 1.15; color: var(--ink);
+  transition: color var(--dur-hover) var(--ease),
+              transform 380ms var(--ease), opacity 380ms var(--ease);
 }
-.stack-items li:first-child { border-top: none; padding-top: 0; }
-.stack-items li:last-child { padding-bottom: 0; }
+
+/* Reveal. The hidden state hangs off .stack-armed, which only React sets
+   after mount — so the pre-rendered HTML ships finished and the section
+   stays complete with JavaScript disabled. --i is the row's index across
+   both groups, making the stagger one run down the whole section. */
+.stack-armed .stack-items li::before { transform: scaleX(0); }
+.stack-armed .stack-chip { opacity: 0; }
+.stack-armed .stack-name { opacity: 0; transform: translateY(10px); }
+
+.stack-in .stack-items li::before,
+.stack-in .stack-chip,
+.stack-in .stack-name { transition-delay: calc(var(--i) * 60ms); }
+.stack-in .stack-items li::before { transform: scaleX(1); }
+.stack-in .stack-chip { opacity: 1; }
+.stack-in .stack-name { opacity: 1; transform: none; }
+
+/* Reduced motion: don't merely collapse the stagger — never hide the rows in
+   the first place, so the section is complete before it is scrolled to. */
+@media (prefers-reduced-motion: reduce) {
+  .stack-armed .stack-items li::before { transform: scaleX(1); }
+  .stack-armed .stack-chip { opacity: 1; }
+  .stack-armed .stack-name { opacity: 1; transform: none; }
+}
+
+/* Hover flood — pointer devices only, so a tap cannot strand a row lit. */
+@media (hover: hover) {
+  .stack-items li:hover::before { height: var(--emphasis); }
+  .stack-items li:hover::after { transform: scaleX(1); }
+  .stack-items li:hover .stack-chip { transform: scale(1.35); }
+  .stack-items li:hover .stack-name { color: var(--pig); }
+}
+
 @media (max-width: 959px) {
   .stack-label { grid-column: span 2; padding-top: 10px; }
   .stack-items { grid-column: span 4; }
-  .stack-items li { font-size: 28px; }
+  .stack-name { font-size: 28px; }
 }
 @media (max-width: 599px) {
   .stack-group { padding: 22px 0; row-gap: 14px; }
   .stack-label, .stack-items { grid-column: span 1; padding-top: 0; }
-  .stack-items li { font-size: 26px; padding: 12px 0; }
+  .stack-items li { padding: 12px 0; gap: 12px; }
+  .stack-chip { width: 8px; height: 8px; }
+  .stack-name { font-size: 26px; }
 }
 
 /* ── SECTION HEADER ─────────────────────────────────── */
@@ -477,6 +593,7 @@ textarea.field-input { resize: vertical; min-height: 96px; }
     animation-duration: 0.001ms !important;
     animation-delay: 0ms !important;
     transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
     scroll-behavior: auto !important;
   }
 }

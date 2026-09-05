@@ -20,9 +20,15 @@ Layout: `frontend/` (Next.js) · `backend/` (Spring Boot) · `docker-compose.yml
 Next.js 14 App Router, TypeScript, React 18. The whole page is assembled in `app/page.tsx` from `app/components/`.
 
 - **Content & i18n:** language-neutral data (links, tech names, project metadata) is in `app/data.ts`; all translatable copy is in `app/i18n/dictionary.ts` keyed by locale (`vi`/`en`). Language state is a client Context in `app/i18n/LanguageProvider.tsx`; components read it via `useLang()`. Default language is **Vietnamese**, persisted to `localStorage` (`"lang"`); the switcher is `LangToggle.tsx`, a two-pill VI/EN control rendered by `SiteNav.tsx` (`Nav.tsx` no longer exists). It stays visible in the nav bar at every width, and a second copy renders at the foot of `MobileNavSheet.tsx` for reachability while the sheet is open below 600px.
-- **Themes:** two — dark (default) and light — switched by `data-theme` on `<html>`, stamped by a blocking head script before first paint and owned by `ThemeProvider`. Accent is the vermilion seal ink `#C8402C` (`#BC4029` on light). Design system: `docs/superpowers/specs/2026-09-02-an-redesign-spec.md`.
+- **Themes:** two — dark (default) and light — switched by `data-theme` on `<html>`, stamped by a blocking head script before first paint and owned by `ThemeProvider`. Accent is the vermilion seal ink `#C8402C` (`#BC4029` on light). The only colours beyond it are the Stack section's seven pigments. Design system: `docs/superpowers/specs/2026-09-02-an-redesign-spec.md`.
 - Routes: `/` and `/work/hajime`, both pre-rendered by `output: "export"`.
-- There is no motion library. One CSS load sequence in the hero; nothing animates on scroll.
+- There is no motion library. One CSS load sequence in the hero. **The Stack section is the
+  one documented exception to the accent and motion rules:** it carries seven `--pig-*` hues
+  (one identity colour per technology, all AA on both grounds) beyond the seal, and one
+  scroll-triggered staggered reveal driven by an `IntersectionObserver` inside `Stack.tsx`.
+  The reveal's hidden state hangs off a `stack-armed` class set only after mount, so the
+  static export still ships the section complete. Nothing else on the site animates on
+  scroll, and no other section takes a second colour — keep it that way.
 
 ```bash
 cd frontend
