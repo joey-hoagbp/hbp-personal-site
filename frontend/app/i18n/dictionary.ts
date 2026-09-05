@@ -152,9 +152,6 @@ export const messages: Record<Lang, Messages> = {
         microservices: "Tách miền nghiệp vụ thành những service hỏng độc lập.",
         grpc: "Hợp đồng có kiểu cho các lời gọi giữa service.",
         mongo: "Mô hình tài liệu, aggregation và index đủ vững.",
-        react: "Trạng thái và vòng render giữ được sự đoán trước.",
-        next: "App Router, static export — và chính trang bạn đang xem.",
-        rest: "Endpoint thiết kế từ hợp đồng, có tài liệu trước khi code.",
       },
     },
     portfolio: {
@@ -322,9 +319,6 @@ export const messages: Record<Lang, Messages> = {
         microservices: "Splitting a domain into services that fail on their own.",
         grpc: "Typed contracts for the calls services make to each other.",
         mongo: "Document modelling, aggregation and indexes that hold up.",
-        react: "Component state and render cycles that stay predictable.",
-        next: "App Router, static export — and the page you are reading.",
-        rest: "Endpoints designed contract-first, documented before built.",
       },
     },
     portfolio: {

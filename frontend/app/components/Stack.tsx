@@ -1,10 +1,10 @@
 "use client";
 
-import { Fragment, useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import SectionHeader from "./SectionHeader";
 import { useLang } from "../i18n/LanguageProvider";
 import { messages } from "../i18n/dictionary";
-import { STACK_GROUPS } from "../data";
+import { STACK_ITEMS } from "../data";
 
 /**
  * The Stack index — the one section that carries colour beyond the seal and
@@ -45,10 +45,6 @@ export default function Stack() {
     return () => io.disconnect();
   }, []);
 
-  // Row index across both groups, so the stagger reads as one run down the
-  // whole section rather than restarting at the second group.
-  let row = 0;
-
   return (
     <section
       ref={sectionRef}
@@ -56,24 +52,22 @@ export default function Stack() {
     >
       <SectionHeader id="skills" label={t.label} />
       <div className="rule" />
-      {STACK_GROUPS.map((group, i) => (
-        <Fragment key={group.key}>
-          <ul className="stack-items">
-            {group.items.map((item) => (
-              <li
-                key={item.key}
-                className={`pig-${item.pigment}`}
-                style={{ "--i": row++ } as CSSProperties}
-              >
-                <span className="stack-chip" aria-hidden="true" />
-                <span className="stack-name">{item.name}</span>
-                <span className="stack-desc">{t.items[item.key]}</span>
-              </li>
-            ))}
-          </ul>
-          {i < STACK_GROUPS.length - 1 && <div className="rule" />}
-        </Fragment>
-      ))}
+      <ul className="stack-items">
+        {STACK_ITEMS.map((item, i) => (
+          <li
+            key={item.key}
+            className={`pig-${item.pigment}`}
+            style={{ "--i": i } as CSSProperties}
+          >
+            <span className="stack-chip" aria-hidden="true" />
+            <span className="stack-name">{item.name}</span>
+            <span className="stack-desc">{t.items[item.key]}</span>
+          </li>
+        ))}
+      </ul>
+      {/* Closes the index the way Experience closes its rows — without it the
+          last row hangs open now that there is no second group below it. */}
+      <div className="rule" />
     </section>
   );
 }

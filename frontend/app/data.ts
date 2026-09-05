@@ -21,43 +21,24 @@ export const SOCIAL_LINKS: { label: string; href: string; icon: "mail" | "github
   { label: "instagram.com/phuc.hoang1510", href: "https://www.instagram.com/phuc.hoang1510", icon: "instagram" },
 ];
 
-// The Stack section: two domain groups, rendered at one weight. The grouping is
-// by domain (what the service is built from vs. how it reaches a user), NOT a
-// skill ranking — the ranked tiers were deliberately removed in 4d26919. The
-// groups are unlabelled: only the rule between them marks the split, so the
-// rows run the full width of the shell.
-// `key` binds a row to its one-line gloss in dictionary.ts (skills.items).
-// `pigment` is likewise an identity hue, not a rank: it names one of the
-// --pig-* tokens in globals.css so the row can colour its own chip and hairline.
-// Separate from the backend's category grouping (Frontend/Backend/Tools) in
-// Profile.techStacks — deliberately not tied to that contract.
+// The Stack section: one flat index, rendered at one weight — NOT a ranking
+// (the ranked tiers were deliberately removed in 4d26919, the domain grouping
+// in a646041). `key` binds a row to its one-line gloss in dictionary.ts
+// (skills.items). `pigment` is an identity hue, not a rank: it names one of
+// the --pig-* tokens in globals.css so the row can colour its own chip and
+// hairline. Separate from the backend's category grouping
+// (Frontend/Backend/Tools) in Profile.techStacks — deliberately not tied to
+// that contract.
 export type Pigment =
   | "vermilion" | "indigo" | "celadon" | "leaf" | "sky" | "amethyst" | "ochre";
 
-export type TechKey =
-  | "spring" | "microservices" | "grpc" | "mongo" | "react" | "next" | "rest";
+export type TechKey = "spring" | "microservices" | "grpc" | "mongo";
 
-export const STACK_GROUPS: {
-  key: "core" | "api";
-  items: { key: TechKey; name: string; pigment: Pigment }[];
-}[] = [
-  {
-    key: "core",
-    items: [
-      { key: "spring", name: "Java Spring Boot", pigment: "vermilion" },
-      { key: "microservices", name: "Microservices", pigment: "indigo" },
-      { key: "grpc", name: "Protobuf gRPC", pigment: "celadon" },
-      { key: "mongo", name: "MongoDB", pigment: "leaf" },
-    ],
-  },
-  {
-    key: "api",
-    items: [
-      { key: "react", name: "ReactJS", pigment: "sky" },
-      { key: "next", name: "NextJS", pigment: "amethyst" },
-      { key: "rest", name: "REST API", pigment: "ochre" },
-    ],
-  },
+export const STACK_ITEMS: { key: TechKey; name: string; pigment: Pigment }[] = [
+  { key: "spring", name: "Java Spring Boot", pigment: "vermilion" },
+  { key: "microservices", name: "Microservices", pigment: "indigo" },
+  { key: "grpc", name: "Protobuf gRPC", pigment: "celadon" },
+  { key: "mongo", name: "MongoDB", pigment: "leaf" },
 ];
 
 /**

@@ -264,9 +264,8 @@ a.proof-value:hover { color: var(--seal-lit); }
      .stack-name  reveal translateY + opacity · hover color
      .stack-desc  reveal translateY + opacity · hover color            */
 .skills { padding-block: var(--section-pad); }
-/* Full-bleed within the shell: the rows start at the page margin, with no
-   label column beside them — the two groups read as one index, parted only
-   by the rule between them. */
+/* Full-bleed within the shell: one flat index, the rows starting at the page
+   margin with no label column beside them. */
 .stack-items { list-style: none; padding: 30px 0; }
 
 /* Pigment binding: the only place a row learns its hue. */
@@ -327,8 +326,8 @@ a.proof-value:hover { color: var(--seal-lit); }
 
 /* Reveal. The hidden state hangs off .stack-armed, which only React sets
    after mount — so the pre-rendered HTML ships finished and the section
-   stays complete with JavaScript disabled. --i is the row's index across
-   both groups, making the stagger one run down the whole section. */
+   stays complete with JavaScript disabled. --i is the row's index down
+   the section, making the stagger one run down it. */
 .stack-armed .stack-items li::before { transform: scaleX(0); }
 .stack-armed .stack-chip { opacity: 0; }
 .stack-armed .stack-name,
