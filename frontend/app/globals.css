@@ -261,17 +261,13 @@ a.proof-value:hover { color: var(--seal-lit); }
      li::before   reveal scaleX   · hover height
      li::after    hover  scaleX   (untouched by the reveal)
      .stack-chip  reveal opacity  · hover scale
-     .stack-name  reveal translateY + opacity · hover color            */
+     .stack-name  reveal translateY + opacity · hover color
+     .stack-desc  reveal translateY + opacity · hover color            */
 .skills { padding-block: var(--section-pad); }
-.stack-group { align-items: start; padding: 30px 0; }
-.stack-label {
-  grid-column: span 3; padding-top: 13px;
-  font-family: var(--mono); font-size: 11px; font-weight: 500;
-  letter-spacing: 0.19em; text-transform: uppercase; color: var(--faint);
-  line-height: 1.75; text-wrap: balance;
-}
-.stack-core .stack-label { color: var(--seal-lit); }
-.stack-items { grid-column: span 9; list-style: none; }
+/* Full-bleed within the shell: the rows start at the page margin, with no
+   label column beside them — the two groups read as one index, parted only
+   by the rule between them. */
+.stack-items { list-style: none; padding: 30px 0; }
 
 /* Pigment binding: the only place a row learns its hue. */
 .pig-vermilion { --pig: var(--pig-vermilion); }
@@ -286,7 +282,7 @@ a.proof-value:hover { color: var(--seal-lit); }
   /* isolation keeps the z-index:-1 wash inside this row's stacking
      context — without it the wash paints behind the page ground. */
   position: relative; isolation: isolate;
-  display: flex; align-items: center; gap: 16px;
+  display: flex; align-items: baseline; gap: 16px;
   padding: 15px 0;
 }
 .stack-items li:last-child { padding-bottom: 0; }
@@ -306,9 +302,21 @@ a.proof-value:hover { color: var(--seal-lit); }
   transition: transform 220ms var(--ease);
 }
 .stack-chip {
-  flex: none; width: 10px; height: 10px;
+  /* The row aligns on the text baseline, so the chip's own baseline is its
+     bottom edge — margin-bottom (not transform, which the reveal and the
+     hover already spend) lifts it into the name's x-height. */
+  flex: none; width: 10px; height: 10px; margin-bottom: 3px;
   border-radius: var(--r-chip); background: var(--pig);
   transition: transform var(--dur-hover) var(--ease), opacity 300ms var(--ease);
+}
+/* The gloss: one line on what the technology is used for. Pushed to its own
+   right-hand rail so the names keep a clean left edge. */
+.stack-desc {
+  margin-left: auto; flex: 0 1 440px; padding-left: 32px;
+  font-size: 14.5px; line-height: 1.5; color: var(--ink-2);
+  text-align: right; text-wrap: pretty;
+  transition: color var(--dur-hover) var(--ease),
+              transform 380ms var(--ease), opacity 380ms var(--ease);
 }
 .stack-name {
   font-family: var(--display); font-weight: 700; font-stretch: 106%;
@@ -323,14 +331,17 @@ a.proof-value:hover { color: var(--seal-lit); }
    both groups, making the stagger one run down the whole section. */
 .stack-armed .stack-items li::before { transform: scaleX(0); }
 .stack-armed .stack-chip { opacity: 0; }
-.stack-armed .stack-name { opacity: 0; transform: translateY(10px); }
+.stack-armed .stack-name,
+.stack-armed .stack-desc { opacity: 0; transform: translateY(10px); }
 
 .stack-in .stack-items li::before,
 .stack-in .stack-chip,
-.stack-in .stack-name { transition-delay: calc(var(--i) * 60ms); }
+.stack-in .stack-name,
+.stack-in .stack-desc { transition-delay: calc(var(--i) * 60ms); }
 .stack-in .stack-items li::before { transform: scaleX(1); }
 .stack-in .stack-chip { opacity: 1; }
 .stack-in .stack-name { opacity: 1; transform: none; }
+.stack-in .stack-desc { opacity: 1; transform: none; }
 
 /* Reduced motion: don't merely collapse the stagger — never hide the rows in
    the first place, so the section is complete before it is scrolled to. */
@@ -338,6 +349,7 @@ a.proof-value:hover { color: var(--seal-lit); }
   .stack-armed .stack-items li::before { transform: scaleX(1); }
   .stack-armed .stack-chip { opacity: 1; }
   .stack-armed .stack-name { opacity: 1; transform: none; }
+  .stack-armed .stack-desc { opacity: 1; transform: none; }
 }
 
 /* Hover flood — pointer devices only, so a tap cannot strand a row lit. */
@@ -346,19 +358,28 @@ a.proof-value:hover { color: var(--seal-lit); }
   .stack-items li:hover::after { transform: scaleX(1); }
   .stack-items li:hover .stack-chip { transform: scale(1.35); }
   .stack-items li:hover .stack-name { color: var(--pig); }
+  .stack-items li:hover .stack-desc { color: var(--ink); }
 }
 
 @media (max-width: 959px) {
-  .stack-label { grid-column: span 2; padding-top: 10px; }
-  .stack-items { grid-column: span 4; }
   .stack-name { font-size: 28px; }
+  .stack-desc { flex-basis: 360px; padding-left: 24px; font-size: 13.5px; }
+}
+/* Below 700px the gloss no longer fits beside the name: it drops under it on
+   its own row, left-aligned and indented past the chip. */
+@media (max-width: 699px) {
+  .stack-items { padding: 22px 0; }
+  .stack-items li { padding: 13px 0; gap: 0 12px; flex-wrap: wrap; }
+  .stack-desc {
+    margin-left: 0; flex: 1 0 100%; padding-left: 22px; padding-top: 6px;
+    text-align: left;
+  }
 }
 @media (max-width: 599px) {
-  .stack-group { padding: 22px 0; row-gap: 14px; }
-  .stack-label, .stack-items { grid-column: span 1; padding-top: 0; }
-  .stack-items li { padding: 12px 0; gap: 12px; }
+  .stack-items li { padding: 12px 0; }
   .stack-chip { width: 8px; height: 8px; }
   .stack-name { font-size: 26px; }
+  .stack-desc { padding-left: 20px; font-size: 13.5px; }
 }
 
 /* ── SECTION HEADER ─────────────────────────────────── */

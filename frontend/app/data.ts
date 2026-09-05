@@ -23,7 +23,10 @@ export const SOCIAL_LINKS: { label: string; href: string; icon: "mail" | "github
 
 // The Stack section: two domain groups, rendered at one weight. The grouping is
 // by domain (what the service is built from vs. how it reaches a user), NOT a
-// skill ranking — the ranked tiers were deliberately removed in 4d26919.
+// skill ranking — the ranked tiers were deliberately removed in 4d26919. The
+// groups are unlabelled: only the rule between them marks the split, so the
+// rows run the full width of the shell.
+// `key` binds a row to its one-line gloss in dictionary.ts (skills.items).
 // `pigment` is likewise an identity hue, not a rank: it names one of the
 // --pig-* tokens in globals.css so the row can colour its own chip and hairline.
 // Separate from the backend's category grouping (Frontend/Backend/Tools) in
@@ -31,25 +34,28 @@ export const SOCIAL_LINKS: { label: string; href: string; icon: "mail" | "github
 export type Pigment =
   | "vermilion" | "indigo" | "celadon" | "leaf" | "sky" | "amethyst" | "ochre";
 
+export type TechKey =
+  | "spring" | "microservices" | "grpc" | "mongo" | "react" | "next" | "rest";
+
 export const STACK_GROUPS: {
-  key: "groupCore" | "groupApi";
-  items: { name: string; pigment: Pigment }[];
+  key: "core" | "api";
+  items: { key: TechKey; name: string; pigment: Pigment }[];
 }[] = [
   {
-    key: "groupCore",
+    key: "core",
     items: [
-      { name: "Java Spring Boot", pigment: "vermilion" },
-      { name: "Microservices", pigment: "indigo" },
-      { name: "Protobuf gRPC", pigment: "celadon" },
-      { name: "MongoDB", pigment: "leaf" },
+      { key: "spring", name: "Java Spring Boot", pigment: "vermilion" },
+      { key: "microservices", name: "Microservices", pigment: "indigo" },
+      { key: "grpc", name: "Protobuf gRPC", pigment: "celadon" },
+      { key: "mongo", name: "MongoDB", pigment: "leaf" },
     ],
   },
   {
-    key: "groupApi",
+    key: "api",
     items: [
-      { name: "ReactJS", pigment: "sky" },
-      { name: "NextJS", pigment: "amethyst" },
-      { name: "REST API", pigment: "ochre" },
+      { key: "react", name: "ReactJS", pigment: "sky" },
+      { key: "next", name: "NextJS", pigment: "amethyst" },
+      { key: "rest", name: "REST API", pigment: "ochre" },
     ],
   },
 ];

@@ -9,7 +9,8 @@ import { STACK_GROUPS } from "../data";
 /**
  * The Stack index — the one section that carries colour beyond the seal and
  * the one thing on the site that animates on scroll (see globals.css, SKILLS).
- * Each technology owns a pigment, shown at rest as its chip and its hairline.
+ * Each technology owns a pigment, shown at rest as its chip and its hairline,
+ * and a one-line gloss on the right-hand rail (dictionary.ts, skills.items).
  *
  * The reveal is two flags, deliberately:
  *   stack-armed  applies the hidden state, and is set only after mount — so
@@ -57,21 +58,19 @@ export default function Stack() {
       <div className="rule" />
       {STACK_GROUPS.map((group, i) => (
         <Fragment key={group.key}>
-          <div className={`g12 stack-group stack-${group.key === "groupCore" ? "core" : "api"}`}>
-            <p className="stack-label">{t[group.key]}</p>
-            <ul className="stack-items">
-              {group.items.map((item) => (
-                <li
-                  key={item.name}
-                  className={`pig-${item.pigment}`}
-                  style={{ "--i": row++ } as CSSProperties}
-                >
-                  <span className="stack-chip" aria-hidden="true" />
-                  <span className="stack-name">{item.name}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <ul className="stack-items">
+            {group.items.map((item) => (
+              <li
+                key={item.key}
+                className={`pig-${item.pigment}`}
+                style={{ "--i": row++ } as CSSProperties}
+              >
+                <span className="stack-chip" aria-hidden="true" />
+                <span className="stack-name">{item.name}</span>
+                <span className="stack-desc">{t.items[item.key]}</span>
+              </li>
+            ))}
+          </ul>
           {i < STACK_GROUPS.length - 1 && <div className="rule" />}
         </Fragment>
       ))}

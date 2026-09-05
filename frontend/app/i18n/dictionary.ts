@@ -6,6 +6,8 @@
 //  the offline fallback.
 // ============================================================
 
+import type { TechKey } from "../data";
+
 export type Lang = "vi" | "en";
 
 export type Messages = {
@@ -31,8 +33,8 @@ export type Messages = {
   };
   skills: {
     label: string;
-    groupCore: string;
-    groupApi: string;
+    // One gloss per technology, keyed by TechKey in data.ts.
+    items: Record<TechKey, string>;
   };
   portfolio: {
     label: string;
@@ -145,8 +147,15 @@ export const messages: Record<Lang, Messages> = {
     },
     skills: {
       label: "Kỹ năng · Stack",
-      groupCore: "Backend · hằng ngày",
-      groupApi: "Giao diện · API",
+      items: {
+        spring: "Dịch vụ REST, xác thực và tầng dữ liệu tôi viết mỗi ngày.",
+        microservices: "Tách miền nghiệp vụ thành những service hỏng độc lập.",
+        grpc: "Hợp đồng có kiểu cho các lời gọi giữa service.",
+        mongo: "Mô hình tài liệu, aggregation và index đủ vững.",
+        react: "Trạng thái và vòng render giữ được sự đoán trước.",
+        next: "App Router, static export — và chính trang bạn đang xem.",
+        rest: "Endpoint thiết kế từ hợp đồng, có tài liệu trước khi code.",
+      },
     },
     portfolio: {
       label: "Sản Phẩm",
@@ -308,8 +317,15 @@ export const messages: Record<Lang, Messages> = {
     },
     skills: {
       label: "Skills · Stack",
-      groupCore: "Backend · daily",
-      groupApi: "Interface · API",
+      items: {
+        spring: "REST services, auth and data layers I write day to day.",
+        microservices: "Splitting a domain into services that fail on their own.",
+        grpc: "Typed contracts for the calls services make to each other.",
+        mongo: "Document modelling, aggregation and indexes that hold up.",
+        react: "Component state and render cycles that stay predictable.",
+        next: "App Router, static export — and the page you are reading.",
+        rest: "Endpoints designed contract-first, documented before built.",
+      },
     },
     portfolio: {
       label: "Portfolio",
