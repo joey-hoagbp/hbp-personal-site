@@ -32,7 +32,6 @@ export default function ProofRow() {
             ) : (
               <span className="proof-value">{it.value}</span>
             )}
-            <span className="meta">{it.note}</span>
           </div>
         ))}
       </div>

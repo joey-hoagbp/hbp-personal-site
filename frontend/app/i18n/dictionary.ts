@@ -25,11 +25,10 @@ export type Messages = {
     };
   };
   proof: {
-    shipped: { label: string; value: string; note: string };
-    now:     { label: string; value: string; note: string };
-    source:  { label: string; value: string; note: string };
+    shipped: { label: string; value: string };
+    now:     { label: string; value: string };
+    source:  { label: string; value: string };
   };
-  currently: { prefix: string };
   skills: {
     label: string;
     groupCore: string;
@@ -140,11 +139,10 @@ export const messages: Record<Lang, Messages> = {
       },
     },
     proof: {
-      shipped: { label: "Đã phát hành", value: "Hajime", note: "Android · APK cài được ngay · React Native + Spring Boot" },
-      now:     { label: "Hiện tại", value: "Dr.JOY Việt Nam", note: "Kỹ sư backend · Java · Spring Boot · từ 3/2026" },
-      source:  { label: "Mã nguồn", value: "joey-hoagbp", note: "github.com · 3 công ty trong 2 năm" },
+      shipped: { label: "Đã phát hành", value: "Hajime" },
+      now:     { label: "Hiện tại", value: "Dr.JOY Việt Nam" },
+      source:  { label: "Mã nguồn", value: "joey-hoagbp" },
     },
-    currently: { prefix: "hiện tại" },
     skills: {
       label: "Kỹ năng · Stack",
       groupCore: "Backend · hằng ngày",
@@ -304,11 +302,10 @@ export const messages: Record<Lang, Messages> = {
       },
     },
     proof: {
-      shipped: { label: "Shipped", value: "Hajime", note: "Android · installable APK · React Native + Spring Boot" },
-      now:     { label: "Currently", value: "Dr.JOY Vietnam", note: "Backend engineer · Java · Spring Boot · since 3/2026" },
-      source:  { label: "Source", value: "joey-hoagbp", note: "github.com · 3 companies in 2 years" },
+      shipped: { label: "Shipped", value: "Hajime" },
+      now:     { label: "Currently", value: "Dr.JOY Vietnam" },
+      source:  { label: "Source", value: "joey-hoagbp" },
     },
-    currently: { prefix: "currently" },
     skills: {
       label: "Skills · Stack",
       groupCore: "Backend · daily",

@@ -1,7 +1,6 @@
 import SiteNav from "./components/SiteNav";
 import Hero from "./components/Hero";
 import ProofRow from "./components/ProofRow";
-import Currently from "./components/Currently";
 import Stack from "./components/Stack";
 import Work from "./components/Work";
 import Experience from "./components/Experience";
@@ -19,7 +18,6 @@ export default async function Home() {
       <main>
         <Hero />
         <ProofRow />
-        <Currently />
         <Stack />
         <Work projects={PROJECTS} />
         <Experience experience={profile.experiences} education={profile.education} />

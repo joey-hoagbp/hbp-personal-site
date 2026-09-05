@@ -18,13 +18,6 @@ export const SOCIAL_LINKS: { label: string; href: string; icon: "mail" | "github
   { label: "instagram.com/phuc.hoang1510", href: "https://www.instagram.com/phuc.hoang1510", icon: "instagram" },
 ];
 
-// "Currently" status strip shown under the hero — a small, human touch.
-export const CURRENTLY: { text: Localized }[] = [
-  { text: { vi: "xây dựng backend tại Dr.JOY", en: "building backend @ Dr.JOY" } },
-  { text: { vi: "học sâu hơn về hệ thống phân tán", en: "learning distributed systems" } },
-  { text: { vi: "nghe lo-fi khi code", en: "coding to lo-fi" } },
-];
-
 // The Stack section: two domain groups, rendered at one weight. The grouping is
 // by domain (what the service is built from vs. how it reaches a user), NOT a
 // skill ranking — the ranked tiers were deliberately removed in 4d26919.
