@@ -488,36 +488,32 @@ a.proof-value:hover { color: var(--seal-lit); }
 .ds-gloss-title { font-size: 12px; color: #fff; }
 .ds-gloss-body { font-size: 9.5px; color: rgba(255,255,255,.36); line-height: 1.6; white-space: pre-line; }
 
-/* ── EXPERIENCE ─────────────────────────────────────── */
-.experience { padding-block: var(--section-pad); }
-.exp-row { padding: 34px 0; align-items: baseline; }
-.exp-date {
+/* ── EXPERIENCE + EDUCATION ─────────────────────────────
+   Two sections, one timeline row: same date / role / note grid, so the
+   two histories read as one column of records. .tl-desc is optional —
+   an education row with no note simply leaves column 9-12 empty. */
+.experience, .education { padding-block: var(--section-pad); }
+.tl-row { padding: 34px 0; align-items: baseline; }
+.tl-date {
   grid-column: span 3;
   font-family: var(--display); font-weight: 700; font-stretch: 104%;
   font-size: 34px; letter-spacing: -0.025em; line-height: 1;
   color: var(--ink); font-variant-numeric: tabular-nums;
 }
-.exp-role { grid-column: span 5; display: flex; flex-direction: column; gap: 7px; }
-.exp-title { font-size: 20px; font-weight: 600; color: var(--ink); }
-.exp-org { font-size: 15px; color: var(--seal-lit); }
-.exp-desc { grid-column: 9 / span 4; font-size: 15px; }
-.edu-row { padding-top: 28px; }
-.edu-row > .meta { grid-column: span 3; }
-.edu-items { grid-column: span 9; display: flex; gap: 56px; }
-.edu-title { color: var(--ink-2); }
+.tl-role { grid-column: span 5; display: flex; flex-direction: column; gap: 7px; }
+.tl-title { font-size: 20px; font-weight: 600; color: var(--ink); }
+.tl-org { font-size: 15px; color: var(--seal-lit); }
+.tl-desc { grid-column: 9 / span 4; font-size: 15px; }
 @media (max-width: 959px) {
-  .exp-date { grid-column: span 6; font-size: 30px; }
-  .exp-role { grid-column: span 3; }
-  .exp-desc { grid-column: span 3; }
-  .edu-row > .meta, .edu-items { grid-column: span 6; }
+  .tl-date { grid-column: span 6; font-size: 30px; }
+  .tl-role { grid-column: span 3; }
+  .tl-desc { grid-column: span 3; }
 }
 @media (max-width: 599px) {
-  .exp-row { padding: 22px 0; row-gap: 8px; }
-  .exp-date, .exp-role, .exp-desc { grid-column: span 1; }
-  .exp-date { font-size: 28px; }
-  .exp-title { font-size: 17px; }
-  .edu-row > .meta, .edu-items { grid-column: span 1; }
-  .edu-items { flex-direction: column; gap: 14px; }
+  .tl-row { padding: 22px 0; row-gap: 8px; }
+  .tl-date, .tl-role, .tl-desc { grid-column: span 1; }
+  .tl-date { font-size: 28px; }
+  .tl-title { font-size: 17px; }
 }
 
 /* ── CONTACT ────────────────────────────────────────── */
@@ -756,7 +752,7 @@ textarea.field-input { resize: vertical; min-height: 96px; }
 }
 .sheet-cta { margin: 16px var(--page-margin); width: auto; }
 .sheet-foot { padding: 0 var(--page-margin) 18px; }
-@media (min-width: 600px) { .sheet { display: none; } }
+@media (min-width: 768px) { .sheet { display: none; } }
 
 /* ── NAV ────────────────────────────────────────────── */
 .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
@@ -768,7 +764,9 @@ textarea.field-input { resize: vertical; min-height: 96px; }
 .nav-inner {
   height: 78px; display: flex; align-items: center; justify-content: space-between;
 }
-.nav-logo { text-decoration: none; }
+/* flex: none — the wordmark is a flex item next to a long .nav-right;
+   without it the mark shrinks and wraps to two lines in the tablet band. */
+.nav-logo { text-decoration: none; flex: none; }
 .nav-right { display: flex; align-items: center; gap: 24px; }
 .nav-links { display: flex; align-items: center; gap: 30px; list-style: none; }
 .nav-link {
@@ -783,8 +781,8 @@ textarea.field-input { resize: vertical; min-height: 96px; }
 .nav-menu { display: none; }
 
 @media (max-width: 959px) {
-  /* Between 600 and 959px the hamburger is still hidden (it only appears
-     below 600px), so .nav-link/.nav-cta are live touch targets here — spec
+  /* Between 768 and 959px the hamburger is still hidden (it only appears
+     below 768px), so .nav-link/.nav-cta are live touch targets here — spec
      §5's 48px floor applies. display: inline-flex is needed for min-height
      to take effect on .nav-link (a non-replaced inline anchor ignores it
      otherwise); .nav-cta already gets inline-flex from .btn. Nav bar height
@@ -793,8 +791,13 @@ textarea.field-input { resize: vertical; min-height: 96px; }
   .nav-cta { min-height: 48px; }
 }
 
-@media (max-width: 599px) {
-  .nav-inner { height: 60px; }
+/* Four section links, the language pills, the theme toggle and the CTA stop
+   fitting one bar below 768px — by 600px the CTA is pushed off the right edge
+   however tight the gaps get, and the wordmark runs into the first link well
+   before that. The sheet carries all of them from here down: it opens on the
+   hamburger and its foot repeats the language and theme controls.
+   MobileNavSheet's auto-close media query tracks this width. */
+@media (max-width: 767px) {
   /* Ruling F2: scope to .nav-right so the same control inside .sheet-foot stays reachable. */
   .nav-links, .nav-divider, .nav-cta, .nav-right .theme-toggle { display: none; }
   .nav-menu {
@@ -804,6 +807,10 @@ textarea.field-input { resize: vertical; min-height: 96px; }
     border-radius: 5px; cursor: pointer;
   }
   .nav-menu svg { width: 19px; height: 19px; }
+}
+
+@media (max-width: 599px) {
+  .nav-inner { height: 60px; }
 }
 
 /* ── CASE STUDY (Hajime, /work/hajime) ──────────────────

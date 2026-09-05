@@ -1,7 +1,7 @@
 // ============================================================
 //  All translatable copy, keyed by locale.
 //  Language-neutral data (URLs, tech names, chips, skills, projects) stays in data.ts.
-//  Only Experience's timeline (work history + education) is fetched from the
+//  Only the Experience and Education timelines are fetched from the
 //  backend profile API (see lib/api.ts), with data.ts's DEFAULT_PROFILE as
 //  the offline fallback.
 // ============================================================
@@ -12,7 +12,7 @@ export type Lang = "vi" | "en";
 
 export type Messages = {
   nav: {
-    skills: string; work: string; experience: string; contact: string;
+    skills: string; work: string; experience: string; education: string; contact: string;
     menu: string; close: string; toLight: string; toDark: string;
   };
   hero: {
@@ -53,7 +53,9 @@ export type Messages = {
   };
   experience: {
     label: string;
-    education: string;
+  };
+  education: {
+    label: string;
   };
   contact: {
     label: string;
@@ -123,7 +125,7 @@ export const LANG_LABELS: Record<Lang, string> = {
 export const messages: Record<Lang, Messages> = {
   vi: {
     nav: {
-      skills: "Kỹ năng", work: "Sản phẩm", experience: "Kinh nghiệm", contact: "Liên hệ",
+      skills: "Kỹ năng", work: "Sản phẩm", experience: "Kinh nghiệm", education: "Học vấn", contact: "Liên hệ",
       menu: "Mở menu", close: "Đóng menu",
       toLight: "Chuyển sang giao diện sáng", toDark: "Chuyển sang giao diện tối",
     },
@@ -180,7 +182,9 @@ export const messages: Record<Lang, Messages> = {
     },
     experience: {
       label: "Kinh nghiệm · Experience",
-      education: "Học vấn",
+    },
+    education: {
+      label: "Học vấn · Education",
     },
     contact: {
       label: "Liên Hệ",
@@ -290,7 +294,7 @@ export const messages: Record<Lang, Messages> = {
 
   en: {
     nav: {
-      skills: "Skills", work: "Work", experience: "Experience", contact: "Contact",
+      skills: "Skills", work: "Work", experience: "Experience", education: "Education", contact: "Contact",
       menu: "Open menu", close: "Close menu",
       toLight: "Switch to light theme", toDark: "Switch to dark theme",
     },
@@ -347,7 +351,9 @@ export const messages: Record<Lang, Messages> = {
     },
     experience: {
       label: "Experience",
-      education: "Education",
+    },
+    education: {
+      label: "Education",
     },
     contact: {
       label: "Contact",

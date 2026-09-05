@@ -8,11 +8,12 @@ import LangToggle from "./LangToggle";
 import ThemeToggle from "./ThemeToggle";
 import MobileNavSheet from "./MobileNavSheet";
 
-const SECTION_IDS = ["skills", "portfolio", "experience", "contact"] as const;
+const SECTION_IDS = ["skills", "portfolio", "experience", "education", "contact"] as const;
 const LINKS = [
   { id: "skills", key: "skills" },
   { id: "portfolio", key: "work" },
   { id: "experience", key: "experience" },
+  { id: "education", key: "education" },
 ] as const;
 
 export default function SiteNav({ home = true }: { home?: boolean }) {
@@ -44,7 +45,8 @@ export default function SiteNav({ home = true }: { home?: boolean }) {
     // 600px+ device stage — it exits the mid-viewport band while the section
     // is still on screen, dropping the nav highlight early. closest("section")
     // walks up to the enclosing <section> in every case (Skills, Portfolio,
-    // Experience and Contact all route their id through SectionHeader now),
+    // Experience, Education and Contact all route their id through
+    // SectionHeader now),
     // and is a harmless no-op if a future section ever puts its id directly
     // on the <section> element instead.
     const idByElement = new Map<Element, string>();

@@ -11,6 +11,7 @@ const LINKS = [
   { id: "skills", key: "skills" },
   { id: "portfolio", key: "work" },
   { id: "experience", key: "experience" },
+  { id: "education", key: "education" },
 ] as const;
 
 export default function MobileNavSheet({
@@ -42,11 +43,12 @@ export default function MobileNavSheet({
       else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     }
 
-    // The sheet is CSS-hidden at >=600px but stays mounted; without this, a
-    // mouse-only user who resizes past that breakpoint while it's open is
-    // left with body scroll locked and a focus trap armed on an invisible
-    // dialog, with no visible control to escape it.
-    const mql = window.matchMedia("(min-width: 600px)");
+    // The sheet is CSS-hidden at >=768px (globals.css collapses the bar's
+    // links into it below that) but stays mounted; without this, a mouse-only
+    // user who resizes past that breakpoint while it's open is left with body
+    // scroll locked and a focus trap armed on an invisible dialog, with no
+    // visible control to escape it.
+    const mql = window.matchMedia("(min-width: 768px)");
     function onViewportChange(e: MediaQueryListEvent | MediaQueryList) {
       if (e.matches) onClose();
     }
