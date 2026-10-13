@@ -4,6 +4,7 @@ import CaseHero from "../../components/case/CaseHero";
 import DeviceStrip from "../../components/case/DeviceStrip";
 import DecisionDiagram from "../../components/case/DecisionDiagram";
 import StatusColumns from "../../components/case/StatusColumns";
+import CaseTour from "../../components/case/CaseTour";
 import CaseProblem from "../../components/case/CaseProblem";
 import CaseStack from "../../components/case/CaseStack";
 import CaseCta from "../../components/case/CaseCta";
@@ -24,6 +25,7 @@ export default function HajimePage() {
         <DecisionDiagram />
         <CaseStack />
         <StatusColumns />
+        <CaseTour />
         <CaseCta />
       </main>
       <Footer />

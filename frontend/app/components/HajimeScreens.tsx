@@ -13,7 +13,7 @@ import DeviceFrame from "./DeviceFrame";
 // screens get a vertical offset is a layout concern of the call site (see
 // `.device-strip-row` in globals.css), not something threaded back in here.
 
-function Screenshot({ src, alt }: { src: string; alt: string }) {
+export function Screenshot({ src, alt }: { src: string; alt: string }) {
   return <img className="device-shot" src={src} alt={alt} width={540} height={1170} loading="lazy" />;
 }
 

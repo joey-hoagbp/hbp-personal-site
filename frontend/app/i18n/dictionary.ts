@@ -6,7 +6,7 @@
 //  the offline fallback.
 // ============================================================
 
-import type { TechKey } from "../data";
+import type { HajimeTourId, TechKey } from "../data";
 
 export type Lang = "vi" | "en";
 
@@ -100,6 +100,13 @@ export type Messages = {
       sharedNote: string;
     };
     stack: { label: string };
+    tour: {
+      label: string;
+      title: string;
+      note: string;
+      regionLabel: string;
+      screens: Record<HajimeTourId, { name: string; caption: string }>;
+    };
     status: {
       label: string;
       title: string;
@@ -250,6 +257,21 @@ export const messages: Record<Lang, Messages> = {
           "lệch một ngày cũng bị bắt lỗi.",
       },
       stack: { label: "Công Nghệ" },
+      tour: {
+        label: "Giao diện",
+        title: "Từ đăng nhập đến chuỗi ngày — bảy màn hình.",
+        note: "Ảnh chụp thật từ bản release, theo đúng thứ tự người học mới gặp chúng.",
+        regionLabel: "Các màn hình của Hajime — cuộn ngang để xem hết",
+        screens: {
+          signin: { name: "Đăng nhập", caption: "Đăng nhập bằng Google — cách duy nhất để vào app." },
+          learn: { name: "Học", caption: "Lộ trình bài học; Mochi chỉ bài tiếp theo." },
+          teach: { name: "Dạy", caption: "Mỗi chữ mới được dạy trước, kèm âm thanh." },
+          check: { name: "Kiểm tra", caption: "Rồi mới kiểm tra — xong bài, thẻ chuyển sang lịch ôn SM-2." },
+          kana: { name: "Kana", caption: "Bảng Hiragana và Katakana, đếm số chữ đã thuộc." },
+          streak: { name: "Chuỗi", caption: "Chuỗi ngày, bản đồ hoạt động, XP và thành tích." },
+          you: { name: "Bạn", caption: "Mục tiêu hằng ngày, giờ nhắc, furigana và ngôn ngữ." },
+        },
+      },
       status: {
         label: "Tình Trạng",
         title: "Những gì đã chạy thật, và những gì chưa.",
@@ -411,6 +433,21 @@ export const messages: Record<Lang, Messages> = {
           "a one-day drift fails the suite.",
       },
       stack: { label: "Stack" },
+      tour: {
+        label: "Screens",
+        title: "From sign-in to streak — seven screens.",
+        note: "Real screenshots of the release build, in the order a new learner meets them.",
+        regionLabel: "Hajime's screens — scroll sideways to see them all",
+        screens: {
+          signin: { name: "Sign in", caption: "Google Sign-In — the only way in." },
+          learn: { name: "Learn", caption: "The lesson path, with Mochi pointing at the next one." },
+          teach: { name: "Teach", caption: "Each new character is taught first, with its audio." },
+          check: { name: "Check", caption: "Then checked — finish the lesson and its cards join the SM-2 schedule." },
+          kana: { name: "Kana", caption: "Hiragana and Katakana charts, counting what you've mastered." },
+          streak: { name: "Streak", caption: "Day streak, activity heatmap, XP and achievements." },
+          you: { name: "You", caption: "Daily goal, reminder time, furigana and language." },
+        },
+      },
       status: {
         label: "Status",
         title: "What actually runs, and what doesn't yet.",

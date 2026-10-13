@@ -162,6 +162,22 @@ export const HAJIME_CASE_STACK: string[] = [
   "JWT",
 ];
 
+// The Hajime case study's screen tour (/work/hajime), in the order a new
+// learner meets them. Screenshots of the release build; each screen's name
+// and caption live in dictionary.ts under caseHajime.tour.screens[id].
+export type HajimeTourId = "signin" | "learn" | "teach" | "check" | "kana" | "streak" | "you";
+
+export const HAJIME_TOUR: { id: HajimeTourId; src: string }[] = [
+  { id: "signin", src: "/hajime/signin.webp" },
+  { id: "learn", src: "/hajime/learn.webp" },
+  { id: "teach", src: "/hajime/teach.webp" },
+  { id: "check", src: "/hajime/check.webp" },
+  { id: "kana", src: "/hajime/kana.webp" },
+  { id: "streak", src: "/hajime/streak.webp" },
+  // The account email on this screen is blurred before export.
+  { id: "you", src: "/hajime/you.webp" },
+];
+
 /**
  * Content-in-code project list rendered by the Work section — the owner adds
  * projects here (zero backend changes needed). Distinct from
