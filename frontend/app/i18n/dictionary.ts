@@ -46,10 +46,7 @@ export type Messages = {
     caseStudy: string;
   };
   device: {
-    streak: string; charNote: string; hard: string; got: string;
-    strokeLabel: string; kanjiReading: string; kanjiGloss: string;
-    dueBadge: string; dueUnit: string; dueNote: string;
-    reviewProgressLabel: string; skip: string; startReview: string;
+    learnAlt: string; kanaAlt: string; checkAlt: string;
   };
   experience: {
     label: string;
@@ -166,19 +163,9 @@ export const messages: Record<Lang, Messages> = {
       caseStudy: "Đọc case study",
     },
     device: {
-      streak: "7 ngày",
-      charNote: "hàng A · nguyên âm",
-      hard: "Khó",
-      got: "Nhớ rồi",
-      strokeLabel: "THỨ TỰ NÉT · KANJI N5",
-      kanjiReading: "NHẬT",
-      kanjiGloss: "mặt trời, ngày — 4 nét\nにち · ひ",
-      dueBadge: "12 thẻ đến hạn",
-      dueUnit: "thẻ hôm nay",
-      dueNote: "lịch ôn tính bởi SM-2",
-      reviewProgressLabel: "Đã ôn",
-      skip: "Bỏ qua",
-      startReview: "Ôn ngay",
+      learnAlt: "Tab Học của Hajime: lộ trình bài học, các bài đã xong và bài tiếp theo cùng Mochi",
+      kanaAlt: "Tab Kana của Hajime: bảng Hiragana xếp theo hàng",
+      checkAlt: "Một câu kiểm tra trong bài học Hajime, trả lời đúng cách đọc của な",
     },
     experience: {
       label: "Kinh nghiệm · Experience",
@@ -335,19 +322,9 @@ export const messages: Record<Lang, Messages> = {
       caseStudy: "Read the case study",
     },
     device: {
-      streak: "7 days",
-      charNote: "A-row · vowel",
-      hard: "Hard",
-      got: "Got it",
-      strokeLabel: "STROKE ORDER · N5 KANJI",
-      kanjiReading: "NICHI",
-      kanjiGloss: "sun, day — 4 strokes\nにち · ひ",
-      dueBadge: "12 cards due",
-      dueUnit: "cards today",
-      dueNote: "scheduled by SM-2",
-      reviewProgressLabel: "Reviewed",
-      skip: "Skip",
-      startReview: "Review now",
+      learnAlt: "Hajime's Learn tab: the lesson path, finished lessons and the next one with Mochi",
+      kanaAlt: "Hajime's Kana tab: the Hiragana chart grouped by row",
+      checkAlt: "A check question in a Hajime lesson, answered with the correct reading of な",
     },
     experience: {
       label: "Experience",

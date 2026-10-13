@@ -1,6 +1,6 @@
 "use client";
 
-import { KanaScreen, KanjiScreen } from "./HajimeScreens";
+import { CheckScreen, LearnScreen } from "./HajimeScreens";
 import { useLang } from "../i18n/LanguageProvider";
 import { messages } from "../i18n/dictionary";
 import { loc, type Project } from "../../lib/api";
@@ -40,8 +40,8 @@ export default function WorkFeature({ project }: { project: Project }) {
       </div>
 
       <div className="work-stage">
-        <KanaScreen />
-        <KanjiScreen />
+        <LearnScreen />
+        <CheckScreen />
       </div>
     </div>
   );

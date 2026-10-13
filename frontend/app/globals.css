@@ -40,10 +40,9 @@
   --pig-amethyst:      #A07CE8;
   --pig-ochre:         #D9A441;
 
-  /* ── app mockup (theme-independent) ──────── */
+  /* ── app screenshots (theme-independent) ── */
   --app-shell:         #15131F;
-  --app-screen-from:   #1E1B4B;
-  --app-screen-to:     #0F0C29;
+  --app-screen:        #F4F3F0;  /* Hajime's own background, behind the screenshot while it loads */
 
   /* ── type ────────────────────────────────── */
   --display: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -444,49 +443,12 @@ a.proof-value:hover { color: var(--seal-lit); }
   box-shadow: var(--shadow-device);
 }
 .device-offset { margin-top: 56px; }
-.device-screen {
-  height: 100%;
-  background: linear-gradient(155deg, var(--app-screen-from) 0%, var(--app-screen-to) 100%);
-  border-radius: 24px; padding: 20px 16px;
-  display: flex; flex-direction: column; gap: 14px;
-  font-family: var(--mono);
-}
+.device-screen { height: 100%; background: var(--app-screen); border-radius: 24px; overflow: hidden; }
+/* The screenshots are 1080x2340 (0.462) against a 230x496 (0.464) screen, so
+   `cover` trims at most ~2px — never enough to clip the app's own content. */
+.device-shot { display: block; width: 100%; height: 100%; object-fit: cover; }
 @media (max-width: 959px) { .device-offset { display: none; } }
 @media (max-width: 599px) { .device { width: 214px; height: 446px; } }
-
-/* ── DEVICE SCREEN CONTENT ────────────────────────────
-   Theme-independent: this is a picture of the app's own screen palette,
-   not a themed surface. ── */
-.ds-top { display: flex; align-items: center; justify-content: space-between; }
-.ds-app { font-size: 9px; letter-spacing: 0.16em; color: rgba(255,255,255,.36); }
-.ds-streak {
-  font-size: 9px; color: #F0A08A; padding: 3px 8px; border-radius: var(--r-pill, 100px);
-  background: rgba(224,103,78,.18); border: 1px solid rgba(224,103,78,.32);
-}
-.ds-card {
-  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.10);
-  border-radius: 14px; padding: 26px 14px; text-align: center;
-  display: flex; flex-direction: column; gap: 7px;
-}
-.ds-char { font-size: 64px; line-height: 1; color: #fff; }
-.ds-roman { font-size: 14px; color: rgba(255,255,255,.62); }
-.ds-note { font-size: 9.5px; color: rgba(255,255,255,.30); }
-.ds-progress { display: flex; flex-direction: column; gap: 6px; }
-.ds-progress-row { display: flex; justify-content: space-between; font-size: 9px; letter-spacing: 0.09em; text-transform: uppercase; color: rgba(255,255,255,.32); }
-.ds-pct { color: #F0A08A; text-transform: none; letter-spacing: 0; }
-.ds-progress-bg { height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden; }
-.ds-progress-bg span { display: block; height: 100%; background: var(--seal); }
-.ds-actions { margin-top: auto; display: flex; gap: 7px; }
-.ds-action { flex: 1; text-align: center; padding: 11px; border-radius: 9px; font-size: 9.5px; background: rgba(255,255,255,.07); color: rgba(255,255,255,.55); }
-.ds-action-primary { background: var(--seal); color: var(--on-seal); }
-.ds-kanji { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); border-radius: 14px; padding: 16px; display: flex; align-items: center; justify-content: center; }
-.ds-kanji svg { width: 140px; height: 140px; }
-.ds-kanji-grid { stroke: rgba(255,255,255,.10); }
-.ds-kanji-strokes { stroke: #fff; }
-.ds-kanji-num { fill: #fff; }
-.ds-gloss { display: flex; flex-direction: column; gap: 4px; }
-.ds-gloss-title { font-size: 12px; color: #fff; }
-.ds-gloss-body { font-size: 9.5px; color: rgba(255,255,255,.36); line-height: 1.6; white-space: pre-line; }
 
 /* ── EXPERIENCE + EDUCATION ─────────────────────────────
    Two sections, one timeline row: same date / role / note grid, so the
@@ -868,10 +830,10 @@ textarea.field-input { resize: vertical; min-height: 96px; }
 }
 
 /* Device strip — spec §3: three phones >=1200 (outer two offset +44px),
-   two at 960, one below. The DOM order is [Kana, Review, Kanji]: Kana
-   (first-child) is always visible; Kanji (last-child) keeps the behaviour
+   two at 960, one below. The DOM order is [Learn, Kana, Check]: Learn
+   (first-child) is always visible; Check (last-child) keeps the behaviour
    it already had from DeviceFrame's own `.device-offset` (hidden <=959,
-   offset >=960) unchanged; Review (the middle, added, phone) is the only
+   offset >=960) unchanged; Kana (the middle, added, phone) is the only
    one gated to the new >=1200 band. At >=1200 the strip overrides both
    outer phones to its OWN 44px offset — not DeviceFrame's 56px, which
    stays the homepage WorkFeature figure — so the middle phone sits higher.
@@ -890,7 +852,7 @@ textarea.field-input { resize: vertical; min-height: 96px; }
   .device-strip-row > .device:nth-child(2) { display: block; margin-top: 0; }
   .device-strip-row > .device:first-child { margin-top: 44px; }
   /* Specificity (0,4,0) — beats the plain `.device-offset { margin-top: 56px }`
-     rule (0,1,0) regardless of source order, so Kanji's offset in THIS strip
+     rule (0,1,0) regardless of source order, so Check's offset in THIS strip
      is always 44px, never the homepage's 56px. */
   .device-strip-row > .device.device-offset:last-child { margin-top: 44px; }
 }
