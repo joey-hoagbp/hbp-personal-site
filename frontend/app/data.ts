@@ -63,7 +63,7 @@ export const DEFAULT_PROFILE: Profile = {
   projects: [
     {
       title: "Hajime",
-      apkUrl: "https://github.com/joey-hoagbp/hbp-personal-site/releases/download/hajime-v1.0/hajime-japanese.apk",
+      apkUrl: "https://github.com/joey-hoagbp/hbp-personal-site/releases/download/hajime-v1.1/hajime-japanese.apk",
       current: true,
       chips: [
         { label: "Mobile App", accent: true },
@@ -189,7 +189,7 @@ export const PROJECTS: Project[] = [
     id: "hajime",
     title: "Hajime",
     titleNative: "はじめ",
-    apkUrl: "https://github.com/joey-hoagbp/hbp-personal-site/releases/download/hajime-v1.0/hajime-japanese.apk",
+    apkUrl: "https://github.com/joey-hoagbp/hbp-personal-site/releases/download/hajime-v1.1/hajime-japanese.apk",
     current: true,
     chips: [
       { label: "Mobile App", accent: true },

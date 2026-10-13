@@ -283,6 +283,7 @@ export const messages: Record<Lang, Messages> = {
           "SM-2 chạy song song client/server, giữ đồng bộ bằng test vector dùng chung",
           "Thứ tự nét viết Kanji N5, lấy từ KanjiVG",
           "Đăng nhập Google, refresh token tự xoay vòng, hoạt động offline",
+          "Mở app tức thì: hiện dữ liệu phiên trước từ bộ nhớ đệm trong lúc backend miễn phí khởi động lại",
         ],
         notYet: [
           "Mới nạp sẵn 100/700 từ vựng",
@@ -459,6 +460,7 @@ export const messages: Record<Lang, Messages> = {
           "Dual-run SM-2 (client + server), kept in sync by shared test vectors",
           "KanjiVG stroke order for JLPT N5 kanji",
           "Google Sign-In with rotating refresh tokens and offline support",
+          "Instant launch: last session's data loads from a local cache while the free-tier backend wakes up",
         ],
         notYet: [
           "Only 100 of 700 vocabulary items seeded",
