@@ -12,7 +12,7 @@ Layout: `frontend/` (Next.js) · `backend/` (Spring Boot) · `docker-compose.yml
 
 - **Execution: go subagent-driven by default.** When an implementation plan is ready, start subagent-driven execution (one fresh subagent per task, review between tasks) — do **not** ask the user to choose between subagent-driven and inline execution.
 - Plans and specs live under `docs/superpowers/plans/` and `docs/superpowers/specs/` (`YYYY-MM-DD-<topic>.md`).
-- **Work directly on `master`** — do not create feature branches. Commit straight onto `master` and `git push origin master` when done (run the lint + build gate first). `master` is the trunk and the GitHub default branch; a stale `main` branch also exists — never commit to or push it.
+- **Work directly on `master`** — do not create feature branches. Commit straight onto `master` and `git push origin master` when done (run the lint + build gate first). `master` is the trunk and the GitHub default branch; there is no `main`.
 - End commit messages with: `Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>`.
 
 ## Frontend (`frontend/`)
