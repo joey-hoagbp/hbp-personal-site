@@ -226,5 +226,72 @@ export const PROJECTS: Project[] = [
         "Streaks, XP, achievements and offline support",
       ],
     },
+    highlights: [
+      {
+        label: { vi: "Vấn đề", en: "The problem" },
+        body: {
+          vi:
+            "Phần lớn ứng dụng dạy nhận diện kana, không dạy ghi nhớ lâu — học xong buổi đầu, " +
+            "quên sau ba ngày. Hajime dạy theo lô ba bài \"dạy rồi kiểm tra\", rồi giao mỗi thẻ " +
+            "đã học cho lịch ôn tập SM-2: thời điểm ôn tiếp theo được tính, không đoán.",
+          en:
+            "Most apps teach you to recognise kana, not to keep it — learn it in one sitting, " +
+            "forget it in three days. Hajime teaches in batches of three, teach then check, and " +
+            "hands every learned card to an SM-2 schedule: the next review is calculated, not guessed.",
+        },
+      },
+      {
+        label: { vi: "Quyết định kỹ thuật", en: "The technical decision" },
+        body: {
+          vi:
+            "SM-2 chạy hai lần: trên điện thoại để thẻ tiếp theo hiện ngay, không đợi mạng; trên " +
+            "server để làm nguồn sự thật khi cài lại hay đổi máy. Một bộ test vector dùng chung " +
+            "giữ hai bên khớp nhau — lệch một ngày cũng bị bắt lỗi.",
+          en:
+            "SM-2 runs twice: on the phone, so the next card appears with no network wait; on the " +
+            "server, as the source of truth across reinstalls and devices. One shared test-vector " +
+            "suite keeps the two in step — a one-day drift fails it.",
+        },
+      },
+    ],
+  },
+  {
+    id: "one-more-friday",
+    title: "One More Friday",
+    current: true,
+    chips: [
+      { label: "Mobile Game", accent: true },
+      { label: "Godot", accent: false },
+      { label: "C#", accent: false },
+      { label: "Pixel Art", accent: false },
+    ],
+    subtitle: {
+      vi: "Game giải đố kể chuyện trên di động",
+      en: "A narrative puzzle game for mobile",
+    },
+    description: {
+      vi:
+        "Game pixel art về hai người yêu nhau rồi dần đánh mất nhau — không vì một biến cố lớn, " +
+        "mà vì những khoảnh khắc nhỏ họ để trôi qua. Mỗi lựa chọn âm thầm định hình hai chỉ số " +
+        "ẩn, và chỉ một trong hai cái kết phải tự mình giành lấy.",
+      en:
+        "A pixel-art game about two people falling in love and slowly losing each other — not " +
+        "through one dramatic moment, but through all the small ones they let slip by. Every " +
+        "choice quietly shapes two hidden stats, and one of the two endings has to be earned.",
+    },
+    features: {
+      vi: [
+        "Bảy chương, mỗi chương một cơ chế chơi riêng",
+        "Hội thoại phân nhánh tiếng Việt và tiếng Anh (Yarn Spinner)",
+        "Hai chỉ số ẩn VOICE và TRUST — không bao giờ hiện thành số",
+        "Godot 4 .NET (C#), lõi .NET thuần có unit test",
+      ],
+      en: [
+        "Seven chapters, each with its own mechanic",
+        "Branching dialogue in Vietnamese and English (Yarn Spinner)",
+        "Hidden VOICE and TRUST stats — never shown as numbers",
+        "Godot 4 .NET (C#) over a pure, unit-tested .NET core",
+      ],
+    },
   },
 ];

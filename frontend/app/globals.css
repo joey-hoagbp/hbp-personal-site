@@ -435,6 +435,29 @@ a.proof-value:hover { color: var(--seal-lit); }
   .work-title { font-size: 38px; }
   .work-actions { flex-direction: column; align-items: stretch; }
 }
+.work-grid + .work-grid { margin-top: var(--section-pad); }
+.work-notes { display: flex; flex-direction: column; gap: 18px; padding-top: 22px; border-top: var(--hairline) solid var(--rule); }
+.work-notes dd { margin: 4px 0 0; font-size: 15px; line-height: 1.65; color: var(--muted); }
+
+/* One More Friday's stage (FridayStage.tsx). Its colours are the game's own
+   inks from its 23-colour palette (Night Base ground, Night Shadow floor,
+   PaperCool Shadow text, 7.6:1), not site tokens: like the Hajime
+   screenshots, the stage is the product's picture, so it stays the same in
+   both themes. The floor is a hard edge, never a gradient — the game has no
+   soft light. Sprites scale by whole numbers only (x6, x4 on phones). */
+.work-stage.friday-stage {
+  flex-direction: column; align-items: center; justify-content: center; gap: 40px; padding: 0;
+  background: linear-gradient(#2B2440 0 66%, #171227 66% 100%);
+}
+.friday-pair { display: flex; align-items: flex-end; gap: 104px; }
+.friday-sprite { display: block; width: 192px; height: 336px; image-rendering: pixelated; }
+.friday-credits { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; color: #B9B8BB; }
+.friday-credits:hover { color: #E6E5E6; }
+@media (max-width: 599px) {
+  .work-stage.friday-stage { padding: 36px 0 24px; gap: 28px; }
+  .friday-pair { gap: 56px; }
+  .friday-sprite { width: 128px; height: 224px; }
+}
 
 /* ── DEVICE FRAME ───────────────────────────────────── */
 .device {

@@ -1,14 +1,31 @@
 "use client";
 
 import { CheckScreen, LearnScreen } from "./HajimeScreens";
+import FridayStage from "./FridayStage";
 import { useLang } from "../i18n/LanguageProvider";
 import { messages } from "../i18n/dictionary";
 import { loc, type Project } from "../../lib/api";
+
+function HajimeStage() {
+  return (
+    <div className="work-stage">
+      <LearnScreen />
+      <CheckScreen />
+    </div>
+  );
+}
+
+// Each project's visual, keyed by Project.id.
+const STAGES: Record<string, () => JSX.Element> = {
+  hajime: HajimeStage,
+  "one-more-friday": FridayStage,
+};
 
 export default function WorkFeature({ project }: { project: Project }) {
   const { lang } = useLang();
   const t = messages[lang];
   const p = t.portfolio;
+  const Stage = project.id ? STAGES[project.id] : undefined;
 
   return (
     <div className="g12 work-grid">
@@ -29,20 +46,26 @@ export default function WorkFeature({ project }: { project: Project }) {
             </li>
           ))}
         </ul>
+        {project.highlights && (
+          <dl className="work-notes">
+            {project.highlights.map(({ label, body }) => (
+              <div key={label.en}>
+                <dt className="meta">{loc(label, lang)}</dt>
+                <dd>{loc(body, lang)}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
         <div className="work-actions">
           {project.apkUrl ? (
             <a href={project.apkUrl} className="btn" download="hajime-japanese.apk">{p.downloadApk}</a>
           ) : (
             <button className="btn" disabled>{p.comingSoon}</button>
           )}
-          <a href="/work/hajime" className="btn-ghost">{p.caseStudy}</a>
         </div>
       </div>
 
-      <div className="work-stage">
-        <LearnScreen />
-        <CheckScreen />
-      </div>
+      {Stage && <Stage />}
     </div>
   );
 }

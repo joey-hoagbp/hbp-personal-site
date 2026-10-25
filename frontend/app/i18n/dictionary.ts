@@ -43,10 +43,12 @@ export type Messages = {
     comingSoon: string;
     repo: string;
     demo: string;
-    caseStudy: string;
   };
   device: {
     learnAlt: string; kanaAlt: string; checkAlt: string;
+  };
+  friday: {
+    lucasAlt: string; maryAlt: string; credits: string;
   };
   experience: {
     label: string;
@@ -167,12 +169,16 @@ export const messages: Record<Lang, Messages> = {
       comingSoon: "Tải về APK · Sắp ra mắt",
       repo: "Mã nguồn",
       demo: "Bản demo",
-      caseStudy: "Đọc case study",
     },
     device: {
       learnAlt: "Tab Học của Hajime: lộ trình bài học, các bài đã xong và bài tiếp theo cùng Mochi",
       kanaAlt: "Tab Kana của Hajime: bảng Hiragana xếp theo hàng",
       checkAlt: "Một câu kiểm tra trong bài học Hajime, trả lời đúng cách đọc của な",
+    },
+    friday: {
+      lucasAlt: "Lucas, nhân vật pixel tóc đen, quay sang phải",
+      maryAlt: "Mary, nhân vật pixel tóc vàng cài nơ đỏ, quay sang trái về phía Lucas",
+      credits: "Nhân vật: LPC sprites · tác giả & giấy phép",
     },
     experience: {
       label: "Kinh nghiệm · Experience",
@@ -342,12 +348,16 @@ export const messages: Record<Lang, Messages> = {
       comingSoon: "Download APK · Coming soon",
       repo: "Source",
       demo: "Live demo",
-      caseStudy: "Read the case study",
     },
     device: {
       learnAlt: "Hajime's Learn tab: the lesson path, finished lessons and the next one with Mochi",
       kanaAlt: "Hajime's Kana tab: the Hiragana chart grouped by row",
       checkAlt: "A check question in a Hajime lesson, answered with the correct reading of な",
+    },
+    friday: {
+      lucasAlt: "Lucas, a dark-haired pixel-art character, facing right",
+      maryAlt: "Mary, a blonde pixel-art character with a red bow, facing left toward Lucas",
+      credits: "Characters: LPC sprites · authors & licences",
     },
     experience: {
       label: "Experience",

@@ -36,6 +36,8 @@ export type Project = {
   subtitle: Localized;
   description: Localized;
   features: { vi: string[]; en: string[] };
+  /** Short labelled paragraphs shown under the features (e.g. the problem and the key technical decision). */
+  highlights?: { label: Localized; body: Localized }[];
   id?: string;
   repoUrl?: string;
   demoUrl?: string;
